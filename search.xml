@@ -69,6 +69,10 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
       <categories>
         <category>Python</category>
       </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>TCP/IP</tag>
+      </tags>
   </entry>
   <entry>
     <title>唠叨唠叨——理发</title>
@@ -78,6 +82,9 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
       <categories>
         <category>生活</category>
       </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
   </entry>
   <entry>
     <title>Python实现列表排序</title>
@@ -93,5 +100,10 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
       <categories>
         <category>Python</category>
       </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>列表排序</tag>
+        <tag>算法</tag>
+      </tags>
   </entry>
 </search>
