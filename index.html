@@ -197,6 +197,321 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/22/Selenium%20Grid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="QueYang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QueYang">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/22/Selenium%20Grid/" class="post-title-link" itemprop="url">Selenium Serverʹ�����ã�һ��</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-22 19:57:10 / 修改时间：21:16:21" itemprop="dateCreated datePublished" datetime="2020-07-22T19:57:10+08:00">2020-07-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/22/Selenium%20Grid/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/22/Selenium%20Grid/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="����Selenium-server��Ϊhub"><a href="#����Selenium-server��Ϊhub" class="headerlink" title="����Selenium server��Ϊhub"></a>����Selenium server��Ϊhub</h1><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
+<p><code>-port 4455</code>�ǿ���4455�Ŷ˿�<code>-role hub</code>�ǽ�<code>Selenium server</code>��Ϊ<code>hub</code>����<code>Grid server</code></p>
+<p>��ͼ��ʾ<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200102.png" alt=""></p>
+<h1 id="���������"><a href="#���������" class="headerlink" title="���������"></a>���������</h1><p>���������ַ������<code>loaclhost:4455/grid/console</code></p>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200620.png" alt=""></p>
+<h1 id="���ӽڵ�"><a href="#���ӽڵ�" class="headerlink" title="���ӽڵ�"></a>���ӽڵ�</h1><h2 id="yһ���ڵ�ʹ���һ̨�����"><a href="#yһ���ڵ�ʹ���һ̨�����" class="headerlink" title="ÿһ���ڵ�ʹ���һ̨�����"></a>ÿһ���ڵ�ʹ���һ̨�����</h2><p>�´�һ��cmd<br>����<code>java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.141.59.jar -role node -hub http://10.30.35.106:4455</code></p>
+<p>����һ���ڵ㣬�����ͼ<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722202415.png" alt=""><br>ˢ�������</p>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722202558.png" alt=""></p>
+<h2 id="���������ae�����ʹ��json�l����Զ���ڵ�"><a href="#���������ae�����ʹ��json�l����Զ���ڵ�" class="headerlink" title="���������ǣ�����ʹ��json�ļ����Զ���ڵ�"></a>���������ǣ�����ʹ��json�ļ����Զ���ڵ�</h2><p>cmd��������<code>java -jar selenium-server-standalone.jar -role node -nodeConfig nodeconfig.json</code><br><code>nodeConfig.json</code>�ļ�����</p>
+<pre><code>{
+  &quot;capabilities&quot;:
+  [
+    {
+      &quot;browserName&quot;: &quot;firefox&quot;,
+      &quot;maxInstances&quot;: 3,
+      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
+    },
+    {
+      &quot;browserName&quot;: &quot;chrome&quot;,
+      &quot;maxInstances&quot;: 5,
+      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
+    },
+    {
+      &quot;browserName&quot;: &quot;internet explorer&quot;,
+      &quot;maxInstances&quot;: 1,
+      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
+    }
+  ],
+  &quot;proxy&quot;: &quot;org.openqa.grid.selenium.proxy.DefaultRemoteProxy&quot;,
+  &quot;maxSession&quot;: 5,
+  &quot;port&quot;: 5555,
+  &quot;register&quot;: true,
+  &quot;registerCycle&quot;: 5000,
+  &quot;hub&quot;: &quot;http://localhost:4455&quot;,
+  &quot;nodeStatusCheckTimeout&quot;: 5000,
+  &quot;nodePolling&quot;: 5000,
+  &quot;role&quot;: &quot;node&quot;,
+  &quot;unregisterIfStillDownAfter&quot;: 60000,
+  &quot;downPollingLimit&quot;: 2,
+  &quot;debug&quot;: false,
+  &quot;servlets&quot; : [],
+  &quot;withoutServlets&quot;: [],
+  &quot;custom&quot;: {}
+}</code></pre><p>������������������ַ<code>http://localhost:4455/grid/console</code>����Ϊjson�����õ�hub��<code>http://localhost:4455</code>��<br>�������</p>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722204600.png" alt=""><br>������1��IE��3�������5��Chrome��ע�⣬��Щ�ڵ�����<code>id : http://10.30.35.106:5555, OS : WIN10</code>�еĽڵ㣬ע��˿ںš�</p>
+<h2 id="����Firefox�ڵ�"><a href="#����Firefox�ڵ�" class="headerlink" title="����Firefox�ڵ�"></a>����Firefox�ڵ�</h2><ol>
+<li>��������һ��hub �˿���4444</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser&quot;browserName=firefox,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 �Cport 6677</code></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210247.png" alt=""></p>
+<h2 id="����Chrome�ڵ�"><a href="#����Chrome�ڵ�" class="headerlink" title="����Chrome�ڵ�"></a>����Chrome�ڵ�</h2><ol>
+<li>���µ�cmd�����뵽 selenium-server-standalone-3.141.59.jar �����ļ���</li>
+<li><code>java -jar selenium-server-standalone-13.141.59.jar -role webdriver -browser &quot;browserName=chrome,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 �Cport 7777</code></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210624.png" alt=""></p>
+<p>��ʱ���ܹ��������˿��нڵ��ˡ����һ�º�����˼��<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210913.png" alt=""></p>
+<h2 id="��Mac-OS-������Safari"><a href="#��Mac-OS-������Safari" class="headerlink" title="��Mac OS ������Safari"></a>��Mac OS ������Safari</h2><ol>
+<li>���µ�cmd�����뵽 selenium-server-standalone-3.141.59.jar �����ļ���</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser &quot;browserName=safari,version=7,maxinstance=2,platform=MAC&quot; -hubHost 10.30.35.106 �Cport 7788</code></li>
+</ol>
+<p>��ʱ����һ��<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722211407.png" alt=""></p>
+<p>����Ϊʲô��ʾUNKONW,����������о��о�</p>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/20/Python%20Mining/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="QueYang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QueYang">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/20/Python%20Mining/" class="post-title-link" itemprop="url">Learning Data Mining With Python</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-20 21:11:00 / 修改时间：22:19:50" itemprop="dateCreated datePublished" datetime="2020-07-20T21:11:00+08:00">2020-07-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/20/Python%20Mining/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/20/Python%20Mining/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="д��j��"><a href="#д��j��" class="headerlink" title="д��ǰ��"></a>д��ǰ��</h1><p>���ϵ��������ѧϰ�����ھ�ļ�¼�ɡ������ڸ��£����ݼ������ݶ��ǲο���Python�����ھ�������ʵ�����Ȿ�顣</p>
+<h1 id="�׺��Է���������Ʒ�Ƽ�Ϊ����"><a href="#�׺��Է���������Ʒ�Ƽ�Ϊ����" class="headerlink" title="�׺��Է���������Ʒ�Ƽ�Ϊ����"></a>�׺��Է���������Ʒ�Ƽ�Ϊ����</h1><p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>��Ʒ���۴����°ᵽ���Ϻ󣬺ܶ�֮ǰ���˹���ɵĹ���ֻ��ʵ���Զ�������������������������������Ϊ�����������۳���Ӣ��up-selling��ָ�������Ѿ�������Ʒ�Ĺ˿�������һ����Ʒ��ԭ���������˹�����ɵ���Ʒ�Ƽ��������������������ھ���������ɣ�����ÿ����Ϊ�̼Ҷ���˼�����Ԫ��ǿ�����Ƶ�����������ķ�չ��</p>
+<p>����һ���¼򵥵���Ʒ�Ƽ������������˼·��ʵ�ܺ����⣺����֮ǰ����ͬʱ�����������Ʒ���Ժ�Ҳ�ܿ��ܻ�ͬʱ���򡣸��뷨ȷʵ�ܼ򵥰ɣ�������Ǻܶ���Ʒ�Ƽ�����Ļ������������ϻ������¡�</p>
+<p>�����뷨������ת��Ϊ�㷨���˿͹�����Ʒ�����������Ƽ���Ʒǰ���Ȳ�ѯһ����ʷ�������ݣ��ҵ��������ǹ���ͬ����Ʒ�Ľ������ݣ�����ͬʱ������ʲô���ٰ������Ƽ����˿ͼ��ɡ����㷨ʵ�ʱ���Ҳ���������ٱ�����Ƽ���Ʒ����Ч��</p>
+<p>�����ﶨ��һ������<br>    ���һ����������ƷX����ô�����п��ܹ�����ƷY�����Ҳ����ʶ����Ʒ�Ĺ���</p>
+<pre><code>import numpy as np
+dataset_filename = &quot;affinity_dataset.txt&quot;
+X = np.loadtxt(dataset_filename)</code></pre><p>�������ݿ�֮��������������ֱ���֧�ֶ�(support)�����Ŷ�(confidence)</p>
+<p>֧�ֶ�ָ���ݼ��й���Ӧ��Ĵ�����Ҳ���ǹ�������������������Ĵ�����<br>���Ŷ���ָ�����׼ȷ����Σ����ڷ�������������ʾ��ǰ��������ֺͽ���һ�µı������١����㷽��Ϊ����ͳ�Ƶ�ǰ����ĳ��ִ��������������������������������䣩��ͬ�Ĺ���������</p>
+<p>Ϊ�˼���֧�ֶȺ����Ŷȣ���Ҫͳ�����ݼ������й����������ݡ�����<strong>����Ӧ��</strong>��<strong>������Ч</strong>���������ֵ����ʽ���棬�����ֵ�ļ����������ͽ�����ɵ�Ԫ�飬Ԫ��Ԫ���������б��е�����ֵ��ʾ��</p>
+<p>�����ֵ䣬��Ž��</p>
+<pre><code>from collections import defaultdict
+valid_rules = defaultdict(int)
+invalid_rules = defaultdict(int)
+num_occurances = defaultdict(int)</code></pre><ul>
+<li><p><code>premise</code> ��ʾǰ������–�˿͹�����ĳһ����Ʒ��<code>num_occurances</code>��ʾ������ǰ�������Ĵ�����</p>
+</li>
+<li><p><code>conclusion</code> ��ʾ���</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for sample in X:</span><br><span class="line">    for premise in range(n_features):  # ��ÿ����������һ��</span><br><span class="line">        if sample[premise] &#x3D;&#x3D; 0: continue</span><br><span class="line">        num_occurances[premise] +&#x3D; 1</span><br><span class="line">        for conclusion in range(n_features):</span><br><span class="line">            if premise &#x3D;&#x3D; conclusion: continue  # ��������ͽ�����ͬ�ľ��������Է���û������</span><br><span class="line">            if sample[conclusion] &#x3D;&#x3D; 1:</span><br><span class="line">                valid_rules[(premise,conclusion)] +&#x3D; 1</span><br><span class="line">            else:</span><br><span class="line">                invalid_rules[(premise,conclusion)] +&#x3D; 1  # ͳ��ֻ����һ����Ʒ�Ĵ��������ǹ�����Ч</span><br><span class="line">support &#x3D; valid_rules       # ֧�ֶȾ��ǹ���Ӧ��Ĵ���</span><br><span class="line">confidence &#x3D; defaultdict(float)  # ���Ŷȵ��ֵ�</span><br><span class="line">for premise,conclusion in valid_rules.keys():  # ע�����ĸ������ĸ�</span><br><span class="line">    confidence[(premise,conclusion)] &#x3D; valid_rules[(premise,conclusion)]&#x2F;num_occurances[premise]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>����һ�����������ÿ��������֧�ֶȺ����Ŷȡ�</p>
+<pre><code>def print_rule(premise, conclusion, support, confidence, features):
+    premise_name = features[premise]
+    conclusion_name = features[conclusion]
+    print(&quot;Rule: If a person buys {0} they will also buy {1}&quot;.format(premise_name, conclusion_name))
+    print(&quot; - Confidence: {0:.3f}&quot;.format(confidence[(premise, conclusion)]))
+    print(&quot; - Support: {0}&quot;.format(support[(premise, conclusion)]))
+    print(&quot;&quot;)</code></pre><p>�����ŶȽ�������Ȼ�����ǰ��Ĺ����������ֵ��items() �������ذ����ֵ�����Ԫ�ص��б�������ʹ��itemgetter() ����Ϊ���������Ϳ�<br>�Զ�Ƕ���б���������itemgetter(1) ��ʾ���ֵ��Ԫ�ص�ֵ������Ϊ֧�ֶȣ���Ϊ�������ݣ�reverse=True ��ʾ�������С�</p>
+<pre><code>from operator import itemgetter
+# ֧�ֶ�����
+sorted_support = sorted(support.items(),key=itemgetter(1),reverse = True)
+for index in range(5):
+    premise,conclusion = sorted_support[index][0]
+    print_rule(premise,conclusion,support,confidence,features)</code></pre><p>�������</p>
+<pre><code>Rule: If a person buys cheese they will also buy bananas
+ - Confidence: 0.659
+ - Support: 27
+
+Rule: If a person buys bananas they will also buy cheese
+ - Confidence: 0.458
+ - Support: 27
+
+Rule: If a person buys cheese they will also buy apples
+ - Confidence: 0.610
+ - Support: 25
+
+Rule: If a person buys apples they will also buy cheese
+ - Confidence: 0.694
+ - Support: 25
+
+Rule: If a person buys apples they will also buy bananas
+ - Confidence: 0.583
+ - Support: 21</code></pre><p>�����Ŷ�����Ҳ��һ����</p>
+<pre><code># ���Ŷ�����
+sorted_confidence = sorted(confidence.items(),key=itemgetter(1),reverse=True)
+for index in range(5):
+    premise,conclusion = sorted_confidence[index][0]
+    print_rule(premise,conclusion,support,confidence,features)</code></pre><p>�������</p>
+<pre><code>Rule: If a person buys apples they will also buy cheese
+ - Confidence: 0.694
+ - Support: 25
+
+Rule: If a person buys cheese they will also buy bananas
+ - Confidence: 0.659
+ - Support: 27
+
+Rule: If a person buys bread they will also buy bananas
+ - Confidence: 0.630
+ - Support: 17
+
+Rule: If a person buys cheese they will also buy apples
+ - Confidence: 0.610
+ - Support: 25
+
+Rule: If a person buys apples they will also buy bananas
+ - Confidence: 0.583
+ - Support: 21</code></pre><h1 id="���̽��"><a href="#���̽��" class="headerlink" title="���̽��"></a>���̽��</h1><p>�������Ľ�����Կ��������˿���ƻ����Ҳ�������� ���͡��˿������ң�Ҳ�����㽶 ���������������֧�ֶȺ���<br>�Ŷȶ��ܸߡ����о������Ը�����Щ������������Ʒ�ڷ�λ�á���ƻ��������ʱ���Ա�Ҳһ��������ҡ������㽶�����Ҹ������ûɶ���ˡ�</p>
+<head> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
+</head> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/16/%E4%BD%A0%E5%A5%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -645,7 +960,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -658,7 +973,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

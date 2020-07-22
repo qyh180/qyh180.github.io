@@ -1,56 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Markdown美化 font-awesome的使用</title>
-    <url>/2020/07/16/%E4%BD%A0%E5%A5%BD/</url>
-    <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。</p>
-<a id="more"></a>
-
-
-<p><i class="fa fa-share-alt"></i> <a href="http://www.fontawesome.com.cn/icons" target="_blank" rel="noopener">font-awesome官方地址</a></p>
-<h1 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h1><p>在Markdown中添加一下代码，放在文件的最底部。</p>
-<pre><code>&lt;head&gt; 
-    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; 
-    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; 
-&lt;/head&gt; 
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css&quot;&gt;</code></pre><p>然后就可以在font-awesome官网找到合适的图标，使用方法是将<code>&lt;i class=&quot;fa fa-share-alt&quot;&gt;&lt;/i&gt;</code>放在你需要添加图标的地方。</p>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>&lt;i class=&quot;fab fa-google&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code> <i class="fab fa-google" aria-hidden="true"></i> 这是Google图标</p>
-<h2 id="图标变大"><a href="#图标变大" class="headerlink" title="图标变大"></a>图标变大</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x" aria-hidden="true"></i> 这是2倍大的Google图标，使用fa-2x</p>
-<h2 id="图标旋转"><a href="#图标旋转" class="headerlink" title="图标旋转"></a>图标旋转</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x fa-spin&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x fa-spin" aria-hidden="true"></i> 使用fa-spin来让图标进行旋转</p>
-<h2 id="特殊引用效果"><a href="#特殊引用效果" class="headerlink" title="特殊引用效果"></a>特殊引用效果</h2><p><code>&lt;i class=&quot;fab fa-google fa-3x fa-pull-left fa-border&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code></p>
-<p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>…独坐在路边街角 冷风吹醒，默默地伴着我的孤影，只想将结他紧抱，诉出辛酸，就在这刻想起往事，心中一股冲劲勇闯，抛开那现实没有顾虑，仿佛身边拥有一切，看似与别人筑起隔膜。</p>
-<p>在这里使用 <code>fa-border</code> 和 <code>fa-pull-right</code> 或 <code>fa-pull-left</code> 可以轻易构造出引用的特殊效果。</p>
-<h2 id="替换无序列表中的图标"><a href="#替换无序列表中的图标" class="headerlink" title="替换无序列表中的图标"></a>替换无序列表中的图标</h2><p>使用 <code>fa-ul</code> and <code>fa-li</code> 轻松的替换无序列表中的默认图标。</p>
-<pre><code>&lt;ul class=&quot;fa-ul&quot;&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;使用列表类图标&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;轻松的替换&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;无序列表&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-square&quot;&gt;&lt;/i&gt;中的默认图标&lt;/li&gt;
-&lt;/ul&gt;</code></pre><ul class="fa-ul">
-  <li><i class="fa-li fa fa-check-square"></i>使用列表类图标</li>
-  <li><i class="fa-li fa fa-check-square"></i>轻松的替换</li>
-  <li><i class="fa-li fa fa-spinner fa-spin"></i>无序列表</li>
-  <li><i class="fa-li fa fa-square"></i>中的默认图标</li>
-</ul>
-
-<h2 id="对图标旋转角度"><a href="#对图标旋转角度" class="headerlink" title="对图标旋转角度"></a>对图标旋转角度</h2><p>使用 <code>fa-rotate-*</code> and <code>fa-flip-*</code> 类</p>
-<pre><code>&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-90&quot;&gt;&lt;/i&gt; fa-rotate-90&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-180&quot;&gt;&lt;/i&gt; fa-rotate-180&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-270&quot;&gt;&lt;/i&gt; fa-rotate-270&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-flip-horizontal&quot;&gt;&lt;/i&gt; fa-flip-horizontal&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-flip-vertical&quot;&gt;&lt;/i&gt; fa-flip-vertical
-&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;</code></pre><p><i class="fa fa-quote-left fa-rotate-90"></i> fa-rotate-90<br><br><i class="fa fa-quote-left fa-rotate-180"></i> fa-rotate-180<br><br><i class="fa fa-quote-left fa-rotate-270"></i> fa-rotate-270<br><br><i class="fa fa-quote-left fa-flip-horizontal"></i> fa-flip-horizontal<br><br><i class="fa fa-quote-left fa-flip-vertical"></i> fa-flip-vertical</p>
-<h1 id="更多例子请看font-awesome样例"><a href="#更多例子请看font-awesome样例" class="headerlink" title="更多例子请看font-awesome样例"></a>更多例子请看<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fab fa-fort-awesome"></i><a href="http://www.fontawesome.com.cn/examples/" target="_blank" rel="noopener">font-awesome样例</a></h1><head> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
-</head> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
-      <categories>
-        <category>Mardown</category>
-      </categories>
-  </entry>
-  <entry>
     <title>IP地址分类查询</title>
     <url>/2020/07/16/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/</url>
     <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：</p>
@@ -123,6 +73,227 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
         <tag>Python</tag>
         <tag>TCP/IP</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Learning Data Mining With Python</title>
+    <url>/2020/07/20/Python%20Mining/</url>
+    <content><![CDATA[<h1 id="д��j��"><a href="#д��j��" class="headerlink" title="д��ǰ��"></a>д��ǰ��</h1><p>���ϵ��������ѧϰ�����ھ�ļ�¼�ɡ������ڸ��£����ݼ������ݶ��ǲο���Python�����ھ�������ʵ�����Ȿ�顣</p>
+<h1 id="�׺��Է���������Ʒ�Ƽ�Ϊ����"><a href="#�׺��Է���������Ʒ�Ƽ�Ϊ����" class="headerlink" title="�׺��Է���������Ʒ�Ƽ�Ϊ����"></a>�׺��Է���������Ʒ�Ƽ�Ϊ����</h1><p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>��Ʒ���۴����°ᵽ���Ϻ󣬺ܶ�֮ǰ���˹���ɵĹ���ֻ��ʵ���Զ�������������������������������Ϊ�����������۳���Ӣ��up-selling��ָ�������Ѿ�������Ʒ�Ĺ˿�������һ����Ʒ��ԭ���������˹�����ɵ���Ʒ�Ƽ��������������������ھ���������ɣ�����ÿ����Ϊ�̼Ҷ���˼�����Ԫ��ǿ�����Ƶ�����������ķ�չ��</p>
+<p>����һ���¼򵥵���Ʒ�Ƽ������������˼·��ʵ�ܺ����⣺����֮ǰ����ͬʱ�����������Ʒ���Ժ�Ҳ�ܿ��ܻ�ͬʱ���򡣸��뷨ȷʵ�ܼ򵥰ɣ�������Ǻܶ���Ʒ�Ƽ�����Ļ������������ϻ������¡�</p>
+<p>�����뷨������ת��Ϊ�㷨���˿͹�����Ʒ�����������Ƽ���Ʒǰ���Ȳ�ѯһ����ʷ�������ݣ��ҵ��������ǹ���ͬ����Ʒ�Ľ������ݣ�����ͬʱ������ʲô���ٰ������Ƽ����˿ͼ��ɡ����㷨ʵ�ʱ���Ҳ���������ٱ�����Ƽ���Ʒ����Ч��</p>
+<p>�����ﶨ��һ������<br>    ���һ����������ƷX����ô�����п��ܹ�����ƷY�����Ҳ����ʶ����Ʒ�Ĺ���</p>
+<pre><code>import numpy as np
+dataset_filename = &quot;affinity_dataset.txt&quot;
+X = np.loadtxt(dataset_filename)</code></pre><p>�������ݿ�֮��������������ֱ���֧�ֶ�(support)�����Ŷ�(confidence)</p>
+<p>֧�ֶ�ָ���ݼ��й���Ӧ��Ĵ�����Ҳ���ǹ�������������������Ĵ�����<br>���Ŷ���ָ�����׼ȷ����Σ����ڷ�������������ʾ��ǰ��������ֺͽ���һ�µı������١����㷽��Ϊ����ͳ�Ƶ�ǰ����ĳ��ִ��������������������������������䣩��ͬ�Ĺ���������</p>
+<p>Ϊ�˼���֧�ֶȺ����Ŷȣ���Ҫͳ�����ݼ������й����������ݡ�����<strong>����Ӧ��</strong>��<strong>������Ч</strong>���������ֵ����ʽ���棬�����ֵ�ļ����������ͽ�����ɵ�Ԫ�飬Ԫ��Ԫ���������б��е�����ֵ��ʾ��</p>
+<p>�����ֵ䣬��Ž��</p>
+<pre><code>from collections import defaultdict
+valid_rules = defaultdict(int)
+invalid_rules = defaultdict(int)
+num_occurances = defaultdict(int)</code></pre><ul>
+<li><p><code>premise</code> ��ʾǰ������–�˿͹�����ĳһ����Ʒ��<code>num_occurances</code>��ʾ������ǰ�������Ĵ�����</p>
+</li>
+<li><p><code>conclusion</code> ��ʾ���</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for sample in X:</span><br><span class="line">    for premise in range(n_features):  # ��ÿ����������һ��</span><br><span class="line">        if sample[premise] &#x3D;&#x3D; 0: continue</span><br><span class="line">        num_occurances[premise] +&#x3D; 1</span><br><span class="line">        for conclusion in range(n_features):</span><br><span class="line">            if premise &#x3D;&#x3D; conclusion: continue  # ��������ͽ�����ͬ�ľ��������Է���û������</span><br><span class="line">            if sample[conclusion] &#x3D;&#x3D; 1:</span><br><span class="line">                valid_rules[(premise,conclusion)] +&#x3D; 1</span><br><span class="line">            else:</span><br><span class="line">                invalid_rules[(premise,conclusion)] +&#x3D; 1  # ͳ��ֻ����һ����Ʒ�Ĵ��������ǹ�����Ч</span><br><span class="line">support &#x3D; valid_rules       # ֧�ֶȾ��ǹ���Ӧ��Ĵ���</span><br><span class="line">confidence &#x3D; defaultdict(float)  # ���Ŷȵ��ֵ�</span><br><span class="line">for premise,conclusion in valid_rules.keys():  # ע�����ĸ������ĸ�</span><br><span class="line">    confidence[(premise,conclusion)] &#x3D; valid_rules[(premise,conclusion)]&#x2F;num_occurances[premise]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>����һ�����������ÿ��������֧�ֶȺ����Ŷȡ�</p>
+<pre><code>def print_rule(premise, conclusion, support, confidence, features):
+    premise_name = features[premise]
+    conclusion_name = features[conclusion]
+    print(&quot;Rule: If a person buys {0} they will also buy {1}&quot;.format(premise_name, conclusion_name))
+    print(&quot; - Confidence: {0:.3f}&quot;.format(confidence[(premise, conclusion)]))
+    print(&quot; - Support: {0}&quot;.format(support[(premise, conclusion)]))
+    print(&quot;&quot;)</code></pre><p>�����ŶȽ�������Ȼ�����ǰ��Ĺ����������ֵ��items() �������ذ����ֵ�����Ԫ�ص��б�������ʹ��itemgetter() ����Ϊ���������Ϳ�<br>�Զ�Ƕ���б���������itemgetter(1) ��ʾ���ֵ��Ԫ�ص�ֵ������Ϊ֧�ֶȣ���Ϊ�������ݣ�reverse=True ��ʾ�������С�</p>
+<pre><code>from operator import itemgetter
+# ֧�ֶ�����
+sorted_support = sorted(support.items(),key=itemgetter(1),reverse = True)
+for index in range(5):
+    premise,conclusion = sorted_support[index][0]
+    print_rule(premise,conclusion,support,confidence,features)</code></pre><p>�������</p>
+<pre><code>Rule: If a person buys cheese they will also buy bananas
+ - Confidence: 0.659
+ - Support: 27
+
+Rule: If a person buys bananas they will also buy cheese
+ - Confidence: 0.458
+ - Support: 27
+
+Rule: If a person buys cheese they will also buy apples
+ - Confidence: 0.610
+ - Support: 25
+
+Rule: If a person buys apples they will also buy cheese
+ - Confidence: 0.694
+ - Support: 25
+
+Rule: If a person buys apples they will also buy bananas
+ - Confidence: 0.583
+ - Support: 21</code></pre><p>�����Ŷ�����Ҳ��һ����</p>
+<pre><code># ���Ŷ�����
+sorted_confidence = sorted(confidence.items(),key=itemgetter(1),reverse=True)
+for index in range(5):
+    premise,conclusion = sorted_confidence[index][0]
+    print_rule(premise,conclusion,support,confidence,features)</code></pre><p>�������</p>
+<pre><code>Rule: If a person buys apples they will also buy cheese
+ - Confidence: 0.694
+ - Support: 25
+
+Rule: If a person buys cheese they will also buy bananas
+ - Confidence: 0.659
+ - Support: 27
+
+Rule: If a person buys bread they will also buy bananas
+ - Confidence: 0.630
+ - Support: 17
+
+Rule: If a person buys cheese they will also buy apples
+ - Confidence: 0.610
+ - Support: 25
+
+Rule: If a person buys apples they will also buy bananas
+ - Confidence: 0.583
+ - Support: 21</code></pre><h1 id="���̽��"><a href="#���̽��" class="headerlink" title="���̽��"></a>���̽��</h1><p>�������Ľ�����Կ��������˿���ƻ����Ҳ�������� ���͡��˿������ң�Ҳ�����㽶 ���������������֧�ֶȺ���<br>�Ŷȶ��ܸߡ����о������Ը�����Щ������������Ʒ�ڷ�λ�á���ƻ��������ʱ���Ա�Ҳһ��������ҡ������㽶�����Ҹ������ûɶ���ˡ�</p>
+<head> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
+</head> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Data Mining</tag>
+        <tag>Books</tag>
+        <tag>Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Selenium Serverʹ�����ã�һ��</title>
+    <url>/2020/07/22/Selenium%20Grid/</url>
+    <content><![CDATA[<h1 id="����Selenium-server��Ϊhub"><a href="#����Selenium-server��Ϊhub" class="headerlink" title="����Selenium server��Ϊhub"></a>����Selenium server��Ϊhub</h1><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
+<p><code>-port 4455</code>�ǿ���4455�Ŷ˿�<code>-role hub</code>�ǽ�<code>Selenium server</code>��Ϊ<code>hub</code>����<code>Grid server</code></p>
+<p>��ͼ��ʾ<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200102.png" alt=""></p>
+<h1 id="���������"><a href="#���������" class="headerlink" title="���������"></a>���������</h1><p>���������ַ������<code>loaclhost:4455/grid/console</code></p>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200620.png" alt=""></p>
+<h1 id="���ӽڵ�"><a href="#���ӽڵ�" class="headerlink" title="���ӽڵ�"></a>���ӽڵ�</h1><h2 id="yһ���ڵ�ʹ���һ̨�����"><a href="#yһ���ڵ�ʹ���һ̨�����" class="headerlink" title="ÿһ���ڵ�ʹ���һ̨�����"></a>ÿһ���ڵ�ʹ���һ̨�����</h2><p>�´�һ��cmd<br>����<code>java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.141.59.jar -role node -hub http://10.30.35.106:4455</code></p>
+<p>����һ���ڵ㣬�����ͼ<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722202415.png" alt=""><br>ˢ�������</p>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722202558.png" alt=""></p>
+<h2 id="���������ae�����ʹ��json�l����Զ���ڵ�"><a href="#���������ae�����ʹ��json�l����Զ���ڵ�" class="headerlink" title="���������ǣ�����ʹ��json�ļ����Զ���ڵ�"></a>���������ǣ�����ʹ��json�ļ����Զ���ڵ�</h2><p>cmd��������<code>java -jar selenium-server-standalone.jar -role node -nodeConfig nodeconfig.json</code><br><code>nodeConfig.json</code>�ļ�����</p>
+<pre><code>{
+  &quot;capabilities&quot;:
+  [
+    {
+      &quot;browserName&quot;: &quot;firefox&quot;,
+      &quot;maxInstances&quot;: 3,
+      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
+    },
+    {
+      &quot;browserName&quot;: &quot;chrome&quot;,
+      &quot;maxInstances&quot;: 5,
+      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
+    },
+    {
+      &quot;browserName&quot;: &quot;internet explorer&quot;,
+      &quot;maxInstances&quot;: 1,
+      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
+    }
+  ],
+  &quot;proxy&quot;: &quot;org.openqa.grid.selenium.proxy.DefaultRemoteProxy&quot;,
+  &quot;maxSession&quot;: 5,
+  &quot;port&quot;: 5555,
+  &quot;register&quot;: true,
+  &quot;registerCycle&quot;: 5000,
+  &quot;hub&quot;: &quot;http://localhost:4455&quot;,
+  &quot;nodeStatusCheckTimeout&quot;: 5000,
+  &quot;nodePolling&quot;: 5000,
+  &quot;role&quot;: &quot;node&quot;,
+  &quot;unregisterIfStillDownAfter&quot;: 60000,
+  &quot;downPollingLimit&quot;: 2,
+  &quot;debug&quot;: false,
+  &quot;servlets&quot; : [],
+  &quot;withoutServlets&quot;: [],
+  &quot;custom&quot;: {}
+}</code></pre><p>������������������ַ<code>http://localhost:4455/grid/console</code>����Ϊjson�����õ�hub��<code>http://localhost:4455</code>��<br>�������</p>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722204600.png" alt=""><br>������1��IE��3�������5��Chrome��ע�⣬��Щ�ڵ�����<code>id : http://10.30.35.106:5555, OS : WIN10</code>�еĽڵ㣬ע��˿ںš�</p>
+<h2 id="����Firefox�ڵ�"><a href="#����Firefox�ڵ�" class="headerlink" title="����Firefox�ڵ�"></a>����Firefox�ڵ�</h2><ol>
+<li>��������һ��hub �˿���4444</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser&quot;browserName=firefox,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 �Cport 6677</code></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210247.png" alt=""></p>
+<h2 id="����Chrome�ڵ�"><a href="#����Chrome�ڵ�" class="headerlink" title="����Chrome�ڵ�"></a>����Chrome�ڵ�</h2><ol>
+<li>���µ�cmd�����뵽 selenium-server-standalone-3.141.59.jar �����ļ���</li>
+<li><code>java -jar selenium-server-standalone-13.141.59.jar -role webdriver -browser &quot;browserName=chrome,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 �Cport 7777</code></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210624.png" alt=""></p>
+<p>��ʱ���ܹ��������˿��нڵ��ˡ����һ�º�����˼��<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210913.png" alt=""></p>
+<h2 id="��Mac-OS-������Safari"><a href="#��Mac-OS-������Safari" class="headerlink" title="��Mac OS ������Safari"></a>��Mac OS ������Safari</h2><ol>
+<li>���µ�cmd�����뵽 selenium-server-standalone-3.141.59.jar �����ļ���</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser &quot;browserName=safari,version=7,maxinstance=2,platform=MAC&quot; -hubHost 10.30.35.106 �Cport 7788</code></li>
+</ol>
+<p>��ʱ����һ��<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722211407.png" alt=""></p>
+<p>����Ϊʲô��ʾUNKONW,����������о��о�</p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>selenium</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown美化 font-awesome的使用</title>
+    <url>/2020/07/16/%E4%BD%A0%E5%A5%BD/</url>
+    <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。</p>
+<a id="more"></a>
+
+
+<p><i class="fa fa-share-alt"></i> <a href="http://www.fontawesome.com.cn/icons" target="_blank" rel="noopener">font-awesome官方地址</a></p>
+<h1 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h1><p>在Markdown中添加一下代码，放在文件的最底部。</p>
+<pre><code>&lt;head&gt; 
+    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; 
+    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; 
+&lt;/head&gt; 
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css&quot;&gt;</code></pre><p>然后就可以在font-awesome官网找到合适的图标，使用方法是将<code>&lt;i class=&quot;fa fa-share-alt&quot;&gt;&lt;/i&gt;</code>放在你需要添加图标的地方。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>&lt;i class=&quot;fab fa-google&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code> <i class="fab fa-google" aria-hidden="true"></i> 这是Google图标</p>
+<h2 id="图标变大"><a href="#图标变大" class="headerlink" title="图标变大"></a>图标变大</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x" aria-hidden="true"></i> 这是2倍大的Google图标，使用fa-2x</p>
+<h2 id="图标旋转"><a href="#图标旋转" class="headerlink" title="图标旋转"></a>图标旋转</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x fa-spin&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x fa-spin" aria-hidden="true"></i> 使用fa-spin来让图标进行旋转</p>
+<h2 id="特殊引用效果"><a href="#特殊引用效果" class="headerlink" title="特殊引用效果"></a>特殊引用效果</h2><p><code>&lt;i class=&quot;fab fa-google fa-3x fa-pull-left fa-border&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code></p>
+<p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>…独坐在路边街角 冷风吹醒，默默地伴着我的孤影，只想将结他紧抱，诉出辛酸，就在这刻想起往事，心中一股冲劲勇闯，抛开那现实没有顾虑，仿佛身边拥有一切，看似与别人筑起隔膜。</p>
+<p>在这里使用 <code>fa-border</code> 和 <code>fa-pull-right</code> 或 <code>fa-pull-left</code> 可以轻易构造出引用的特殊效果。</p>
+<h2 id="替换无序列表中的图标"><a href="#替换无序列表中的图标" class="headerlink" title="替换无序列表中的图标"></a>替换无序列表中的图标</h2><p>使用 <code>fa-ul</code> and <code>fa-li</code> 轻松的替换无序列表中的默认图标。</p>
+<pre><code>&lt;ul class=&quot;fa-ul&quot;&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;使用列表类图标&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;轻松的替换&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;无序列表&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-square&quot;&gt;&lt;/i&gt;中的默认图标&lt;/li&gt;
+&lt;/ul&gt;</code></pre><ul class="fa-ul">
+  <li><i class="fa-li fa fa-check-square"></i>使用列表类图标</li>
+  <li><i class="fa-li fa fa-check-square"></i>轻松的替换</li>
+  <li><i class="fa-li fa fa-spinner fa-spin"></i>无序列表</li>
+  <li><i class="fa-li fa fa-square"></i>中的默认图标</li>
+</ul>
+
+<h2 id="对图标旋转角度"><a href="#对图标旋转角度" class="headerlink" title="对图标旋转角度"></a>对图标旋转角度</h2><p>使用 <code>fa-rotate-*</code> and <code>fa-flip-*</code> 类</p>
+<pre><code>&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-90&quot;&gt;&lt;/i&gt; fa-rotate-90&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-180&quot;&gt;&lt;/i&gt; fa-rotate-180&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-270&quot;&gt;&lt;/i&gt; fa-rotate-270&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-flip-horizontal&quot;&gt;&lt;/i&gt; fa-flip-horizontal&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-flip-vertical&quot;&gt;&lt;/i&gt; fa-flip-vertical
+&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;</code></pre><p><i class="fa fa-quote-left fa-rotate-90"></i> fa-rotate-90<br><br><i class="fa fa-quote-left fa-rotate-180"></i> fa-rotate-180<br><br><i class="fa fa-quote-left fa-rotate-270"></i> fa-rotate-270<br><br><i class="fa fa-quote-left fa-flip-horizontal"></i> fa-flip-horizontal<br><br><i class="fa fa-quote-left fa-flip-vertical"></i> fa-flip-vertical</p>
+<h1 id="更多例子请看font-awesome样例"><a href="#更多例子请看font-awesome样例" class="headerlink" title="更多例子请看font-awesome样例"></a>更多例子请看<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fab fa-fort-awesome"></i><a href="http://www.fontawesome.com.cn/examples/" target="_blank" rel="noopener">font-awesome样例</a></h1><head> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
+</head> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
+      <categories>
+        <category>Mardown</category>
+      </categories>
   </entry>
   <entry>
     <title>唠叨唠叨——理发</title>
