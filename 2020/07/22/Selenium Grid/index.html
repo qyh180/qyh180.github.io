@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="����Selenium server��Ϊhubjava -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub -port 4455�ǿ���4455�Ŷ˿�-role hub�ǽ�Selenium server��Ϊhub����Grid server ��ͼ��ʾ ������������������ַ������l">
+  <meta name="description" content="启用Selenium server作为hubjava -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub -port 4455是开启4455号端口-role hub是将Selenium server作为hub或者Grid server">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Selenium Serverʹ�����ã�һ��">
+<meta property="og:title" content="Selenium Server使用配置（一）">
 <meta property="og:url" content="http://yoursite.com/2020/07/22/Selenium%20Grid/index.html">
 <meta property="og:site_name" content="QueYang">
-<meta property="og:description" content="����Selenium server��Ϊhubjava -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub -port 4455�ǿ���4455�Ŷ˿�-role hub�ǽ�Selenium server��Ϊhub����Grid server ��ͼ��ʾ ������������������ַ������l">
+<meta property="og:description" content="启用Selenium server作为hubjava -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub -port 4455是开启4455号端口-role hub是将Selenium server作为hub或者Grid server">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200102.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200620.png">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210913.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722211407.png">
 <meta property="article:published_time" content="2020-07-22T11:57:10.189Z">
-<meta property="article:modified_time" content="2020-07-22T13:16:21.100Z">
+<meta property="article:modified_time" content="2020-07-22T13:20:09.739Z">
 <meta property="article:author" content="QueYang">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="selenium">
@@ -57,7 +57,7 @@
   };
 </script>
 
-  <title>Selenium Serverʹ�����ã�һ�� | QueYang</title>
+  <title>Selenium Server使用配置（一） | QueYang</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169612934-1"></script>
     <script>
@@ -227,7 +227,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Selenium Serverʹ�����ã�һ��
+          Selenium Server使用配置（一）
         </h1>
 
         <div class="post-meta">
@@ -238,7 +238,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-07-22 19:57:10 / 修改时间：21:16:21" itemprop="dateCreated datePublished" datetime="2020-07-22T19:57:10+08:00">2020-07-22</time>
+              <time title="创建时间：2020-07-22 19:57:10 / 修改时间：21:20:09" itemprop="dateCreated datePublished" datetime="2020-07-22T19:57:10+08:00">2020-07-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,15 +275,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="����Selenium-server��Ϊhub"><a href="#����Selenium-server��Ϊhub" class="headerlink" title="����Selenium server��Ϊhub"></a>����Selenium server��Ϊhub</h1><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
-<p><code>-port 4455</code>�ǿ���4455�Ŷ˿�<code>-role hub</code>�ǽ�<code>Selenium server</code>��Ϊ<code>hub</code>����<code>Grid server</code></p>
-<p>��ͼ��ʾ<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200102.png" alt=""></p>
-<h1 id="���������"><a href="#���������" class="headerlink" title="���������"></a>���������</h1><p>���������ַ������<code>loaclhost:4455/grid/console</code></p>
+        <h1 id="启用Selenium-server作为hub"><a href="#启用Selenium-server作为hub" class="headerlink" title="启用Selenium server作为hub"></a>启用Selenium server作为hub</h1><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
+<p><code>-port 4455</code>是开启4455号端口<code>-role hub</code>是将<code>Selenium server</code>作为<code>hub</code>或者<code>Grid server</code></p>
+<a id="more"></a>
+<p>如图所示<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200102.png" alt=""></p>
+<h1 id="在浏览器打开"><a href="#在浏览器打开" class="headerlink" title="在浏览器打开"></a>在浏览器打开</h1><p>在浏览器地址栏输入<code>loaclhost:4455/grid/console</code></p>
 <p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200620.png" alt=""></p>
-<h1 id="���ӽڵ�"><a href="#���ӽڵ�" class="headerlink" title="���ӽڵ�"></a>���ӽڵ�</h1><h2 id="yһ���ڵ�ʹ���һ̨�����"><a href="#yһ���ڵ�ʹ���һ̨�����" class="headerlink" title="ÿһ���ڵ�ʹ���һ̨�����"></a>ÿһ���ڵ�ʹ���һ̨�����</h2><p>�´�һ��cmd<br>����<code>java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.141.59.jar -role node -hub http://10.30.35.106:4455</code></p>
-<p>����һ���ڵ㣬�����ͼ<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722202415.png" alt=""><br>ˢ�������</p>
+<h1 id="添加节点"><a href="#添加节点" class="headerlink" title="添加节点"></a>添加节点</h1><h2 id="每一个节点就代表一台计算机"><a href="#每一个节点就代表一台计算机" class="headerlink" title="每一个节点就代表一台计算机"></a>每一个节点就代表一台计算机</h2><p>新打开一个cmd<br>输入<code>java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.141.59.jar -role node -hub http://10.30.35.106:4455</code></p>
+<p>创建一个节点，结果如图<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722202415.png" alt=""><br>刷新浏览器</p>
 <p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722202558.png" alt=""></p>
-<h2 id="���������ae�����ʹ��json�l����Զ���ڵ�"><a href="#���������ae�����ʹ��json�l����Զ���ڵ�" class="headerlink" title="���������ǣ�����ʹ��json�ļ����Զ���ڵ�"></a>���������ǣ�����ʹ��json�ļ����Զ���ڵ�</h2><p>cmd��������<code>java -jar selenium-server-standalone.jar -role node -nodeConfig nodeconfig.json</code><br><code>nodeConfig.json</code>�ļ�����</p>
+<h2 id="更厉害的是，可以使用json文件来自定义节点"><a href="#更厉害的是，可以使用json文件来自定义节点" class="headerlink" title="更厉害的是，可以使用json文件来自定义节点"></a>更厉害的是，可以使用json文件来自定义节点</h2><p>cmd输入命令<code>java -jar selenium-server-standalone.jar -role node -nodeConfig nodeconfig.json</code><br><code>nodeConfig.json</code>文件如下</p>
 <pre><code>{
   &quot;capabilities&quot;:
   [
@@ -318,25 +319,25 @@
   &quot;servlets&quot; : [],
   &quot;withoutServlets&quot;: [],
   &quot;custom&quot;: {}
-}</code></pre><p>������������������ַ<code>http://localhost:4455/grid/console</code>����Ϊjson�����õ�hub��<code>http://localhost:4455</code>��<br>�������</p>
-<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722204600.png" alt=""><br>������1��IE��3�������5��Chrome��ע�⣬��Щ�ڵ�����<code>id : http://10.30.35.106:5555, OS : WIN10</code>�еĽڵ㣬ע��˿ںš�</p>
-<h2 id="����Firefox�ڵ�"><a href="#����Firefox�ڵ�" class="headerlink" title="����Firefox�ڵ�"></a>����Firefox�ڵ�</h2><ol>
-<li>��������һ��hub �˿���4444</li>
-<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser&quot;browserName=firefox,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 �Cport 6677</code></li>
+}</code></pre><p>启动后在浏览器输入地址<code>http://localhost:4455/grid/console</code>，因为json中设置的hub是<code>http://localhost:4455</code>。<br>结果如下</p>
+<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722204600.png" alt=""><br>启动了1个IE，3个火狐，5个Chrome。注意，这些节点是在<code>id : http://10.30.35.106:5555, OS : WIN10</code>中的节点，注意端口号。</p>
+<h2 id="添加Firefox节点"><a href="#添加Firefox节点" class="headerlink" title="添加Firefox节点"></a>添加Firefox节点</h2><ol>
+<li>重新启动一个hub 端口是4444</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser&quot;browserName=firefox,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 6677</code></li>
 </ol>
 <p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210247.png" alt=""></p>
-<h2 id="����Chrome�ڵ�"><a href="#����Chrome�ڵ�" class="headerlink" title="����Chrome�ڵ�"></a>����Chrome�ڵ�</h2><ol>
-<li>���µ�cmd�����뵽 selenium-server-standalone-3.141.59.jar �����ļ���</li>
-<li><code>java -jar selenium-server-standalone-13.141.59.jar -role webdriver -browser &quot;browserName=chrome,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 �Cport 7777</code></li>
+<h2 id="添加Chrome节点"><a href="#添加Chrome节点" class="headerlink" title="添加Chrome节点"></a>添加Chrome节点</h2><ol>
+<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
+<li><code>java -jar selenium-server-standalone-13.141.59.jar -role webdriver -browser &quot;browserName=chrome,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 7777</code></li>
 </ol>
 <p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210624.png" alt=""></p>
-<p>��ʱ���ܹ��������˿��нڵ��ˡ����һ�º�����˼��<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210913.png" alt=""></p>
-<h2 id="��Mac-OS-������Safari"><a href="#��Mac-OS-������Safari" class="headerlink" title="��Mac OS ������Safari"></a>��Mac OS ������Safari</h2><ol>
-<li>���µ�cmd�����뵽 selenium-server-standalone-3.141.59.jar �����ļ���</li>
-<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser &quot;browserName=safari,version=7,maxinstance=2,platform=MAC&quot; -hubHost 10.30.35.106 �Cport 7788</code></li>
+<p>此时，总共有两个端口有节点了。体会一下红框的意思。<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210913.png" alt=""></p>
+<h2 id="在Mac-OS-下添加Safari"><a href="#在Mac-OS-下添加Safari" class="headerlink" title="在Mac OS 下添加Safari"></a>在Mac OS 下添加Safari</h2><ol>
+<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser &quot;browserName=safari,version=7,maxinstance=2,platform=MAC&quot; -hubHost 10.30.35.106 –port 7788</code></li>
 </ol>
-<p>��ʱ����һ��<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722211407.png" alt=""></p>
-<p>����Ϊʲô��ʾUNKONW,����������о��о�</p>
+<p>此时多了一列<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722211407.png" alt=""></p>
+<p>但是为什么显示UNKONW,这个后面再研究研究</p>
 
     </div>
 
@@ -429,7 +430,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#����Selenium-server��Ϊhub"><span class="nav-number">1.</span> <span class="nav-text">����Selenium server��Ϊhub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#���������"><span class="nav-number">2.</span> <span class="nav-text">���������</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#���ӽڵ�"><span class="nav-number">3.</span> <span class="nav-text">���ӽڵ�</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#yһ���ڵ�ʹ���һ̨�����"><span class="nav-number">3.1.</span> <span class="nav-text">ÿһ���ڵ�ʹ���һ̨�����</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#���������ae�����ʹ��json�l����Զ���ڵ�"><span class="nav-number">3.2.</span> <span class="nav-text">���������ǣ�����ʹ��json�ļ����Զ���ڵ�</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#����Firefox�ڵ�"><span class="nav-number">3.3.</span> <span class="nav-text">����Firefox�ڵ�</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#����Chrome�ڵ�"><span class="nav-number">3.4.</span> <span class="nav-text">����Chrome�ڵ�</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#��Mac-OS-������Safari"><span class="nav-number">3.5.</span> <span class="nav-text">��Mac OS ������Safari</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#启用Selenium-server作为hub"><span class="nav-number">1.</span> <span class="nav-text">启用Selenium server作为hub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在浏览器打开"><span class="nav-number">2.</span> <span class="nav-text">在浏览器打开</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加节点"><span class="nav-number">3.</span> <span class="nav-text">添加节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#每一个节点就代表一台计算机"><span class="nav-number">3.1.</span> <span class="nav-text">每一个节点就代表一台计算机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更厉害的是，可以使用json文件来自定义节点"><span class="nav-number">3.2.</span> <span class="nav-text">更厉害的是，可以使用json文件来自定义节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加Firefox节点"><span class="nav-number">3.3.</span> <span class="nav-text">添加Firefox节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加Chrome节点"><span class="nav-number">3.4.</span> <span class="nav-text">添加Chrome节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Mac-OS-下添加Safari"><span class="nav-number">3.5.</span> <span class="nav-text">在Mac OS 下添加Safari</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
