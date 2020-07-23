@@ -1,6 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Selenium Server使用配置（一）</title>
+    <url>/2020/07/22/Selenium%20Grid/</url>
+    <content><![CDATA[<h1 id="1-整个流程"><a href="#1-整个流程" class="headerlink" title="1. 整个流程"></a>1. 整个流程</h1><pre><code>要使用Selenium Grid进行分布式的操作，步骤大致是下面几个。</code></pre><ol>
+<li>在本地CMD创建hub</li>
+<li>在hub创建node,要对node配置端口号</li>
+<li>在python脚本中配置要执行哪一个Node</li>
+</ol>
+<h1 id="2-webdriver下载"><a href="#2-webdriver下载" class="headerlink" title="2. webdriver下载"></a>2. webdriver下载</h1><p>webdriver 是用来执行并操作浏览器的一个API，程序脚本通过webdriver来直接对浏览器进行操作，相当于起到一个链接浏览器和程序的桥梁。</p>
+<h2 id="2-1-IE"><a href="#2-1-IE" class="headerlink" title="2.1 IE"></a>2.1 IE</h2><ol>
+<li>下载地址：<a href="http://selenium-release.storage.googleapis.com/index.html?path=3.5/" target="_blank" rel="noopener">IEDriverServer</a><br>选择和电脑位数相同的额压缩包</li>
+<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。<h2 id="2-2-Chrome"><a href="#2-2-Chrome" class="headerlink" title="2.2 Chrome"></a>2.2 Chrome</h2></li>
+<li>下载地址：<a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="noopener">ChromeDriver</a><br>注意要和电脑中Chrome版本一致，</li>
+<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。<h2 id="2-3-Firefox"><a href="#2-3-Firefox" class="headerlink" title="2.3 Firefox"></a>2.3 Firefox</h2></li>
+<li>下载地址：<a href="https://github.com/mozilla/geckodriver/releases" target="_blank" rel="noopener">geckodriver</a></li>
+<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。</li>
+</ol>
+<h1 id="3-Selenium-Grid启动"><a href="#3-Selenium-Grid启动" class="headerlink" title="3. Selenium Grid启动"></a>3. Selenium Grid启动</h1><p>什么是Selenium Grid呢？</p>
+<p>如果你想要在多台机器上同时启动多个浏览器进行Web应用程序的测试，那么你就需要使用 Selenium Grid。其有一个hub和若干个node节点组成。hub用来管理各个node的注册信息，接受远程客户端的请求调用，然后将相应的请求转发给node来执行。<br>简单来说就是通过Selenium Grid可以实现在一台电脑上控制多台node节点来远程执行selenium自动化测试脚本。自动化测试脚本是放在hub主机上的，那么通过grid就可以控制下属的node客户端来执行hub主机上的自动化测试脚本。<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20170726154758111-1.jpg" alt=""></p>
+<h2 id="3-1-启动hub"><a href="#3-1-启动hub" class="headerlink" title="3.1 启动hub"></a>3.1 启动hub</h2><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
+<p><code>-port 4455</code>是开启4455号端口<code>-role hub</code>是将<code>Selenium server</code>作为<code>hub</code>或者<code>Grid server</code></p>
+<a id="more"></a>
+<p>如图所示<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722200102.png" alt=""></p>
+<p>在浏览器地址栏输入<code>loaclhost:4455/grid/console</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722200620.png" alt=""></p>
+<h2 id="3-2-添加node"><a href="#3-2-添加node" class="headerlink" title="3.2 添加node"></a>3.2 添加node</h2><p>每一个节点就代表一台计算机<br>新打开一个cmd<br>输入<code>java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.141.59.jar -role node -hub http://10.30.35.106:4455</code></p>
+<p>创建一个节点，结果如图<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722202415.png" alt=""><br>刷新浏览器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722202558.png" alt=""></p>
+<h2 id="3-3-使用json文件来自定义节点"><a href="#3-3-使用json文件来自定义节点" class="headerlink" title="3.3 使用json文件来自定义节点"></a>3.3 使用json文件来自定义节点</h2><p>在使用json自定义节点前，必须先开启hub</p>
+<p>cmd输入命令<code>java -jar selenium-server-standalone-3.149.0.jar -role node -nodeConfig nodeconfig.json</code><br><code>nodeConfig.json</code>文件如下</p>
+<pre><code>{
+  &quot;capabilities&quot;:
+  [
+    {
+      &quot;browserName&quot;: &quot;firefox&quot;,
+      &quot;maxInstances&quot;: 3,
+      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
+    },
+    {
+      &quot;browserName&quot;: &quot;chrome&quot;,
+      &quot;maxInstances&quot;: 5,
+      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
+    },
+    {
+      &quot;browserName&quot;: &quot;internet explorer&quot;,
+      &quot;maxInstances&quot;: 1,
+      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
+    }
+  ],
+  &quot;proxy&quot;: &quot;org.openqa.grid.selenium.proxy.DefaultRemoteProxy&quot;,
+  &quot;maxSession&quot;: 5,
+  &quot;port&quot;: 6666,
+  &quot;register&quot;: true,
+  &quot;registerCycle&quot;: 5000,
+  &quot;hub&quot;: &quot;http://localhost:4455&quot;,
+  &quot;nodeStatusCheckTimeout&quot;: 5000,
+  &quot;nodePolling&quot;: 5000,
+  &quot;role&quot;: &quot;node&quot;,
+  &quot;unregisterIfStillDownAfter&quot;: 60000,
+  &quot;downPollingLimit&quot;: 2,
+  &quot;debug&quot;: false,
+  &quot;servlets&quot; : [],
+  &quot;withoutServlets&quot;: [],
+  &quot;custom&quot;: {}
+}</code></pre><p>启动后在浏览器输入地址<code>http://localhost:4455/grid/console</code>，因为json中设置的hub是<code>http://localhost:4455</code>。<br>结果如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722204600.png" alt=""><br>启动了1个IE，3个火狐，5个Chrome。注意，这些节点是在<code>id : http://10.30.35.106:5555, OS : WIN10</code>中的节点，注意端口号。</p>
+<h2 id="3-4-添加Firefox节点"><a href="#3-4-添加Firefox节点" class="headerlink" title="3.4 添加Firefox节点"></a>3.4 添加Firefox节点</h2><ol>
+<li>重新启动一个hub 端口是4444</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser&quot;browserName=firefox,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 6677</code></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722210247.png" alt=""></p>
+<h2 id="3-5-添加Chrome节点"><a href="#3-5-添加Chrome节点" class="headerlink" title="3.5 添加Chrome节点"></a>3.5 添加Chrome节点</h2><ol>
+<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
+<li><code>java -jar selenium-server-standalone-13.141.59.jar -role webdriver -browser &quot;browserName=chrome,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 7777</code></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722210624.png" alt=""></p>
+<p>此时，总共有两个端口有节点了。体会一下红框的意思。<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722210913.png" alt=""></p>
+<h2 id="3-6-在Mac-OS-下添加Safari"><a href="#3-6-在Mac-OS-下添加Safari" class="headerlink" title="3.6 在Mac OS 下添加Safari"></a>3.6 在Mac OS 下添加Safari</h2><ol>
+<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser &quot;browserName=safari,version=7,maxinstance=2,platform=MAC&quot; -hubHost 10.30.35.106 –port 7788</code></li>
+</ol>
+<p>此时多了一列<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722211407.png" alt=""></p>
+<p>但是为什么显示UNKONW,这个后面再研究研究</p>
+<h1 id="4-在Python中使用"><a href="#4-在Python中使用" class="headerlink" title="4 在Python中使用"></a>4 在Python中使用</h1><h2 id="4-1-使用单个节点"><a href="#4-1-使用单个节点" class="headerlink" title="4.1 使用单个节点"></a>4.1 使用单个节点</h2><p>当配置好hub和Node后，如何用Python来启动相应的节点呢。</p>
+<p>在<code>def setUp(self)</code>里使用下面方法</p>
+<pre><code>self.driver = webdriver.Remote(command_executor = &apos;http://192.168.50.115:5555/wd/hub&apos;,
+                                       desired_capabilities={&apos;platform&apos;: &apos;WINDOWS&apos;,
+                                        &apos;browserName&apos;:&apos;chrome&apos;,
+                                          &apos;version&apos;: &apos;&apos;,
+                                          &apos;javascriptEnabled&apos;: True})</code></pre><p>有几个注意点：</p>
+<ol>
+<li><code>command_executor</code>的端口号是Node的端口号，不是hub的端口号，因为最终测试的执行还是在Node上执行。</li>
+<li><code>desired_capabilities</code>的各个参数用来配置这个测试使用哪一个操作系统和浏览器，还支持输入浏览器版本号。</li>
+</ol>
+<h2 id="4-2-使用多个节点"><a href="#4-2-使用多个节点" class="headerlink" title="4.2 使用多个节点"></a>4.2 使用多个节点</h2><p>要使用多个节点，可以先把节点地址和浏览器创建在一个字典内，然后用<code>for</code>循环进行逐个使用。</p>
+<pre><code># 定义node_hub与浏览器对应关系
+nodes = {
+    &apos;http://192.168.50.115:5555/wd/hub&apos;: &apos;chrome&apos;,
+    &apos;http://192.168.50.115:6666/wd/hub&apos;: &apos;internet explorer&apos;,
+    &apos;http://192.168.50.115:7777/wd/hub&apos;: &apos;firefox&apos;
+}
+
+# 通过不同的浏览器执行测试脚本
+for host, browser in nodes.items():
+    print(host, browser)
+    # 调用remote方法
+    driver = Remote(command_executor=host,
+                    desired_capabilities={&apos;platform&apos;: &apos;ANY&apos;, &apos;browserName&apos;: browser, &apos;version&apos;: &apos;&apos;, &apos;javascriptEnabled&apos;: True})
+
+driver.get(&quot;http://www.baidu.com&quot;)
+driver.find_element_by_id(&quot;kw&quot;).send_keys(&quot;hello&quot;)
+driver.find_element_by_id(&quot;su&quot;).click()
+time.sleep(2)
+driver.quit()</code></pre><h1 id="5-可能存在的问题"><a href="#5-可能存在的问题" class="headerlink" title="5. 可能存在的问题"></a>5. 可能存在的问题</h1><p>运行时候你会发现，IE浏览器无法打开，而Chrome和Firfox却没问题。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开IE浏览器，Internet 选项，安全。将启用保护模式勾选取消，四个区域都要这样设置<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200723201622.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>selenium</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown美化 font-awesome的使用</title>
+    <url>/2020/07/16/%E4%BD%A0%E5%A5%BD/</url>
+    <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。</p>
+<a id="more"></a>
+
+
+<p><i class="fa fa-share-alt"></i> <a href="http://www.fontawesome.com.cn/icons" target="_blank" rel="noopener">font-awesome官方地址</a></p>
+<h1 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h1><p>在Markdown中添加一下代码，放在文件的最底部。</p>
+<pre><code>&lt;head&gt; 
+    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; 
+    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; 
+&lt;/head&gt; 
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css&quot;&gt;</code></pre><p>然后就可以在font-awesome官网找到合适的图标，使用方法是将<code>&lt;i class=&quot;fa fa-share-alt&quot;&gt;&lt;/i&gt;</code>放在你需要添加图标的地方。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>&lt;i class=&quot;fab fa-google&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code> <i class="fab fa-google" aria-hidden="true"></i> 这是Google图标</p>
+<h2 id="图标变大"><a href="#图标变大" class="headerlink" title="图标变大"></a>图标变大</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x" aria-hidden="true"></i> 这是2倍大的Google图标，使用fa-2x</p>
+<h2 id="图标旋转"><a href="#图标旋转" class="headerlink" title="图标旋转"></a>图标旋转</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x fa-spin&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x fa-spin" aria-hidden="true"></i> 使用fa-spin来让图标进行旋转</p>
+<h2 id="特殊引用效果"><a href="#特殊引用效果" class="headerlink" title="特殊引用效果"></a>特殊引用效果</h2><p><code>&lt;i class=&quot;fab fa-google fa-3x fa-pull-left fa-border&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code></p>
+<p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>…独坐在路边街角 冷风吹醒，默默地伴着我的孤影，只想将结他紧抱，诉出辛酸，就在这刻想起往事，心中一股冲劲勇闯，抛开那现实没有顾虑，仿佛身边拥有一切，看似与别人筑起隔膜。</p>
+<p>在这里使用 <code>fa-border</code> 和 <code>fa-pull-right</code> 或 <code>fa-pull-left</code> 可以轻易构造出引用的特殊效果。</p>
+<h2 id="替换无序列表中的图标"><a href="#替换无序列表中的图标" class="headerlink" title="替换无序列表中的图标"></a>替换无序列表中的图标</h2><p>使用 <code>fa-ul</code> and <code>fa-li</code> 轻松的替换无序列表中的默认图标。</p>
+<pre><code>&lt;ul class=&quot;fa-ul&quot;&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;使用列表类图标&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;轻松的替换&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;无序列表&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-square&quot;&gt;&lt;/i&gt;中的默认图标&lt;/li&gt;
+&lt;/ul&gt;</code></pre><ul class="fa-ul">
+  <li><i class="fa-li fa fa-check-square"></i>使用列表类图标</li>
+  <li><i class="fa-li fa fa-check-square"></i>轻松的替换</li>
+  <li><i class="fa-li fa fa-spinner fa-spin"></i>无序列表</li>
+  <li><i class="fa-li fa fa-square"></i>中的默认图标</li>
+</ul>
+
+<h2 id="对图标旋转角度"><a href="#对图标旋转角度" class="headerlink" title="对图标旋转角度"></a>对图标旋转角度</h2><p>使用 <code>fa-rotate-*</code> and <code>fa-flip-*</code> 类</p>
+<pre><code>&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-90&quot;&gt;&lt;/i&gt; fa-rotate-90&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-180&quot;&gt;&lt;/i&gt; fa-rotate-180&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-270&quot;&gt;&lt;/i&gt; fa-rotate-270&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-flip-horizontal&quot;&gt;&lt;/i&gt; fa-flip-horizontal&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-flip-vertical&quot;&gt;&lt;/i&gt; fa-flip-vertical
+&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;</code></pre><p><i class="fa fa-quote-left fa-rotate-90"></i> fa-rotate-90<br><br><i class="fa fa-quote-left fa-rotate-180"></i> fa-rotate-180<br><br><i class="fa fa-quote-left fa-rotate-270"></i> fa-rotate-270<br><br><i class="fa fa-quote-left fa-flip-horizontal"></i> fa-flip-horizontal<br><br><i class="fa fa-quote-left fa-flip-vertical"></i> fa-flip-vertical</p>
+<h1 id="更多例子请看font-awesome样例"><a href="#更多例子请看font-awesome样例" class="headerlink" title="更多例子请看font-awesome样例"></a>更多例子请看<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fab fa-fort-awesome"></i><a href="http://www.fontawesome.com.cn/examples/" target="_blank" rel="noopener">font-awesome样例</a></h1><head> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
+</head> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
+      <categories>
+        <category>Mardown</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Python实现列表排序</title>
+    <url>/2020/07/16/%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="一、-快速排序"><a href="#一、-快速排序" class="headerlink" title="一、 快速排序"></a>一、 快速排序</h2><h3 id="1-算法原理"><a href="#1-算法原理" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>快速排序首先要在数组中选择一个基准元素，<a id="more"></a>以此为基准将数组分为 左边全部小于基准元素，右边全部大于基准元素。</p>
+<p>&emsp;&emsp;算法的步骤：</p>
+<p>&emsp;&emsp;1. 选取数组第一个元素为基准元素:first = nums[0]。</p>
+<p>&emsp;&emsp;2. 从第二个元素开始for i 循环:</p>
+<p>&emsp;&emsp;&emsp;&emsp;当遇到 i &lt; mid，将i元素放入右边数组中，right.append(i)</p>
+<p>&emsp;&emsp;&emsp;&emsp;当遇到 i &gt;= mid，将i元素放入左边数组中，left.append(i)</p>
+<p>&emsp;&emsp;3.递归进行第2步骤，对left和right数组进行相同操作，从无序变成有序。</font></p>
+<h3 id="2-Python-3-代码实现"><a href="#2-Python-3-代码实现" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">快读排序</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(arr)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> arr ==[]:</span><br><span class="line">		<span class="keyword">return</span> []</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		mid = arr[<span class="number">0</span>]                                      <span class="comment"># 取第一个元素作为基准元素</span></span><br><span class="line">		left ,right = [], []</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> arr[<span class="number">1</span>:]:</span><br><span class="line">			<span class="keyword">if</span> i &lt; mid:</span><br><span class="line">				right.append(i)</span><br><span class="line">			<span class="keyword">if</span> i &gt;= mid:</span><br><span class="line">				left.append(i)</span><br><span class="line">	res =  quick_sort(left) + [mid] + quick_sort(right)  <span class="comment"># 递归处理</span></span><br><span class="line">	<span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></code></pre><h3 id="3-复杂度"><a href="#3-复杂度" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(nlogn)</code>，空间复杂度是<code>O(nlog2n)</code>；不稳定。</p>
+<h2 id="二、-冒泡排序"><a href="#二、-冒泡排序" class="headerlink" title="二、 冒泡排序"></a>二、 冒泡排序</h2><h3 id="1-算法原理-1"><a href="#1-算法原理-1" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢”浮”到数列的顶端</p>
+<p>&emsp;&emsp;算法的步骤：</p>
+<p>&emsp;&emsp;1. 从左往右开始，依次循环。</p>
+<p>&emsp;&emsp;2. 比较当前元素与后一个元素的大小:</p>
+<p>&emsp;&emsp;3. 如果当前元素小于后一个元素，则两元素位置进行交换。</p>
+<p>&emsp;&emsp;4. 重复上述步骤到最后一个元素，至此这一轮排序结束。</p>
+<p>&emsp;&emsp;5. 递归上述步骤，当外层循环到最后一个元素的时候即结束运行。</font></p>
+<h3 id="2-Python-3-代码实现-1"><a href="#2-Python-3-代码实现-1" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">冒泡排序</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> nums ==[]:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    n = len(nums)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n-i<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> nums[j] &lt; nums[j+<span class="number">1</span>]:</span><br><span class="line">                nums[j] ,nums[j+<span class="number">1</span>]= nums[j+<span class="number">1</span>], nums[j]</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure></code></pre><h3 id="3-复杂度-1"><a href="#3-复杂度-1" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(n2)</code>，空间复杂度是<code>O(1)</code>；稳定。</p>
+<h2 id="三、-选择排序"><a href="#三、-选择排序" class="headerlink" title="三、 选择排序"></a>三、 选择排序</h2><h3 id="1-算法原理-2"><a href="#1-算法原理-2" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>每次从待排序的列表中选择第一位元素作为基准比较元素，再从待排序列表中选出最小（或最大）一个元素，将其存放在该列表中的起始位置。和冒泡排序的不同之处是，选择排序每轮只交换一次，而冒泡排序需要交换很多次。</p>
+<p>&emsp;&emsp;算法的步骤：</p>
+<p>&emsp;&emsp;1. 开始时选择列表中第一个元素作为基准比较元素，后面的元素都是待排序元素。</p>
+<p>&emsp;&emsp;2. 一次比较待排序元素与基准比较元素的大小。</p>
+<p>&emsp;&emsp;3. 找到最小（最大）元素，然后交换基准比较元素和该最小（最大）元素的位置，至此一轮结束。</p>
+<p>&emsp;&emsp;4. 重复上述步骤到最后待排序列表为空时停止。<br></font></p>
+<h3 id="2-Python-3-代码实现-2"><a href="#2-Python-3-代码实现-2" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">选择排序</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">select_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> nums == []:</span><br><span class="line">		<span class="keyword">return</span> nums</span><br><span class="line">	n=len(nums)</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,n<span class="number">-1</span>):</span><br><span class="line">		min_index = i</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,n):</span><br><span class="line">			<span class="keyword">if</span> nums[j] &gt; nums[min_index]:</span><br><span class="line">				min_index = j</span><br><span class="line">		nums[i], nums[min_index] = nums[min_index], nums[i]</span><br><span class="line">	<span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure></code></pre><h3 id="3-复杂度-2"><a href="#3-复杂度-2" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(n2)</code>，空间复杂度是<code>O(1)</code>；不稳定。</p>
+<head> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
+</head> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>列表排序</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>唠叨唠叨——理发</title>
+    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
+    <content><![CDATA[<p><font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。<br><br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。<br><br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···<br><br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。<br><br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。<br><br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。</p>
+</font>]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IP地址分类查询</title>
     <url>/2020/07/16/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/</url>
     <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：</p>
@@ -72,281 +298,6 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
       <tags>
         <tag>Python</tag>
         <tag>TCP/IP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Learning Data Mining With Python</title>
-    <url>/2020/07/20/Python%20Mining/</url>
-    <content><![CDATA[<h1 id="鍐欏湪鍓嶉潰"><a href="#鍐欏湪鍓嶉潰" class="headerlink" title="鍐欏湪鍓嶉潰"></a>鍐欏湪鍓嶉潰</h1><p>杩欎釜绯诲垪绠楁槸鎴戝涔犳暟鎹寲鎺樼殑璁板綍鍚с€備笉瀹氭湡鏇存柊锛屾暟鎹泦鍜屽唴瀹归兘鏄弬鑰冦€奝ython鏁版嵁鎸栨帢鍏ラ棬涓庡疄璺点€嬭繖鏈功銆?</p>
-<a id="more"></a>
-<h1 id="浜插拰鎬у垎鏋愶紙浠ュ晢鍝佹帹鑽愪负渚嬶級"><a href="#浜插拰鎬у垎鏋愶紙浠ュ晢鍝佹帹鑽愪负渚嬶級" class="headerlink" title="浜插拰鎬у垎鏋愶紙浠ュ晢鍝佹帹鑽愪负渚嬶級"></a>浜插拰鎬у垎鏋愶紙浠ュ晢鍝佹帹鑽愪负渚嬶級</h1><p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>鍟嗗搧閿€鍞粠绾夸笅鎼埌绾夸笂鍚庯紝寰堝涔嬪墠闈犱汉宸ュ畬鎴愮殑宸ヤ綔鍙湁瀹炵幇鑷姩鍖栵紝鎵嶆湁鏈涘皢鐢熸剰鍋氬ぇ銆備互鍚戜笂閿€鍞负渚嬶紝鍚戜笂閿€鍞嚭鑷嫳鏂噓p-selling锛屾寚鐨勬槸鍚戝凡缁忚喘涔板晢鍝佺殑椤惧鎺ㄩ攢鍙︿竴绉嶅晢鍝併€傚師鏉ョ嚎涓嬬敱浜哄伐鏉ュ畬鎴愮殑鍟嗗搧鎺ㄨ崘宸ヤ綔锛岀幇鍦ㄤ緷闈犳暟鎹寲鎺樻妧鏈氨鑳藉畬鎴愶紝鑰屼笖姣忓勾鑳戒负鍟嗗澶氳繘璐﹀嚑浜跨編鍏冿紝寮哄姏鍔╂帹鐢靛瓙鍟嗗姟闈╁懡鐨勫彂灞曪紒</p>
-<p>鎴戜滑涓€璧风湅涓嬬畝鍗曠殑鍟嗗搧鎺ㄨ崘鏈嶅姟锛屽畠鑳屽悗鐨勬€濊矾鍏跺疄寰堝ソ鐞嗚В锛氫汉浠箣鍓嶇粡甯稿悓鏃惰喘涔扮殑涓や欢鍟嗗搧锛屼互鍚庝篃寰堝彲鑳戒細鍚屾椂璐拱銆傝鎯虫硶纭疄寰堢畝鍗曞惂锛屽彲杩欏氨鏄緢澶氬晢鍝佹帹鑽愭湇鍔＄殑鍩虹锛屾棤璁虹嚎涓婅繕鏄嚎涓嬨€?</p>
-<p>杩欑鎯虫硶寰堝鏄撹浆鍖栦负绠楁硶銆傞【瀹㈣喘涔板晢鍝佸悗锛屽湪鍚戜粬浠帹鑽愬晢鍝佸墠锛屽厛鏌ヨ涓€涓嬪巻鍙蹭氦鏄撴暟鎹紝鎵惧埌浠ュ線浠栦滑璐拱鍚屾牱鍟嗗搧鐨勪氦鏄撴暟鎹紝鐪嬬湅鍚屾椂璐拱浜嗕粈涔堬紝鍐嶆妸瀹冧滑鎺ㄨ崘缁欓【瀹㈠嵆鍙€傝绠楁硶瀹為檯琛ㄧ幇涔熶笉閿欙紝鑷冲皯姣旈殢鏈烘帹鑽愬晢鍝佹洿鏈夋晥銆?</p>
-<p>鍦ㄨ繖閲屽畾涔変竴涓鍒欙細<br>    濡傛灉涓€涓汉涔颁簡鍟嗗搧X锛岄偅涔堜粬寰堟湁鍙兘璐拱鍟嗗搧Y銆傛殏涓斾笉濂界巼澶氫欢鍟嗗搧鐨勮鍒欍€?</p>
-<pre><code>import numpy as np
-dataset_filename = &quot;affinity_dataset.txt&quot;
-X = np.loadtxt(dataset_filename)</code></pre><p>瀵煎叆鏁版嵁搴撲箣鍚庯紝寮曞叆涓や釜姒傚康銆傚垎鍒槸鏀寔搴?support)鍜岀疆淇″害(confidence)</p>
-<p>鏀寔搴︽寚鏁版嵁闆嗕腑瑙勫垯搴旈獙鐨勬鏁般€備篃灏辨槸瑙勫垯涓鏋滆繖涓潯浠舵弧瓒崇殑娆℃暟銆?<br>缃俊搴︽槸鎸囪鍒欑殑鍑嗙‘搴﹀浣曪紝鍗冲湪绗﹀悎濡傛灉璇彞鎵€琛ㄧず鐨勫墠鎻愭潯浠堕噷锛屽張鍜岀粨璁轰竴鑷寸殑姣斾緥澶氬皯銆傝绠楁柟娉曚负棣栧厛缁熻褰撳墠瑙勫垯鐨勫嚭鐜版鏁帮紝鍐嶇敤瀹冩潵闄や互鏉′欢锛堚€滃鏋溾€濊鍙ワ級鐩稿悓鐨勮鍒欐暟閲忋€?</p>
-<p>涓轰簡璁＄畻鏀寔搴﹀拰缃俊搴︼紝闇€瑕佺粺璁℃暟鎹泦涓墍鏈夎鍒欑殑鐩稿叧鏁版嵁銆備緥濡?<em>瑙勫垯搴旈獙*</em>鍜?<em>瑙勫垯鏃犳晥*</em>锛岃繖閲岀敤瀛楀吀鐨勫舰寮忎繚瀛橈紝鍏朵腑瀛楀吀鐨勯敭鏄敱鏉′欢鍜岀粨璁虹粍鎴愮殑鍏冪粍锛屽厓缁勫厓绱犵敤鐗瑰緛鍒楄〃涓殑绱㈠紩鍊艰〃绀恒€?</p>
-<p>鍒涘缓瀛楀吀锛屽瓨鏀剧粨鏋?</p>
-<pre><code>from collections import defaultdict
-valid_rules = defaultdict(int)
-invalid_rules = defaultdict(int)
-num_occurances = defaultdict(int)</code></pre><ul>
-<li><p><code>premise</code> 琛ㄧず鍓嶆彁鏉′欢–椤惧璐拱浜嗘煇涓€绉嶅晢鍝侊紝<code>num_occurances</code>琛ㄧず婊¤冻浜嗗墠鎻愭潯浠剁殑娆℃暟銆?</p>
-</li>
-<li><p><code>conclusion</code> 琛ㄧず缁撴灉</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for sample in X:</span><br><span class="line">    for premise in range(n_features):  # 瀵规瘡涓壒寰侀亶鍘嗕竴閬?</span><br><span class="line">        if sample[premise] &#x3D;&#x3D; 0: continue</span><br><span class="line">        num_occurances[premise] +&#x3D; 1</span><br><span class="line">        for conclusion in range(n_features):</span><br><span class="line">            if premise &#x3D;&#x3D; conclusion: continue  # 濡傛灉鏉′欢鍜岀粨璁虹浉鍚岀殑灏辫烦杩囷紝瀵瑰垎鏋愭病鏈夋剰涔?</span><br><span class="line">            if sample[conclusion] &#x3D;&#x3D; 1:</span><br><span class="line">                valid_rules[(premise,conclusion)] +&#x3D; 1</span><br><span class="line">            else:</span><br><span class="line">                invalid_rules[(premise,conclusion)] +&#x3D; 1  # 缁熻鍙拱浜嗕竴涓晢鍝佺殑娆℃暟锛屽氨鏄鍒欐棤鏁?</span><br><span class="line">support &#x3D; valid_rules       # 鏀寔搴﹀氨鏄鍒欏簲楠岀殑娆℃暟</span><br><span class="line">confidence &#x3D; defaultdict(float)  # 缃俊搴︾殑瀛楀吀</span><br><span class="line">for premise,conclusion in valid_rules.keys():  # 娉ㄦ剰鏄摢涓櫎浠ュ摢涓?</span><br><span class="line">    confidence[(premise,conclusion)] &#x3D; valid_rules[(premise,conclusion)]&#x2F;num_occurances[premise]</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>瀹氫箟涓€涓嚱鏁帮紝杈撳嚭姣忔潯瑙勫垯鍙婂叾鏀寔搴﹀拰缃俊搴︺€?</p>
-<pre><code>def print_rule(premise, conclusion, support, confidence, features):
-    premise_name = features[premise]
-    conclusion_name = features[conclusion]
-    print(&quot;Rule: If a person buys {0} they will also buy {1}&quot;.format(premise_name, conclusion_name))
-    print(&quot; - Confidence: {0:.3f}&quot;.format(confidence[(premise, conclusion)]))
-    print(&quot; - Support: {0}&quot;.format(support[(premise, conclusion)]))
-    print(&quot;&quot;)</code></pre><p>瀵圭疆淇″害杩涜鎺掑簭锛岀劧鍚庤緭鍑哄墠浜旂殑瑙勫垯鍙婂叾缁撴灉锛屽瓧鍏哥殑items() 鍑芥暟杩斿洖鍖呭惈瀛楀吀鎵€鏈夊厓绱犵殑鍒楄〃銆傛垜浠娇鐢╥temgetter() 绫讳綔涓洪敭锛岃繖鏍峰氨鍙?<br>浠ュ宓屽鍒楄〃杩涜鎺掑簭銆俰temgetter(1) 琛ㄧず浠ュ瓧鍏稿悇鍏冪礌鐨勫€硷紙杩欓噷涓烘敮鎸佸害锛変綔涓烘帓搴忎緷鎹紝reverse=True 琛ㄧず闄嶅簭鎺掑垪銆?</p>
-<pre><code>from operator import itemgetter
-# 鏀寔搴︽帓搴?
-sorted_support = sorted(support.items(),key=itemgetter(1),reverse = True)
-for index in range(5):
-    premise,conclusion = sorted_support[index][0]
-    print_rule(premise,conclusion,support,confidence,features)</code></pre><p>缁撴灉濡備笅</p>
-<pre><code>Rule: If a person buys cheese they will also buy bananas
- - Confidence: 0.659
- - Support: 27
-
-Rule: If a person buys bananas they will also buy cheese
- - Confidence: 0.458
- - Support: 27
-
-Rule: If a person buys cheese they will also buy apples
- - Confidence: 0.610
- - Support: 25
-
-Rule: If a person buys apples they will also buy cheese
- - Confidence: 0.694
- - Support: 25
-
-Rule: If a person buys apples they will also buy bananas
- - Confidence: 0.583
- - Support: 21</code></pre><p>瀵圭疆淇″害鎺掑簭涔熸槸涓€鏍风殑</p>
-<pre><code># 缃俊搴︽帓搴?
-sorted_confidence = sorted(confidence.items(),key=itemgetter(1),reverse=True)
-for index in range(5):
-    premise,conclusion = sorted_confidence[index][0]
-    print_rule(premise,conclusion,support,confidence,features)</code></pre><p>缁撴灉濡備笅</p>
-<pre><code>Rule: If a person buys apples they will also buy cheese
- - Confidence: 0.694
- - Support: 25
-
-Rule: If a person buys cheese they will also buy bananas
- - Confidence: 0.659
- - Support: 27
-
-Rule: If a person buys bread they will also buy bananas
- - Confidence: 0.630
- - Support: 17
-
-Rule: If a person buys cheese they will also buy apples
- - Confidence: 0.610
- - Support: 25
-
-Rule: If a person buys apples they will also buy bananas
- - Confidence: 0.583
- - Support: 21</code></pre><h1 id="缁撴灉鎺㈡瀽"><a href="#缁撴灉鎺㈡瀽" class="headerlink" title="缁撴灉鎺㈡瀽"></a>缁撴灉鎺㈡瀽</h1><p>浠庢帓搴忓悗鐨勭粨鏋滃彲浠ョ湅鍑猴紝鈥滈【瀹拱鑻规灉锛屼篃浼氫拱濂堕叒 鈥濆拰鈥滈【瀹拱濂堕叒锛屼篃浼氫拱棣欒晧 鈥濓紝杩欎袱鏉¤鍒欑殑鏀寔搴﹀拰缃?<br>淇″害閮藉緢楂樸€傝秴甯傜粡鐞嗗彲浠ユ牴鎹繖浜涜鍒欐潵璋冩暣鍟嗗搧鎽嗘斁浣嶇疆銆傚湪鑻规灉淇冮攢鐨勬椂鍊欙紝鏃佽竟涔熶竴璧锋憜涓婂ザ閰€備絾鏄钑夊拰濂堕叒鎼炰績閿€灏辨病鍟ョ敤浜嗐€?</p>
-<head> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
-</head> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Data Mining</tag>
-        <tag>Books</tag>
-        <tag>Learning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Markdown美化 font-awesome的使用</title>
-    <url>/2020/07/16/%E4%BD%A0%E5%A5%BD/</url>
-    <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。</p>
-<a id="more"></a>
-
-
-<p><i class="fa fa-share-alt"></i> <a href="http://www.fontawesome.com.cn/icons" target="_blank" rel="noopener">font-awesome官方地址</a></p>
-<h1 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h1><p>在Markdown中添加一下代码，放在文件的最底部。</p>
-<pre><code>&lt;head&gt; 
-    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; 
-    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; 
-&lt;/head&gt; 
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css&quot;&gt;</code></pre><p>然后就可以在font-awesome官网找到合适的图标，使用方法是将<code>&lt;i class=&quot;fa fa-share-alt&quot;&gt;&lt;/i&gt;</code>放在你需要添加图标的地方。</p>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>&lt;i class=&quot;fab fa-google&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code> <i class="fab fa-google" aria-hidden="true"></i> 这是Google图标</p>
-<h2 id="图标变大"><a href="#图标变大" class="headerlink" title="图标变大"></a>图标变大</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x" aria-hidden="true"></i> 这是2倍大的Google图标，使用fa-2x</p>
-<h2 id="图标旋转"><a href="#图标旋转" class="headerlink" title="图标旋转"></a>图标旋转</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x fa-spin&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x fa-spin" aria-hidden="true"></i> 使用fa-spin来让图标进行旋转</p>
-<h2 id="特殊引用效果"><a href="#特殊引用效果" class="headerlink" title="特殊引用效果"></a>特殊引用效果</h2><p><code>&lt;i class=&quot;fab fa-google fa-3x fa-pull-left fa-border&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code></p>
-<p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>…独坐在路边街角 冷风吹醒，默默地伴着我的孤影，只想将结他紧抱，诉出辛酸，就在这刻想起往事，心中一股冲劲勇闯，抛开那现实没有顾虑，仿佛身边拥有一切，看似与别人筑起隔膜。</p>
-<p>在这里使用 <code>fa-border</code> 和 <code>fa-pull-right</code> 或 <code>fa-pull-left</code> 可以轻易构造出引用的特殊效果。</p>
-<h2 id="替换无序列表中的图标"><a href="#替换无序列表中的图标" class="headerlink" title="替换无序列表中的图标"></a>替换无序列表中的图标</h2><p>使用 <code>fa-ul</code> and <code>fa-li</code> 轻松的替换无序列表中的默认图标。</p>
-<pre><code>&lt;ul class=&quot;fa-ul&quot;&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;使用列表类图标&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;轻松的替换&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;无序列表&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-square&quot;&gt;&lt;/i&gt;中的默认图标&lt;/li&gt;
-&lt;/ul&gt;</code></pre><ul class="fa-ul">
-  <li><i class="fa-li fa fa-check-square"></i>使用列表类图标</li>
-  <li><i class="fa-li fa fa-check-square"></i>轻松的替换</li>
-  <li><i class="fa-li fa fa-spinner fa-spin"></i>无序列表</li>
-  <li><i class="fa-li fa fa-square"></i>中的默认图标</li>
-</ul>
-
-<h2 id="对图标旋转角度"><a href="#对图标旋转角度" class="headerlink" title="对图标旋转角度"></a>对图标旋转角度</h2><p>使用 <code>fa-rotate-*</code> and <code>fa-flip-*</code> 类</p>
-<pre><code>&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-90&quot;&gt;&lt;/i&gt; fa-rotate-90&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-180&quot;&gt;&lt;/i&gt; fa-rotate-180&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-270&quot;&gt;&lt;/i&gt; fa-rotate-270&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-flip-horizontal&quot;&gt;&lt;/i&gt; fa-flip-horizontal&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-flip-vertical&quot;&gt;&lt;/i&gt; fa-flip-vertical
-&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;</code></pre><p><i class="fa fa-quote-left fa-rotate-90"></i> fa-rotate-90<br><br><i class="fa fa-quote-left fa-rotate-180"></i> fa-rotate-180<br><br><i class="fa fa-quote-left fa-rotate-270"></i> fa-rotate-270<br><br><i class="fa fa-quote-left fa-flip-horizontal"></i> fa-flip-horizontal<br><br><i class="fa fa-quote-left fa-flip-vertical"></i> fa-flip-vertical</p>
-<h1 id="更多例子请看font-awesome样例"><a href="#更多例子请看font-awesome样例" class="headerlink" title="更多例子请看font-awesome样例"></a>更多例子请看<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fab fa-fort-awesome"></i><a href="http://www.fontawesome.com.cn/examples/" target="_blank" rel="noopener">font-awesome样例</a></h1><head> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
-</head> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
-      <categories>
-        <category>Mardown</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Selenium Server使用配置（一）</title>
-    <url>/2020/07/22/Selenium%20Grid/</url>
-    <content><![CDATA[<h1 id="启用Selenium-server作为hub"><a href="#启用Selenium-server作为hub" class="headerlink" title="启用Selenium server作为hub"></a>启用Selenium server作为hub</h1><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
-<p><code>-port 4455</code>是开启4455号端口<code>-role hub</code>是将<code>Selenium server</code>作为<code>hub</code>或者<code>Grid server</code></p>
-<a id="more"></a>
-<p>如图所示<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200102.png" alt=""></p>
-<h1 id="在浏览器打开"><a href="#在浏览器打开" class="headerlink" title="在浏览器打开"></a>在浏览器打开</h1><p>在浏览器地址栏输入<code>loaclhost:4455/grid/console</code></p>
-<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722200620.png" alt=""></p>
-<h1 id="添加节点"><a href="#添加节点" class="headerlink" title="添加节点"></a>添加节点</h1><h2 id="每一个节点就代表一台计算机"><a href="#每一个节点就代表一台计算机" class="headerlink" title="每一个节点就代表一台计算机"></a>每一个节点就代表一台计算机</h2><p>新打开一个cmd<br>输入<code>java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.141.59.jar -role node -hub http://10.30.35.106:4455</code></p>
-<p>创建一个节点，结果如图<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722202415.png" alt=""><br>刷新浏览器</p>
-<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722202558.png" alt=""></p>
-<h2 id="更厉害的是，可以使用json文件来自定义节点"><a href="#更厉害的是，可以使用json文件来自定义节点" class="headerlink" title="更厉害的是，可以使用json文件来自定义节点"></a>更厉害的是，可以使用json文件来自定义节点</h2><p>cmd输入命令<code>java -jar selenium-server-standalone.jar -role node -nodeConfig nodeconfig.json</code><br><code>nodeConfig.json</code>文件如下</p>
-<pre><code>{
-  &quot;capabilities&quot;:
-  [
-    {
-      &quot;browserName&quot;: &quot;firefox&quot;,
-      &quot;maxInstances&quot;: 3,
-      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
-    },
-    {
-      &quot;browserName&quot;: &quot;chrome&quot;,
-      &quot;maxInstances&quot;: 5,
-      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
-    },
-    {
-      &quot;browserName&quot;: &quot;internet explorer&quot;,
-      &quot;maxInstances&quot;: 1,
-      &quot;seleniumProtocol&quot;: &quot;WebDriver&quot;
-    }
-  ],
-  &quot;proxy&quot;: &quot;org.openqa.grid.selenium.proxy.DefaultRemoteProxy&quot;,
-  &quot;maxSession&quot;: 5,
-  &quot;port&quot;: 5555,
-  &quot;register&quot;: true,
-  &quot;registerCycle&quot;: 5000,
-  &quot;hub&quot;: &quot;http://localhost:4455&quot;,
-  &quot;nodeStatusCheckTimeout&quot;: 5000,
-  &quot;nodePolling&quot;: 5000,
-  &quot;role&quot;: &quot;node&quot;,
-  &quot;unregisterIfStillDownAfter&quot;: 60000,
-  &quot;downPollingLimit&quot;: 2,
-  &quot;debug&quot;: false,
-  &quot;servlets&quot; : [],
-  &quot;withoutServlets&quot;: [],
-  &quot;custom&quot;: {}
-}</code></pre><p>启动后在浏览器输入地址<code>http://localhost:4455/grid/console</code>，因为json中设置的hub是<code>http://localhost:4455</code>。<br>结果如下</p>
-<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722204600.png" alt=""><br>启动了1个IE，3个火狐，5个Chrome。注意，这些节点是在<code>id : http://10.30.35.106:5555, OS : WIN10</code>中的节点，注意端口号。</p>
-<h2 id="添加Firefox节点"><a href="#添加Firefox节点" class="headerlink" title="添加Firefox节点"></a>添加Firefox节点</h2><ol>
-<li>重新启动一个hub 端口是4444</li>
-<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser&quot;browserName=firefox,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 6677</code></li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210247.png" alt=""></p>
-<h2 id="添加Chrome节点"><a href="#添加Chrome节点" class="headerlink" title="添加Chrome节点"></a>添加Chrome节点</h2><ol>
-<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
-<li><code>java -jar selenium-server-standalone-13.141.59.jar -role webdriver -browser &quot;browserName=chrome,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 7777</code></li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210624.png" alt=""></p>
-<p>此时，总共有两个端口有节点了。体会一下红框的意思。<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722210913.png" alt=""></p>
-<h2 id="在Mac-OS-下添加Safari"><a href="#在Mac-OS-下添加Safari" class="headerlink" title="在Mac OS 下添加Safari"></a>在Mac OS 下添加Safari</h2><ol>
-<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
-<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser &quot;browserName=safari,version=7,maxinstance=2,platform=MAC&quot; -hubHost 10.30.35.106 –port 7788</code></li>
-</ol>
-<p>此时多了一列<br><img src="https://raw.githubusercontent.com/qyh180/figure/master/img/20200722211407.png" alt=""></p>
-<p>但是为什么显示UNKONW,这个后面再研究研究</p>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>selenium</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>唠叨唠叨——理发</title>
-    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
-    <content><![CDATA[<p><font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。<br><br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。<br><br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···<br><br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。<br><br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。<br><br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。</p>
-</font>]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python实现列表排序</title>
-    <url>/2020/07/16/%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h2 id="一、-快速排序"><a href="#一、-快速排序" class="headerlink" title="一、 快速排序"></a>一、 快速排序</h2><h3 id="1-算法原理"><a href="#1-算法原理" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>快速排序首先要在数组中选择一个基准元素，<a id="more"></a>以此为基准将数组分为 左边全部小于基准元素，右边全部大于基准元素。</p>
-<p>&emsp;&emsp;算法的步骤：</p>
-<p>&emsp;&emsp;1. 选取数组第一个元素为基准元素:first = nums[0]。</p>
-<p>&emsp;&emsp;2. 从第二个元素开始for i 循环:</p>
-<p>&emsp;&emsp;&emsp;&emsp;当遇到 i &lt; mid，将i元素放入右边数组中，right.append(i)</p>
-<p>&emsp;&emsp;&emsp;&emsp;当遇到 i &gt;= mid，将i元素放入左边数组中，left.append(i)</p>
-<p>&emsp;&emsp;3.递归进行第2步骤，对left和right数组进行相同操作，从无序变成有序。</font></p>
-<h3 id="2-Python-3-代码实现"><a href="#2-Python-3-代码实现" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">快读排序</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(arr)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> arr ==[]:</span><br><span class="line">		<span class="keyword">return</span> []</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		mid = arr[<span class="number">0</span>]                                      <span class="comment"># 取第一个元素作为基准元素</span></span><br><span class="line">		left ,right = [], []</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> arr[<span class="number">1</span>:]:</span><br><span class="line">			<span class="keyword">if</span> i &lt; mid:</span><br><span class="line">				right.append(i)</span><br><span class="line">			<span class="keyword">if</span> i &gt;= mid:</span><br><span class="line">				left.append(i)</span><br><span class="line">	res =  quick_sort(left) + [mid] + quick_sort(right)  <span class="comment"># 递归处理</span></span><br><span class="line">	<span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></code></pre><h3 id="3-复杂度"><a href="#3-复杂度" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(nlogn)</code>，空间复杂度是<code>O(nlog2n)</code>；不稳定。</p>
-<h2 id="二、-冒泡排序"><a href="#二、-冒泡排序" class="headerlink" title="二、 冒泡排序"></a>二、 冒泡排序</h2><h3 id="1-算法原理-1"><a href="#1-算法原理-1" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢”浮”到数列的顶端</p>
-<p>&emsp;&emsp;算法的步骤：</p>
-<p>&emsp;&emsp;1. 从左往右开始，依次循环。</p>
-<p>&emsp;&emsp;2. 比较当前元素与后一个元素的大小:</p>
-<p>&emsp;&emsp;3. 如果当前元素小于后一个元素，则两元素位置进行交换。</p>
-<p>&emsp;&emsp;4. 重复上述步骤到最后一个元素，至此这一轮排序结束。</p>
-<p>&emsp;&emsp;5. 递归上述步骤，当外层循环到最后一个元素的时候即结束运行。</font></p>
-<h3 id="2-Python-3-代码实现-1"><a href="#2-Python-3-代码实现-1" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">冒泡排序</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> nums ==[]:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    n = len(nums)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n-i<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> nums[j] &lt; nums[j+<span class="number">1</span>]:</span><br><span class="line">                nums[j] ,nums[j+<span class="number">1</span>]= nums[j+<span class="number">1</span>], nums[j]</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure></code></pre><h3 id="3-复杂度-1"><a href="#3-复杂度-1" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(n2)</code>，空间复杂度是<code>O(1)</code>；稳定。</p>
-<h2 id="三、-选择排序"><a href="#三、-选择排序" class="headerlink" title="三、 选择排序"></a>三、 选择排序</h2><h3 id="1-算法原理-2"><a href="#1-算法原理-2" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>每次从待排序的列表中选择第一位元素作为基准比较元素，再从待排序列表中选出最小（或最大）一个元素，将其存放在该列表中的起始位置。和冒泡排序的不同之处是，选择排序每轮只交换一次，而冒泡排序需要交换很多次。</p>
-<p>&emsp;&emsp;算法的步骤：</p>
-<p>&emsp;&emsp;1. 开始时选择列表中第一个元素作为基准比较元素，后面的元素都是待排序元素。</p>
-<p>&emsp;&emsp;2. 一次比较待排序元素与基准比较元素的大小。</p>
-<p>&emsp;&emsp;3. 找到最小（最大）元素，然后交换基准比较元素和该最小（最大）元素的位置，至此一轮结束。</p>
-<p>&emsp;&emsp;4. 重复上述步骤到最后待排序列表为空时停止。<br></font></p>
-<h3 id="2-Python-3-代码实现-2"><a href="#2-Python-3-代码实现-2" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">选择排序</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">select_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> nums == []:</span><br><span class="line">		<span class="keyword">return</span> nums</span><br><span class="line">	n=len(nums)</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,n<span class="number">-1</span>):</span><br><span class="line">		min_index = i</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,n):</span><br><span class="line">			<span class="keyword">if</span> nums[j] &gt; nums[min_index]:</span><br><span class="line">				min_index = j</span><br><span class="line">		nums[i], nums[min_index] = nums[min_index], nums[i]</span><br><span class="line">	<span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure></code></pre><h3 id="3-复杂度-2"><a href="#3-复杂度-2" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(n2)</code>，空间复杂度是<code>O(1)</code>；不稳定。</p>
-<head> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
-</head> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>列表排序</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
 </search>
