@@ -1,15 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>IP地址分类查询</title>
+    <url>/2020/07/16/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：</p>
+<a id="more"></a>
+<p>1/ 格式是否符合；</p>
+<p>2/ ip地址范围是否符合；<br>后续增加：</p>
+<p>1/ 对私有地址分类再细分   –get；</p>
+<p>2/ 封装成.exe；</p>
+<p>3/ 代码结构优化；</p>
+<p>通过了所有测试用例。太冗杂了，应该还可以优化</p>
+<pre><code>start = time.time()
+while True:
+    ip = input(&quot;请输入IP地址:&quot;)
+    # ip = &quot;250.11.22.33&quot;
+    text = re.compile(r&quot;[0-9]$&quot;)
+    if (&quot;.&quot; not in ip) or (ip.count(&quot;.&quot;) != 3) or (text.match(ip)):
+        print(&quot;格式错误，请重新输入(例:192.168.0.1):&quot;)
+        continue
+    else:
+        ip_list = ip.split(&quot;.&quot;)
+        iplist = [int(x) for x in ip_list]
+        if len(iplist) != 4:
+            print(&quot;数量不对，请重新输入(例:192.168.0.1):&quot;)
+            continue
+        else:
+            if (iplist[0] &lt;= 255 and iplist[0] &gt;= 0) and (iplist[1] &gt;= 0 and iplist[1] &lt;= 255) \
+                    and (iplist[2] &gt;= 0 and iplist[2] &lt;= 255) \
+                    and (iplist[3] &gt;= 0 and iplist[3] &lt;= 255):
+                ackip = iplist
+                break
+            else:
+                print(&quot;超过范围，请重新输入(例:192.168.0.1):&quot;)
+                continue
+
+if ackip[0] &lt;=255 and ackip[0] &gt; 0 and ackip[3]&lt;=254 and ackip[3]&gt;0:
+    if ackip[0] &gt;= 1 and ackip[0] &lt;= 126:
+        if ackip[0] == 10:
+            print(&quot;此IP地址：%s 属于 A类私有地址&quot; % ip)
+        else:
+            print(&quot;此IP地址：%s 属于 A类地址&quot; % ip)
+    elif ackip[0] ==127:
+        print(&quot;此IP地址：%s 属于回环地址&quot; % ip)
+    elif ackip[0] &gt;= 128 and ackip[0] &lt;= 191:
+        if ackip[0] == 172 and (ackip[1] &lt;= 31 and ackip[1] &gt;= 16):
+            print(&quot;此IP地址：%s 属于 B类私有地址&quot; % ip)
+        elif ackip[0] == 169 and ackip[1] == 254:
+            print(&quot;此IP地址：%s 属于 windows自动分配&quot; % ip)
+        else:
+            print(&quot;此IP地址：%s 属于 B类地址&quot; % ip)
+    elif ackip[0] &gt;= 192 and ackip[0] &lt;= 223:
+        if ackip[0] == 192 and ackip[1] == 168:
+            print(&quot;此IP地址：%s 属于 C类私有地址&quot; % ip)
+        else:
+            print(&quot;此IP地址：%s 属于 C类地址&quot; % ip)
+    elif ackip[0] &gt;= 224 and ackip[0] &lt;= 239:
+        print(&quot;此IP地址：%s 属于 D类地址,不可用IP&quot; % ip)
+    elif ackip[0] &gt;= 240 and ackip[0] &lt;= 255:
+        print(&quot;此IP地址：%s 属于 E类地址,不可用IP&quot; % ip)
+elif ackip[0] == 0 or ackip[3] == 0:
+    print(&quot;此IP地址：%s 属于 全网地址，不可用IP&quot; % ip)
+elif ackip[3] == 255:
+    print(&quot;此IP地址：%s 属于 广播地址，不可用IP&quot; % ip)
+
+end=time.time()
+print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>TCP/IP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Selenium Server使用配置（一）</title>
     <url>/2020/07/22/Selenium%20Grid/</url>
     <content><![CDATA[<h1 id="1-整个流程"><a href="#1-整个流程" class="headerlink" title="1. 整个流程"></a>1. 整个流程</h1><pre><code>要使用Selenium Grid进行分布式的操作，步骤大致是下面几个。</code></pre><ol>
 <li>在本地CMD创建hub</li>
 <li>在hub创建node,要对node配置端口号</li>
-<li>在python脚本中配置要执行哪一个Node</li>
-</ol>
-<h1 id="2-webdriver下载"><a href="#2-webdriver下载" class="headerlink" title="2. webdriver下载"></a>2. webdriver下载</h1><p>webdriver 是用来执行并操作浏览器的一个API，程序脚本通过webdriver来直接对浏览器进行操作，相当于起到一个链接浏览器和程序的桥梁。</p>
-<h2 id="2-1-IE"><a href="#2-1-IE" class="headerlink" title="2.1 IE"></a>2.1 IE</h2><ol>
+<li>在python脚本中配置要执行哪一个Node<a id="more"></a>
+<h1 id="2-webdriver下载"><a href="#2-webdriver下载" class="headerlink" title="2. webdriver下载"></a>2. webdriver下载</h1>webdriver 是用来执行并操作浏览器的一个API，程序脚本通过webdriver来直接对浏览器进行操作，相当于起到一个链接浏览器和程序的桥梁。<h2 id="2-1-IE"><a href="#2-1-IE" class="headerlink" title="2.1 IE"></a>2.1 IE</h2></li>
 <li>下载地址：<a href="http://selenium-release.storage.googleapis.com/index.html?path=3.5/" target="_blank" rel="noopener">IEDriverServer</a><br>选择和电脑位数相同的额压缩包</li>
 <li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。<h2 id="2-2-Chrome"><a href="#2-2-Chrome" class="headerlink" title="2.2 Chrome"></a>2.2 Chrome</h2></li>
 <li>下载地址：<a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="noopener">ChromeDriver</a><br>注意要和电脑中Chrome版本一致，</li>
@@ -21,7 +93,7 @@
 <p>如果你想要在多台机器上同时启动多个浏览器进行Web应用程序的测试，那么你就需要使用 Selenium Grid。其有一个hub和若干个node节点组成。hub用来管理各个node的注册信息，接受远程客户端的请求调用，然后将相应的请求转发给node来执行。<br>简单来说就是通过Selenium Grid可以实现在一台电脑上控制多台node节点来远程执行selenium自动化测试脚本。自动化测试脚本是放在hub主机上的，那么通过grid就可以控制下属的node客户端来执行hub主机上的自动化测试脚本。<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20170726154758111-1.jpg" alt=""></p>
 <h2 id="3-1-启动hub"><a href="#3-1-启动hub" class="headerlink" title="3.1 启动hub"></a>3.1 启动hub</h2><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
 <p><code>-port 4455</code>是开启4455号端口<code>-role hub</code>是将<code>Selenium server</code>作为<code>hub</code>或者<code>Grid server</code></p>
-<a id="more"></a>
+<!--more-->
 <p>如图所示<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722200102.png" alt=""></p>
 <p>在浏览器地址栏输入<code>loaclhost:4455/grid/console</code></p>
 <p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722200620.png" alt=""></p>
@@ -224,80 +296,6 @@ driver.quit()</code></pre><h1 id="5-可能存在的问题"><a href="#5-可能存
       </categories>
       <tags>
         <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IP地址分类查询</title>
-    <url>/2020/07/16/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：</p>
-<a id="more"></a>
-<p>1/ 格式是否符合；</p>
-<p>2/ ip地址范围是否符合；<br>后续增加：</p>
-<p>1/ 对私有地址分类再细分   –get；</p>
-<p>2/ 封装成.exe；</p>
-<p>3/ 代码结构优化；</p>
-<p>通过了所有测试用例。太冗杂了，应该还可以优化</p>
-<pre><code>start = time.time()
-while True:
-    ip = input(&quot;请输入IP地址:&quot;)
-    # ip = &quot;250.11.22.33&quot;
-    text = re.compile(r&quot;[0-9]$&quot;)
-    if (&quot;.&quot; not in ip) or (ip.count(&quot;.&quot;) != 3) or (text.match(ip)):
-        print(&quot;格式错误，请重新输入(例:192.168.0.1):&quot;)
-        continue
-    else:
-        ip_list = ip.split(&quot;.&quot;)
-        iplist = [int(x) for x in ip_list]
-        if len(iplist) != 4:
-            print(&quot;数量不对，请重新输入(例:192.168.0.1):&quot;)
-            continue
-        else:
-            if (iplist[0] &lt;= 255 and iplist[0] &gt;= 0) and (iplist[1] &gt;= 0 and iplist[1] &lt;= 255) \
-                    and (iplist[2] &gt;= 0 and iplist[2] &lt;= 255) \
-                    and (iplist[3] &gt;= 0 and iplist[3] &lt;= 255):
-                ackip = iplist
-                break
-            else:
-                print(&quot;超过范围，请重新输入(例:192.168.0.1):&quot;)
-                continue
-
-if ackip[0] &lt;=255 and ackip[0] &gt; 0 and ackip[3]&lt;=254 and ackip[3]&gt;0:
-    if ackip[0] &gt;= 1 and ackip[0] &lt;= 126:
-        if ackip[0] == 10:
-            print(&quot;此IP地址：%s 属于 A类私有地址&quot; % ip)
-        else:
-            print(&quot;此IP地址：%s 属于 A类地址&quot; % ip)
-    elif ackip[0] ==127:
-        print(&quot;此IP地址：%s 属于回环地址&quot; % ip)
-    elif ackip[0] &gt;= 128 and ackip[0] &lt;= 191:
-        if ackip[0] == 172 and (ackip[1] &lt;= 31 and ackip[1] &gt;= 16):
-            print(&quot;此IP地址：%s 属于 B类私有地址&quot; % ip)
-        elif ackip[0] == 169 and ackip[1] == 254:
-            print(&quot;此IP地址：%s 属于 windows自动分配&quot; % ip)
-        else:
-            print(&quot;此IP地址：%s 属于 B类地址&quot; % ip)
-    elif ackip[0] &gt;= 192 and ackip[0] &lt;= 223:
-        if ackip[0] == 192 and ackip[1] == 168:
-            print(&quot;此IP地址：%s 属于 C类私有地址&quot; % ip)
-        else:
-            print(&quot;此IP地址：%s 属于 C类地址&quot; % ip)
-    elif ackip[0] &gt;= 224 and ackip[0] &lt;= 239:
-        print(&quot;此IP地址：%s 属于 D类地址,不可用IP&quot; % ip)
-    elif ackip[0] &gt;= 240 and ackip[0] &lt;= 255:
-        print(&quot;此IP地址：%s 属于 E类地址,不可用IP&quot; % ip)
-elif ackip[0] == 0 or ackip[3] == 0:
-    print(&quot;此IP地址：%s 属于 全网地址，不可用IP&quot; % ip)
-elif ackip[3] == 255:
-    print(&quot;此IP地址：%s 属于 广播地址，不可用IP&quot; % ip)
-
-end=time.time()
-print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>TCP/IP</tag>
       </tags>
   </entry>
 </search>

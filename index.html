@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-23 20:25:06" itemprop="dateModified" datetime="2020-07-23T20:25:06+08:00">2020-07-23</time>
+                <time title="修改时间：2020-07-23 20:30:02" itemprop="dateModified" datetime="2020-07-23T20:30:02+08:00">2020-07-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,21 +268,7 @@
           <h1 id="1-整个流程"><a href="#1-整个流程" class="headerlink" title="1. 整个流程"></a>1. 整个流程</h1><pre><code>要使用Selenium Grid进行分布式的操作，步骤大致是下面几个。</code></pre><ol>
 <li>在本地CMD创建hub</li>
 <li>在hub创建node,要对node配置端口号</li>
-<li>在python脚本中配置要执行哪一个Node</li>
-</ol>
-<h1 id="2-webdriver下载"><a href="#2-webdriver下载" class="headerlink" title="2. webdriver下载"></a>2. webdriver下载</h1><p>webdriver 是用来执行并操作浏览器的一个API，程序脚本通过webdriver来直接对浏览器进行操作，相当于起到一个链接浏览器和程序的桥梁。</p>
-<h2 id="2-1-IE"><a href="#2-1-IE" class="headerlink" title="2.1 IE"></a>2.1 IE</h2><ol>
-<li>下载地址：<a href="http://selenium-release.storage.googleapis.com/index.html?path=3.5/" target="_blank" rel="noopener">IEDriverServer</a><br>选择和电脑位数相同的额压缩包</li>
-<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。<h2 id="2-2-Chrome"><a href="#2-2-Chrome" class="headerlink" title="2.2 Chrome"></a>2.2 Chrome</h2></li>
-<li>下载地址：<a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="noopener">ChromeDriver</a><br>注意要和电脑中Chrome版本一致，</li>
-<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。<h2 id="2-3-Firefox"><a href="#2-3-Firefox" class="headerlink" title="2.3 Firefox"></a>2.3 Firefox</h2></li>
-<li>下载地址：<a href="https://github.com/mozilla/geckodriver/releases" target="_blank" rel="noopener">geckodriver</a></li>
-<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。</li>
-</ol>
-<h1 id="3-Selenium-Grid启动"><a href="#3-Selenium-Grid启动" class="headerlink" title="3. Selenium Grid启动"></a>3. Selenium Grid启动</h1><p>什么是Selenium Grid呢？</p>
-<p>如果你想要在多台机器上同时启动多个浏览器进行Web应用程序的测试，那么你就需要使用 Selenium Grid。其有一个hub和若干个node节点组成。hub用来管理各个node的注册信息，接受远程客户端的请求调用，然后将相应的请求转发给node来执行。<br>简单来说就是通过Selenium Grid可以实现在一台电脑上控制多台node节点来远程执行selenium自动化测试脚本。自动化测试脚本是放在hub主机上的，那么通过grid就可以控制下属的node客户端来执行hub主机上的自动化测试脚本。<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20170726154758111-1.jpg" alt=""></p>
-<h2 id="3-1-启动hub"><a href="#3-1-启动hub" class="headerlink" title="3.1 启动hub"></a>3.1 启动hub</h2><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
-<p><code>-port 4455</code>是开启4455号端口<code>-role hub</code>是将<code>Selenium server</code>作为<code>hub</code>或者<code>Grid server</code></p>
+<li>在python脚本中配置要执行哪一个Node
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/07/22/Selenium%20Grid/#more" rel="contents">
