@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-23 20:34:09" itemprop="dateModified" datetime="2020-07-23T20:34:09+08:00">2020-07-23</time>
+                <time title="修改时间：2020-07-24 10:12:19" itemprop="dateModified" datetime="2020-07-24T10:12:19+08:00">2020-07-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,10 +265,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1-整个流程"><a href="#1-整个流程" class="headerlink" title="1. 整个流程"></a>1. 整个流程</h1><pre><code>要使用Selenium Grid进行分布式的操作，步骤大致是下面几个。</code></pre><ol>
-<li>在本地CMD创建hub</li>
-<li>在hub创建node,要对node配置端口号</li>
-<li>在python脚本中配置要执行哪一个Node
+          <h1 id="1-Selenium-Grid是什么？"><a href="#1-Selenium-Grid是什么？" class="headerlink" title="1. Selenium Grid是什么？"></a>1. Selenium Grid是什么？</h1><p><code>Selenium Grid</code>专门用于在不同的浏览器、操作系统和机器上<strong>并行运行</strong>多个测试用例。通过将命令发送给远程的Web浏览器实例来完成并行测试，其中的一台服务器充当中心。Hub会在多态计算机上并发执行测试，从而集中管理不同的浏览器，而不用对每个浏览器进行单独的测试，<code>Selenium Grid</code>使跨浏览器测试变得容易，因为单个测试能够在多台机器和浏览器上运行，快速完成测试。</p>
+<p>Selenium Grid 的两个主要组件时：</p>
+<ul>
+<li><p>Hub是一台中心服务器，它接受来自WebDriver客户端的访问请求，并将JSON测试命令路由到节点上的远程驱动器。它从客户端获取指令，并在各个节点上并发的远程执行它们。</p>
+</li>
+<li><p>Node是一个由本地操作系统和远程WebDriver组成的远程设备。它以JSON测试命令的形式接收来自中心的请求，并使用WebDriver执行它们</p>
+</li>
+</ul>
+<p>由于学生党比较穷，后面流程都是在一台本地计算机上进行的。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/07/22/Selenium%20Grid/#more" rel="contents">
