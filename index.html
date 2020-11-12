@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-12 20:54:37" itemprop="dateModified" datetime="2020-11-12T20:54:37+08:00">2020-11-12</time>
+                <time title="修改时间：2020-11-12 21:48:42" itemprop="dateModified" datetime="2020-11-12T21:48:42+08:00">2020-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,7 +265,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>&emsp;&emsp;辛苦了几天终于有了好的结果，也感叹幸运之神再次眷顾了我。<br>&emsp;&emsp;10-15 厦门市教育局发布校招通知；订宾馆、动车~<br>&emsp;&emsp;10-22 6小时高铁前往长沙；<br>&emsp;&emsp;10-23 招聘会现场投递，争取推荐名额。六中、厦外、二中推荐通用技术笔试。<br>&emsp;&emsp;10-24 上午笔试，下午开始8小时片段教学练习。<br>&emsp;&emsp;10-25 上午面试，下午橘子洲游玩。<br>&emsp;&emsp; 10-26 惊险上线六中。在厦外、二中都没有入围。14点打的差点错过高铁~</p>
+          <p>&emsp;&emsp;辛苦了几天终于有了好的结果，也感叹幸运之神再次眷顾了我。<br><br><br><br>&emsp;&emsp;10-15 厦门市教育局发布校招通知；订宾馆、动车~<br><br>&emsp;&emsp;10-22 6小时高铁前往长沙；<br><br>&emsp;&emsp;10-23 招聘会现场投递，争取推荐名额。六中、厦外、二中推荐通用技术笔试。<br><br>&emsp;&emsp;10-24 上午笔试，下午开始8小时片段教学练习。<br><br>&emsp;&emsp;10-25 上午面试，下午橘子洲游玩。<br><br>&emsp;&emsp; 10-26 惊险上线六中。在厦外、二中都没有入围。14点打的差点错过高铁~</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/10/28/%E5%8E%A6%E9%97%A8%E6%95%99%E5%B8%88%E6%A0%A1%E6%8B%9B-%E6%B9%96%E5%B8%88%E5%A4%A7%E7%AB%99-%E8%AE%B0%E5%BD%95/#more" rel="contents">
@@ -319,10 +319,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-07-28 20:29:47 / 修改时间：20:46:45" itemprop="dateCreated datePublished" datetime="2020-07-28T20:29:47+08:00">2020-07-28</time>
+              <time title="创建时间：2020-07-28 20:29:47" itemprop="dateCreated datePublished" datetime="2020-07-28T20:29:47+08:00">2020-07-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-12 20:56:08" itemprop="dateModified" datetime="2020-11-12T20:56:08+08:00">2020-11-12</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -360,23 +366,14 @@
       
           <h1 id="What-is-Pytest"><a href="#What-is-Pytest" class="headerlink" title="What is Pytest?"></a>What is Pytest?</h1><p>与<code>unittest</code>进行对比，<code>pytest</code>简直太简单，这个简单是容易阅读；容易编写；容易拓展；不仅如此，测试失败还会提醒。测试用例使用方法进行编写的，<code>unittest</code>是用类进行编写。</p>
 <h1 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h1><p>因为参考某篇文章，对新项目创建一个虚拟环境，同一台计算机上项目就不会相互冲突，在这里使用pipenv。</p>
-<h2 id="全局安装pipenv"><a href="#全局安装pipenv" class="headerlink" title="全局安装pipenv"></a>全局安装pipenv</h2><p>因为本机使用的是anaconda，所以打开<code>Anaconda Prompt</code>，输入：</p>
-<pre><code>pip install pipenv。</code></pre><p>然后在项目文件中安装pytest：</p>
-<pre><code>pipenv install pytest --dev</code></pre><p>这样在项目文件中就会出现两个新的文件：<code>Pipfile</code> <code>Pipfile.lock</code></p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>一般将测试用例都放在一个目录下面，目录名称遵守规定，以<code>test</code>开头。</p>
-<pre><code>mkdir tests
-cd tests</code></pre><p>创建一个py文件：test_match.py</p>
-<pre><code>def test_addition():
-    assert 1 + 1 == 2</code></pre><p>看看吧，是不是和unittest比起来简洁很多。都不用导入其他库，而且使用Python自带的assert语句就可以断言了。</p>
-<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>有看到两种方法运行测试：</p>
-<ol>
-<li>在<code>tests</code>目录下执行：<code>pyetst test_match.py</code>;或者<code>pytest -v test_match.py</code>. <code>-v</code>可以在控制台输出更详细的信息。</li>
-<li>回到项目的目录下执行：<code>pipenv run python -m pytest</code></li>
-</ol>
-<p>两者的执行结果都是一样的。</p>
-<h2 id="显示失败详情"><a href="#显示失败详情" class="headerlink" title="显示失败详情"></a>显示失败详情</h2><p>如果测试失败，通过-v这个选项可以显示具体哪里失败</p>
-<p><img src="C:%5CUsers%5CQueYang%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200728204241264.png" alt="image-20200728204241264"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/28/%E4%BD%BF%E7%94%A8Pytest%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
