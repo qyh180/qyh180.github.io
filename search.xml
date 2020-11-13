@@ -75,6 +75,18 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
       </tags>
   </entry>
   <entry>
+    <title>hexo</title>
+    <url>/2020/07/16/hexo/</url>
+    <content><![CDATA[<ul>
+<li>mkdir blog</li>
+<li>cd blog</li>
+<li>hexo init</li>
+<li>cnpm install –save hexo-deployer-git</li>
+<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>Selenium Server使用配置（一）</title>
     <url>/2020/07/22/Selenium%20Grid/</url>
     <content><![CDATA[<h1 id="1-Selenium-Grid是什么？"><a href="#1-Selenium-Grid是什么？" class="headerlink" title="1. Selenium Grid是什么？"></a>1. Selenium Grid是什么？</h1><p><code>Selenium Grid</code>专门用于在不同的浏览器、操作系统和机器上<strong>并行运行</strong>多个测试用例。通过将命令发送给远程的Web浏览器实例来完成并行测试，其中的一台服务器充当中心。Hub会在多态计算机上并发执行测试，从而集中管理不同的浏览器，而不用对每个浏览器进行单独的测试，<code>Selenium Grid</code>使跨浏览器测试变得容易，因为单个测试能够在多台机器和浏览器上运行，快速完成测试。</p>
@@ -157,6 +169,38 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
       </tags>
   </entry>
   <entry>
+    <title>使用Pytest进行测试</title>
+    <url>/2020/07/28/%E4%BD%BF%E7%94%A8Pytest%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="What-is-Pytest"><a href="#What-is-Pytest" class="headerlink" title="What is Pytest?"></a>What is Pytest?</h1><p>与<code>unittest</code>进行对比，<code>pytest</code>简直太简单，这个简单是容易阅读；容易编写；容易拓展；不仅如此，测试失败还会提醒。测试用例使用方法进行编写的，<code>unittest</code>是用类进行编写。</p>
+<h1 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h1><p>因为参考某篇文章，对新项目创建一个虚拟环境，同一台计算机上项目就不会相互冲突，在这里使用pipenv。</p>
+<a id="more"></a>
+<h2 id="全局安装pipenv"><a href="#全局安装pipenv" class="headerlink" title="全局安装pipenv"></a>全局安装pipenv</h2><p>因为本机使用的是anaconda，所以打开<code>Anaconda Prompt</code>，输入：</p>
+<pre><code>pip install pipenv。</code></pre><p>然后在项目文件中安装pytest：</p>
+<pre><code>pipenv install pytest --dev</code></pre><p>这样在项目文件中就会出现两个新的文件：<code>Pipfile</code> <code>Pipfile.lock</code></p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>一般将测试用例都放在一个目录下面，目录名称遵守规定，以<code>test</code>开头。</p>
+<pre><code>mkdir tests
+cd tests</code></pre><p>创建一个py文件：test_match.py</p>
+<pre><code>def test_addition():
+    assert 1 + 1 == 2</code></pre><p>看看吧，是不是和unittest比起来简洁很多。都不用导入其他库，而且使用Python自带的assert语句就可以断言了。</p>
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>有看到两种方法运行测试：</p>
+<ol>
+<li>在<code>tests</code>目录下执行：<code>pyetst test_match.py</code>;或者<code>pytest -v test_match.py</code>. <code>-v</code>可以在控制台输出更详细的信息。</li>
+<li>回到项目的目录下执行：<code>pipenv run python -m pytest</code></li>
+</ol>
+<p>两者的执行结果都是一样的。</p>
+<h2 id="显示失败详情"><a href="#显示失败详情" class="headerlink" title="显示失败详情"></a>显示失败详情</h2><p>如果测试失败，通过-v这个选项可以显示具体哪里失败</p>
+<p><img src="C:%5CUsers%5CQueYang%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200728204241264.png" alt="image-20200728204241264"></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>测试</tag>
+        <tag>Pytest</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown美化 font-awesome的使用</title>
     <url>/2020/07/16/%E4%BD%A0%E5%A5%BD/</url>
     <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。</p>
@@ -207,47 +251,11 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
       </categories>
   </entry>
   <entry>
-    <title>使用Pytest进行测试</title>
-    <url>/2020/07/28/%E4%BD%BF%E7%94%A8Pytest%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="What-is-Pytest"><a href="#What-is-Pytest" class="headerlink" title="What is Pytest?"></a>What is Pytest?</h1><p>与<code>unittest</code>进行对比，<code>pytest</code>简直太简单，这个简单是容易阅读；容易编写；容易拓展；不仅如此，测试失败还会提醒。测试用例使用方法进行编写的，<code>unittest</code>是用类进行编写。</p>
-<h1 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h1><p>因为参考某篇文章，对新项目创建一个虚拟环境，同一台计算机上项目就不会相互冲突，在这里使用pipenv。</p>
-<a id="more"></a>
-<h2 id="全局安装pipenv"><a href="#全局安装pipenv" class="headerlink" title="全局安装pipenv"></a>全局安装pipenv</h2><p>因为本机使用的是anaconda，所以打开<code>Anaconda Prompt</code>，输入：</p>
-<pre><code>pip install pipenv。</code></pre><p>然后在项目文件中安装pytest：</p>
-<pre><code>pipenv install pytest --dev</code></pre><p>这样在项目文件中就会出现两个新的文件：<code>Pipfile</code> <code>Pipfile.lock</code></p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>一般将测试用例都放在一个目录下面，目录名称遵守规定，以<code>test</code>开头。</p>
-<pre><code>mkdir tests
-cd tests</code></pre><p>创建一个py文件：test_match.py</p>
-<pre><code>def test_addition():
-    assert 1 + 1 == 2</code></pre><p>看看吧，是不是和unittest比起来简洁很多。都不用导入其他库，而且使用Python自带的assert语句就可以断言了。</p>
-<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>有看到两种方法运行测试：</p>
-<ol>
-<li>在<code>tests</code>目录下执行：<code>pyetst test_match.py</code>;或者<code>pytest -v test_match.py</code>. <code>-v</code>可以在控制台输出更详细的信息。</li>
-<li>回到项目的目录下执行：<code>pipenv run python -m pytest</code></li>
-</ol>
-<p>两者的执行结果都是一样的。</p>
-<h2 id="显示失败详情"><a href="#显示失败详情" class="headerlink" title="显示失败详情"></a>显示失败详情</h2><p>如果测试失败，通过-v这个选项可以显示具体哪里失败</p>
-<p><img src="C:%5CUsers%5CQueYang%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200728204241264.png" alt="image-20200728204241264"></p>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>测试</tag>
-        <tag>Pytest</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo</title>
-    <url>/2020/07/16/hexo/</url>
-    <content><![CDATA[<ul>
-<li>mkdir blog</li>
-<li>cd blog</li>
-<li>hexo init</li>
-<li>cnpm install –save hexo-deployer-git</li>
-<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
-</ul>
+    <title>博弈树与决策树</title>
+    <url>/2020/11/13/%E5%8D%9A%E5%BC%88%E6%A0%91%E4%B8%8E%E5%86%B3%E7%AD%96%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="极大极小-maxmini-策略"><a href="#极大极小-maxmini-策略" class="headerlink" title="极大极小(maxmini)策略"></a>极大极小(maxmini)策略</h1><p>在博弈中，当面对完全不了解的对手时，使用一种非常保守的策略，即极大极小算法，再假定对手执行最佳行动的前提下，最大化自己的收益。也可以说是在各种可以获得的最小收益的策略中选择最大收益的策略，有点类似鞍点的概念。这种方法放弃了最优策略，转而寻求风险最小的策略，因此说它时一种非常保守的方法。我方选择策略的前提是假设对手会选择最小化我方收益的策略，即用最坏的情况来为下一步策略作出选择。</p>
+<p>极大极小算法的最大缺点就是需要展开整个博弈树，对于那些复杂度很高的博弈，例如围棋，将会使得算法无法计算下去，</p>
+<p>解决博弈树规模过大问题的方法时通过alpha-beta剪枝算法来修建博弈树，以极大极小算法形式遍历博弈树，并且避免某些树分支的展开，alpha-beta剪枝算法通过压缩搜索空间提高搜索效率。</p>
 ]]></content>
   </entry>
   <entry>
