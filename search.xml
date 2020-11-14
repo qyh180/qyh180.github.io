@@ -3,11 +3,9 @@
   <entry>
     <title>IP地址分类查询</title>
     <url>/2020/07/16/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：</p>
-<a id="more"></a>
-<p>1/ 格式是否符合；</p>
+    <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：<br><a id="more"></a><br>1/ 格式是否符合；</p>
 <p>2/ ip地址范围是否符合；<br>后续增加：</p>
-<p>1/ 对私有地址分类再细分   –get；</p>
+<p>1/ 对私有地址分类再细分   —get；</p>
 <p>2/ 封装成.exe；</p>
 <p>3/ 代码结构优化；</p>
 <p>通过了所有测试用例。太冗杂了，应该还可以优化</p>
@@ -65,13 +63,371 @@ elif ackip[3] == 255:
     print(&quot;此IP地址：%s 属于 广播地址，不可用IP&quot; % ip)
 
 end=time.time()
-print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
+print(&quot;Running time: %s&quot; % (end-start))
+</code></pre>]]></content>
       <categories>
         <category>Python</category>
       </categories>
       <tags>
         <tag>Python</tag>
         <tag>TCP/IP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo</title>
+    <url>/2020/07/16/hexo/</url>
+    <content><![CDATA[<ul>
+<li>mkdir blog</li>
+<li>cd blog</li>
+<li>hexo init</li>
+<li>cnpm install —save hexo-deployer-git</li>
+<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>Markdown美化 font-awesome的使用</title>
+    <url>/2020/07/16/%E4%BD%A0%E5%A5%BD/</url>
+    <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。<br><a id="more"></a></p>
+<p><i class="fa fa-share-alt"></i> <a href="http://www.fontawesome.com.cn/icons" target="_blank" rel="noopener">font-awesome官方地址</a></p>
+<h1 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h1><p>在Markdown中添加一下代码，放在文件的最底部。</p>
+<pre><code>&lt;head&gt; 
+    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; 
+    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; 
+&lt;/head&gt; 
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css&quot;&gt;
+</code></pre><p>然后就可以在font-awesome官网找到合适的图标，使用方法是将<code>&lt;i class=&quot;fa fa-share-alt&quot;&gt;&lt;/i&gt;</code>放在你需要添加图标的地方。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>&lt;i class=&quot;fab fa-google&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code> <i class="fab fa-google" aria-hidden="true"></i> 这是Google图标</p>
+<h2 id="图标变大"><a href="#图标变大" class="headerlink" title="图标变大"></a>图标变大</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x" aria-hidden="true"></i> 这是2倍大的Google图标，使用fa-2x</p>
+<h2 id="图标旋转"><a href="#图标旋转" class="headerlink" title="图标旋转"></a>图标旋转</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x fa-spin&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x fa-spin" aria-hidden="true"></i> 使用fa-spin来让图标进行旋转</p>
+<h2 id="特殊引用效果"><a href="#特殊引用效果" class="headerlink" title="特殊引用效果"></a>特殊引用效果</h2><p><code>&lt;i class=&quot;fab fa-google fa-3x fa-pull-left fa-border&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code></p>
+<p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>…独坐在路边街角 冷风吹醒，默默地伴着我的孤影，只想将结他紧抱，诉出辛酸，就在这刻想起往事，心中一股冲劲勇闯，抛开那现实没有顾虑，仿佛身边拥有一切，看似与别人筑起隔膜。</p>
+<p>在这里使用 <code>fa-border</code> 和 <code>fa-pull-right</code> 或 <code>fa-pull-left</code> 可以轻易构造出引用的特殊效果。</p>
+<h2 id="替换无序列表中的图标"><a href="#替换无序列表中的图标" class="headerlink" title="替换无序列表中的图标"></a>替换无序列表中的图标</h2><p>使用 <code>fa-ul</code> and <code>fa-li</code> 轻松的替换无序列表中的默认图标。</p>
+<pre><code>&lt;ul class=&quot;fa-ul&quot;&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;使用列表类图标&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;轻松的替换&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;无序列表&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-square&quot;&gt;&lt;/i&gt;中的默认图标&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><ul class="fa-ul">
+  <li><i class="fa-li fa fa-check-square"></i>使用列表类图标</li>
+  <li><i class="fa-li fa fa-check-square"></i>轻松的替换</li>
+  <li><i class="fa-li fa fa-spinner fa-spin"></i>无序列表</li>
+  <li><i class="fa-li fa fa-square"></i>中的默认图标</li>
+</ul>
+
+<h2 id="对图标旋转角度"><a href="#对图标旋转角度" class="headerlink" title="对图标旋转角度"></a>对图标旋转角度</h2><p>使用 <code>fa-rotate-*</code> and <code>fa-flip-*</code> 类</p>
+<pre><code>&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-90&quot;&gt;&lt;/i&gt; fa-rotate-90&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-180&quot;&gt;&lt;/i&gt; fa-rotate-180&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-270&quot;&gt;&lt;/i&gt; fa-rotate-270&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-flip-horizontal&quot;&gt;&lt;/i&gt; fa-flip-horizontal&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-flip-vertical&quot;&gt;&lt;/i&gt; fa-flip-vertical
+&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
+</code></pre><p><i class="fa fa-quote-left fa-rotate-90">&lt;/i&gt; fa-rotate-90<br><br><i class="fa fa-quote-left fa-rotate-180"></i> fa-rotate-180<br><br><i class="fa fa-quote-left fa-rotate-270">&lt;/i&gt; fa-rotate-270<br><br><i class="fa fa-quote-left fa-flip-horizontal"></i> fa-flip-horizontal<br><br><i class="fa fa-quote-left fa-flip-vertical"></i> fa-flip-vertical</p>
+<h1 id="更多例子请看-lt-i-gt-lt-i-gt-font-awesome样例"><a href="#更多例子请看-lt-i-gt-lt-i-gt-font-awesome样例" class="headerlink" title="更多例子请看&lt;/i&gt;&lt;/i&gt;font-awesome样例"></a>更多例子请看<i class="fa fa-angle-double-right" aria-hidden="true">&lt;/i&gt;<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true">&lt;/i&gt;<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fab fa-fort-awesome"></i><a href="http://www.fontawesome.com.cn/examples/" target="_blank" rel="noopener">font-awesome样例</a></h1><p><head> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
+</head> </p>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
+      <categories>
+        <category>Mardown</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>记录厦门教师校招-湖南师大</title>
+    <url>/2020/10/28/%E5%8E%A6%E9%97%A8%E6%95%99%E5%B8%88%E6%A0%A1%E6%8B%9B-%E6%B9%96%E5%B8%88%E5%A4%A7%E7%AB%99-%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>&emsp;&emsp;辛苦了几天终于有了好的结果，也感叹幸运之神再次眷顾了我。<br><br>&emsp;&emsp;10-15 厦门市教育局发布校招通知；订宾馆、动车~<br><br>&emsp;&emsp;10-22 6小时高铁前往长沙；<br><br>&emsp;&emsp;10-23 招聘会现场投递，争取推荐名额。六中、厦外、二中推荐通用技术笔试。<br><br>&emsp;&emsp;10-24 上午笔试，下午开始8小时片段教学练习。<br><br>&emsp;&emsp;10-25 上午面试，下午橘子洲游玩。<br><br>&emsp;&emsp; 10-26 惊险上线六中。在厦外、二中都没有入围。14点打的差点错过高铁~<br><a id="more"></a></p>
+<h2 id="一些过程"><a href="#一些过程" class="headerlink" title="一些过程"></a>一些过程</h2><h3 id="匆忙"><a href="#匆忙" class="headerlink" title="匆忙"></a>匆忙</h3><font face='宋体' size=4>10月15号的时候看到厦门市教育局发布的2020年优秀毕业生教师招聘，当时完全是乱的。匆忙买了初中物理课本，订了湖南师范大学附近的宾馆，22号去长沙的高铁。16-19号，经历了从初中物理到小学科学再到通用技术的变化。早点确定科目真的太重要了，这么短的时间看教案，练习怎么讲课，反复磨课真的太累咯。
+
+### 突然
+19号去双十中学面试，前一天接到电话说是通用技术，晚上还在纠结要不要去，因为很害怕第二天直接让我上台讲课。结果，课还是上了，教务处主任让我继续去长沙。这次面试没有任何结果，这时候的时间是19号下午2点半。
+
+### 奔波
+23号一早，在湖南师大体育馆门外排起了长长的队伍。一进去后往思明区队伍中排科学老师，对方看我没有教师资格证、没有普通话证书，婉拒了我的申请。又去翔安教育局投递小学科学岗位发现已经不收简历了。这才8点多。再之后将重点放在了通用技术上面。厦门十中填了申请表，对方让我好好准备笔试。厦门二中说重点推荐我。外国语让我去酒店交材料，顺便去麦当劳吃了午饭。下午看到厦门六中也有通用技术名额，上去问了问。负责的校长一开始没想要我，他让双十的通用技术老师来面试了一会，态度就转变了。让我把一志愿放在六中，只要笔试面试合格没问题，六中一定会签我。当时秉着谨慎态度，先答应了他。
+
+### 备考
+24号下午开始，直到晚上休息。一直待在酒店里准备第二天的片段教学。自己用手机录像，发给陈欣让她点评。对每一小节的内容都单独准备片段，背课本上的概念。练习了板书格式，副板书格式。从白天到深夜，我自己都没发现时间过的这么快~
+### 等待
+&emsp;&emsp;每次考完试最难熬的应该就是等待成绩了吧，尤其是对于很重要的考试。这次面试也不例外，面试完后，自我感觉整个面试过程还是比较顺利的，对于片段教学的过程也比较完善，引入，总结，板书，这些都有。按照往年惯例，面试完的晚上就可能会接到学校电话。有的更是让你第二天一早就到某某酒店等结果公布，有的让你把三方协议书先交给他们学校。电话倒是接到了，二中问还报了哪些学校；外国语让第二天7点去他们指定的一个酒店；没有消息的一晚。
+### 惊险
+&emsp;&emsp;为什么又说惊险的。9点出成绩的时候我瞄了一眼，笔试成绩60分。按照招聘规定，笔试是100分，60分及格线，不及格就直接取消资格了。这60分我猜想是因为改卷子的老师手下留情了，报考通用技术的考生原本就不多，大概只是想让多一点考生进面试，就放了我一马。最后惊险的上岸了啊，当时的心情好像没有非常的开心，可能是被这60分给吓得。李承霖去了双十，姚守菊去了厦外，都是自己很满意的结果。
+### 未完
+由于没有通用技术的教师资格证，而这次教资考试我报名的是初中物理，所以明年3月份将是我唯一的机会，如果这次能把两门公共课给通过，就是最好的结果了。31号考试，后面几天还是得再辛苦辛苦啊！！！</font>]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>教师</tag>
+        <tag>工作</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博弈树与决策树</title>
+    <url>/2020/11/13/%E5%8D%9A%E5%BC%88%E6%A0%91%E4%B8%8E%E5%86%B3%E7%AD%96%E6%A0%91/</url>
+    <content><![CDATA[<h2 id="极大极小-maxmini-策略"><a href="#极大极小-maxmini-策略" class="headerlink" title="极大极小(maxmini)策略"></a>极大极小(maxmini)策略</h2><p>在博弈中，当面对完全不了解的对手时，使用一种非常保守的策略，即极大极小算法，再假定对手执行最佳行动的前提下，最大化自己的收益。也可以说是在各种可以获得的最小收益的策略中选择最大收益的策略，有点类似鞍点的概念。这种方法放弃了最优策略，转而寻求风险最小的策略，因此说它时一种非常保守的方法。我方选择策略的前提是假设对手会选择最小化我方收益的策略，即用最坏的情况来为下一步策略作出选择。<br><a id="more"></a><br>极大极小算法的最大缺点就是需要展开整个博弈树，对于那些复杂度很高的博弈，例如围棋，将会使得算法无法计算下去，</p>
+<p>解决博弈树规模过大问题的方法时通过alpha-beta剪枝算法来修建博弈树，以极大极小算法形式遍历博弈树，并且避免某些树分支的展开，alpha-beta剪枝算法通过压缩搜索空间提高搜索效率。</p>
+<h2 id="决策树ID3算法"><a href="#决策树ID3算法" class="headerlink" title="决策树ID3算法"></a>决策树ID3算法</h2><p>ID3中采用信息增益作为选择的标准。</p>
+<h3 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h3><p>考虑到信源的所有可能发生的时间，假设其概率为$p_1、p_2、…、p_N$，那么其信息熵含义：一个信源的平均不确定性。公式表示为：</p>
+<script type="math/tex; mode=display">
+I(p)=-(p_1\times log_2(p_1)+p_2\times log_2(p_2)+...+p_N\times log_2(p_N))\tag{1}</script><h3 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h3><p>在X发生的情况下，Y的熵成为条件熵$H(Y|x)$。其公式为</p>
+<script type="math/tex; mode=display">
+H(Y|X)=H(X,Y)-H(X)= \sum_{i}^{N}p_iH(Y|X=x) \tag{2}</script><p>其表示：（X,Y）发生时包含的熵（并集），减去X的熵，得到Y发生的“新”增的熵。</p>
+<p><strong>信息增益</strong>：表示得知特征A的信息而使得D集合的信息不确定性减少的程度。它为集合D的经验熵减去特征A的条件熵。公式表示为：</p>
+<script type="math/tex; mode=display">
+g(D,A)=H(D)-H(D|A) \tag{3}</script><p>联立(2)(3)得：</p>
+<script type="math/tex; mode=display">
+g(D,A)=H(D)-H(D|A)=H(D)-[H(D,A)-H(A)]=H(D)+H(A)-H(D,A) \tag{4}</script><p><strong>决策树优先从信息增益大的特征列开始划分数据集，这样会显得更靠谱，因为信息增益最大，对结果的影响力也更大。</strong></p>
+<p>$g(D)$和$g(D|A)$可以这么理解，一个是确定$D$中一个元素的类别所需的信息量；另一个是在已知属性$A$的取值后，确定$D$中一个元素所需的信息量。</p>
+<h4 id="例-1"><a href="#例-1" class="headerlink" title="例 1"></a>例 1</h4> <center>Play Tennis 数据库训练样本集</center>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">Outlook</th>
+<th style="text-align:center">Temperature</th>
+<th style="text-align:center">Humidity</th>
+<th style="text-align:center">Windy</th>
+<th style="text-align:center">PlayTennis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">hot</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">hot</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">overcast</td>
+<td style="text-align:center">hot</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">rain</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">rain</td>
+<td style="text-align:center">cool</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">rain</td>
+<td style="text-align:center">cool</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">overcast</td>
+<td style="text-align:center">cool</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">cool</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">rain</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">overcast</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">overcast</td>
+<td style="text-align:center">hot</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">rain</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>表中类别属性$PlayTennis$有两个不同的值${yes,no}$，因此有两个不同的类。</p>
+<p><strong>第一步</strong>，计算分类成不同$PlayTennis$类所需的信息量。由式（1）得：</p>
+<script type="math/tex; mode=display">
+P=(9/14,5/14), H(D)=-(\frac{9}{14}log_2\frac{9}{14}+\frac{5}{14}log_2\frac{5}{14})=0.940</script><p><strong>第二部</strong>，按各个属性划分，计算各个属性对一个样本集合分类所需得信息量。</p>
+<p>首先以属性$Outlook$开始，按照属性$Outlook$来划分样本，则按此属性划分后每个子集所需得信息量为：</p>
+<script type="math/tex; mode=display">
+Outlook = sunny:P=(2/5,3/5),H(S_1)=-(\frac{2}{5}log_2\frac{2}{5}+\frac{3}{5}log_2\frac{3}{5})=0.971</script><script type="math/tex; mode=display">
+Outlook = overcast:P=(4/4,0),H(S_2)=-(\frac{4}{4}log_2\frac{4}{4}+\frac{0}{4}log_2\frac{0}{4})=0</script><script type="math/tex; mode=display">
+Outlook = rain:P=(3/5,2/5),H(S_3)=-(\frac{3}{5}log_2\frac{3}{5}+\frac{2}{5}log_2\frac{2}{5})=0.971</script><p>因此，按照属性$Outlook$划分样本，加权平均计算。</p>
+<script type="math/tex; mode=display">
+H(Outlook,D)=\frac{5}{14}H(s_1)+\frac{4}{14}H(s_2)+\frac{5}{14}H(s_3)=0.694</script><p>最后我们得到样本按属性$Outlook$划分得信息增益为：</p>
+<script type="math/tex; mode=display">
+g(Outlook,D)=H(D)-H(Outlook,D)=0.940-0.694</script><p>类似的，可以计算得到：</p>
+<script type="math/tex; mode=display">
+g(Temperate,D)=0.029,\\
+g(Humidity,D)=0.151,\\
+g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高信息增益得属性，所以选择$Outlook$得取值来<strong>优先</strong>划分此样本集。</p>
+<p>注：</p>
+<p>信息增益高，说明该属性对类的分类效果决定性越大，就可以优先按照该属性对样本集进行分类。</p>
+<p>经过以此多轮的信息增益计算，得到最终决策树：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20201114093215.png" alt=""></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>唠叨唠叨——理发</title>
+    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
+    <content><![CDATA[<font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。
+<br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。
+<br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···
+<br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。
+<br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。
+<br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。
+
+
+</font>]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python实现列表排序</title>
+    <url>/2020/07/16/%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="一、-快速排序"><a href="#一、-快速排序" class="headerlink" title="一、 快速排序"></a>一、 快速排序</h2><h3 id="1-算法原理"><a href="#1-算法原理" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>快速排序首先要在数组中选择一个基准元素，<a id="more"></a>以此为基准将数组分为 左边全部小于基准元素，右边全部大于基准元素。</p>
+<p>&emsp;&emsp;算法的步骤：</p>
+<p>&emsp;&emsp;1. 选取数组第一个元素为基准元素:first = nums[0]。</p>
+<p>&emsp;&emsp;2. 从第二个元素开始for i 循环:</p>
+<p>&emsp;&emsp;&emsp;&emsp;当遇到 i &lt; mid，将i元素放入右边数组中，right.append(i)</p>
+<p>&emsp;&emsp;&emsp;&emsp;当遇到 i &gt;= mid，将i元素放入左边数组中，left.append(i)</p>
+<p>&emsp;&emsp;3.递归进行第2步骤，对left和right数组进行相同操作，从无序变成有序。&lt;/font&gt;</p>
+<h3 id="2-Python-3-代码实现"><a href="#2-Python-3-代码实现" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">快读排序</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(arr)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> arr ==[]:</span><br><span class="line">		<span class="keyword">return</span> []</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		mid = arr[<span class="number">0</span>]                                      <span class="comment"># 取第一个元素作为基准元素</span></span><br><span class="line">		left ,right = [], []</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> arr[<span class="number">1</span>:]:</span><br><span class="line">			<span class="keyword">if</span> i &lt; mid:</span><br><span class="line">				right.append(i)</span><br><span class="line">			<span class="keyword">if</span> i &gt;= mid:</span><br><span class="line">				left.append(i)</span><br><span class="line">	res =  quick_sort(left) + [mid] + quick_sort(right)  <span class="comment"># 递归处理</span></span><br><span class="line">	<span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="3-复杂度"><a href="#3-复杂度" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(nlogn)</code>，空间复杂度是<code>O(nlog2n)</code>；不稳定。</p>
+<h2 id="二、-冒泡排序"><a href="#二、-冒泡排序" class="headerlink" title="二、 冒泡排序"></a>二、 冒泡排序</h2><h3 id="1-算法原理-1"><a href="#1-算法原理-1" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢”浮”到数列的顶端</p>
+<p>&emsp;&emsp;算法的步骤：</p>
+<p>&emsp;&emsp;1. 从左往右开始，依次循环。</p>
+<p>&emsp;&emsp;2. 比较当前元素与后一个元素的大小:</p>
+<p>&emsp;&emsp;3. 如果当前元素小于后一个元素，则两元素位置进行交换。</p>
+<p>&emsp;&emsp;4. 重复上述步骤到最后一个元素，至此这一轮排序结束。</p>
+<p>&emsp;&emsp;5. 递归上述步骤，当外层循环到最后一个元素的时候即结束运行。&lt;/font&gt;</p>
+<h3 id="2-Python-3-代码实现-1"><a href="#2-Python-3-代码实现-1" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">冒泡排序</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> nums ==[]:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    n = len(nums)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n-i<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> nums[j] &lt; nums[j+<span class="number">1</span>]:</span><br><span class="line">                nums[j] ,nums[j+<span class="number">1</span>]= nums[j+<span class="number">1</span>], nums[j]</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="3-复杂度-1"><a href="#3-复杂度-1" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(n2)</code>，空间复杂度是<code>O(1)</code>；稳定。</p>
+<h2 id="三、-选择排序"><a href="#三、-选择排序" class="headerlink" title="三、 选择排序"></a>三、 选择排序</h2><h3 id="1-算法原理-2"><a href="#1-算法原理-2" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>每次从待排序的列表中选择第一位元素作为基准比较元素，再从待排序列表中选出最小（或最大）一个元素，将其存放在该列表中的起始位置。和冒泡排序的不同之处是，选择排序每轮只交换一次，而冒泡排序需要交换很多次。</p>
+<p>&emsp;&emsp;算法的步骤：</p>
+<p>&emsp;&emsp;1. 开始时选择列表中第一个元素作为基准比较元素，后面的元素都是待排序元素。</p>
+<p>&emsp;&emsp;2. 一次比较待排序元素与基准比较元素的大小。</p>
+<p>&emsp;&emsp;3. 找到最小（最大）元素，然后交换基准比较元素和该最小（最大）元素的位置，至此一轮结束。</p>
+<p>&emsp;&emsp;4. 重复上述步骤到最后待排序列表为空时停止。<br>&lt;/font&gt;</p>
+<h3 id="2-Python-3-代码实现-2"><a href="#2-Python-3-代码实现-2" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">选择排序</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">select_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> nums == []:</span><br><span class="line">		<span class="keyword">return</span> nums</span><br><span class="line">	n=len(nums)</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,n<span class="number">-1</span>):</span><br><span class="line">		min_index = i</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,n):</span><br><span class="line">			<span class="keyword">if</span> nums[j] &gt; nums[min_index]:</span><br><span class="line">				min_index = j</span><br><span class="line">		nums[i], nums[min_index] = nums[min_index], nums[i]</span><br><span class="line">	<span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="3-复杂度-2"><a href="#3-复杂度-2" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(n2)</code>，空间复杂度是<code>O(1)</code>；不稳定。</p>
+<p><head> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
+</head> </p>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>列表排序</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Pytest进行测试</title>
+    <url>/2020/07/28/%E4%BD%BF%E7%94%A8Pytest%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="What-is-Pytest"><a href="#What-is-Pytest" class="headerlink" title="What is Pytest?"></a>What is Pytest?</h1><p>与<code>unittest</code>进行对比，<code>pytest</code>简直太简单，这个简单是容易阅读；容易编写；容易拓展；不仅如此，测试失败还会提醒。测试用例使用方法进行编写的，<code>unittest</code>是用类进行编写。</p>
+<h1 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h1><p>因为参考某篇文章，对新项目创建一个虚拟环境，同一台计算机上项目就不会相互冲突，在这里使用pipenv。<br><a id="more"></a></p>
+<h2 id="全局安装pipenv"><a href="#全局安装pipenv" class="headerlink" title="全局安装pipenv"></a>全局安装pipenv</h2><p>因为本机使用的是anaconda，所以打开<code>Anaconda Prompt</code>，输入：</p>
+<pre><code>pip install pipenv。
+</code></pre><p>然后在项目文件中安装pytest：</p>
+<pre><code>pipenv install pytest --dev
+</code></pre><p>这样在项目文件中就会出现两个新的文件：<code>Pipfile</code> <code>Pipfile.lock</code></p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>一般将测试用例都放在一个目录下面，目录名称遵守规定，以<code>test</code>开头。</p>
+<pre><code>mkdir tests
+cd tests
+</code></pre><p>创建一个py文件：test_match.py</p>
+<pre><code>def test_addition():
+    assert 1 + 1 == 2
+</code></pre><p>看看吧，是不是和unittest比起来简洁很多。都不用导入其他库，而且使用Python自带的assert语句就可以断言了。</p>
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>有看到两种方法运行测试：</p>
+<ol>
+<li>在<code>tests</code>目录下执行：<code>pyetst test_match.py</code>;或者<code>pytest -v test_match.py</code>. <code>-v</code>可以在控制台输出更详细的信息。</li>
+<li>回到项目的目录下执行：<code>pipenv run python -m pytest</code></li>
+</ol>
+<p>两者的执行结果都是一样的。</p>
+<h2 id="显示失败详情"><a href="#显示失败详情" class="headerlink" title="显示失败详情"></a>显示失败详情</h2><p>如果测试失败，通过-v这个选项可以显示具体哪里失败</p>
+<p><img src="C:\Users\QueYang\AppData\Roaming\Typora\typora-user-images\image-20200728204241264.png" alt="image-20200728204241264"></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>测试</tag>
+        <tag>Pytest</tag>
       </tags>
   </entry>
   <entry>
@@ -87,7 +443,6 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
 </ul>
 <p>由于学生党比较穷，后面流程都是在一台本地计算机上进行的。</p>
   <a id="more"></a>
-
 <p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20170726154758111-1.jpg" alt=""></p>
 <h1 id="2-整个流程"><a href="#2-整个流程" class="headerlink" title="2. 整个流程"></a>2. 整个流程</h1><p>要使用Selenium Grid进行分布式的操作，步骤大致是下面几个。</p>
 <ol>
@@ -146,332 +501,14 @@ print(&quot;Running time: %s&quot; % (end-start))</code></pre>]]></content>
 </ol>
 <h2 id="5-2-使用多个节点"><a href="#5-2-使用多个节点" class="headerlink" title="5.2 使用多个节点"></a>5.2 使用多个节点</h2><p>要使用多个节点，可以先把节点地址和浏览器创建在一个字典内，然后用<code>for</code>循环进行逐个使用。<br>    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义node_hub与浏览器对应关系</span></span><br><span class="line">nodes = &#123;</span><br><span class="line"><span class="string">'http://192.168.50.115:5555/wd/hub'</span>: <span class="string">'chrome'</span>,</span><br><span class="line"><span class="string">'http://192.168.50.115:6666/wd/hub'</span>: <span class="string">'internet explorer'</span>,</span><br><span class="line"><span class="string">'http://192.168.50.115:7777/wd/hub'</span>: <span class="string">'firefox'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 通过不同的浏览器执行测试脚本</span></span><br><span class="line"><span class="keyword">for</span> host, browser <span class="keyword">in</span> nodes.items():</span><br><span class="line">    print(host, browser)</span><br><span class="line">    <span class="comment"># 调用remote方法</span></span><br><span class="line">    driver = Remote(command_executor=host,</span><br><span class="line">                    desired_capabilities=&#123;<span class="string">'platform'</span>: <span class="string">'ANY'</span>, 	<span class="string">'browserName'</span>: browser, <span class="string">'version'</span>: <span class="string">''</span>, <span class="string">'javascriptEnabled'</span>: <span class="literal">True</span>&#125;)</span><br><span class="line">driver.get(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line">driver.find_element_by_id(<span class="string">"kw"</span>).send_keys(<span class="string">"hello"</span>)</span><br><span class="line">driver.find_element_by_id(<span class="string">"su"</span>).click()</span><br><span class="line">time.sleep(<span class="number">2</span>)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure></p>
 <h1 id="6-可能存在的问题"><a href="#6-可能存在的问题" class="headerlink" title="6. 可能存在的问题"></a>6. 可能存在的问题</h1><p>运行时候你会发现，IE浏览器无法打开，而Chrome和Firfox却没问题。</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开IE浏览器，Internet 选项，安全。将启用保护模式勾选取消，四个区域都要这样设置<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200723201622.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~~</span><br></pre></td></tr></table></figure>]]></content>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开IE浏览器，Internet 选项，安全。将启用保护模式勾选取消，四个区域都要这样设置<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200723201622.png" alt=""><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~~</span><br></pre></td></tr></table></figure></p>
+]]></content>
       <categories>
         <category>Python</category>
       </categories>
       <tags>
         <tag>Python</tag>
         <tag>selenium</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo</title>
-    <url>/2020/07/16/hexo/</url>
-    <content><![CDATA[<ul>
-<li>mkdir blog</li>
-<li>cd blog</li>
-<li>hexo init</li>
-<li>cnpm install –save hexo-deployer-git</li>
-<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>使用Pytest进行测试</title>
-    <url>/2020/07/28/%E4%BD%BF%E7%94%A8Pytest%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="What-is-Pytest"><a href="#What-is-Pytest" class="headerlink" title="What is Pytest?"></a>What is Pytest?</h1><p>与<code>unittest</code>进行对比，<code>pytest</code>简直太简单，这个简单是容易阅读；容易编写；容易拓展；不仅如此，测试失败还会提醒。测试用例使用方法进行编写的，<code>unittest</code>是用类进行编写。</p>
-<h1 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h1><p>因为参考某篇文章，对新项目创建一个虚拟环境，同一台计算机上项目就不会相互冲突，在这里使用pipenv。</p>
-<a id="more"></a>
-<h2 id="全局安装pipenv"><a href="#全局安装pipenv" class="headerlink" title="全局安装pipenv"></a>全局安装pipenv</h2><p>因为本机使用的是anaconda，所以打开<code>Anaconda Prompt</code>，输入：</p>
-<pre><code>pip install pipenv。</code></pre><p>然后在项目文件中安装pytest：</p>
-<pre><code>pipenv install pytest --dev</code></pre><p>这样在项目文件中就会出现两个新的文件：<code>Pipfile</code> <code>Pipfile.lock</code></p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>一般将测试用例都放在一个目录下面，目录名称遵守规定，以<code>test</code>开头。</p>
-<pre><code>mkdir tests
-cd tests</code></pre><p>创建一个py文件：test_match.py</p>
-<pre><code>def test_addition():
-    assert 1 + 1 == 2</code></pre><p>看看吧，是不是和unittest比起来简洁很多。都不用导入其他库，而且使用Python自带的assert语句就可以断言了。</p>
-<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>有看到两种方法运行测试：</p>
-<ol>
-<li>在<code>tests</code>目录下执行：<code>pyetst test_match.py</code>;或者<code>pytest -v test_match.py</code>. <code>-v</code>可以在控制台输出更详细的信息。</li>
-<li>回到项目的目录下执行：<code>pipenv run python -m pytest</code></li>
-</ol>
-<p>两者的执行结果都是一样的。</p>
-<h2 id="显示失败详情"><a href="#显示失败详情" class="headerlink" title="显示失败详情"></a>显示失败详情</h2><p>如果测试失败，通过-v这个选项可以显示具体哪里失败</p>
-<p><img src="C:%5CUsers%5CQueYang%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200728204241264.png" alt="image-20200728204241264"></p>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>测试</tag>
-        <tag>Pytest</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博弈树与决策树</title>
-    <url>/2020/11/13/%E5%8D%9A%E5%BC%88%E6%A0%91%E4%B8%8E%E5%86%B3%E7%AD%96%E6%A0%91/</url>
-    <content><![CDATA[<h2 id="极大极小-maxmini-策略"><a href="#极大极小-maxmini-策略" class="headerlink" title="极大极小(maxmini)策略"></a>极大极小(maxmini)策略</h2><p>在博弈中，当面对完全不了解的对手时，使用一种非常保守的策略，即极大极小算法，再假定对手执行最佳行动的前提下，最大化自己的收益。也可以说是在各种可以获得的最小收益的策略中选择最大收益的策略，有点类似鞍点的概念。这种方法放弃了最优策略，转而寻求风险最小的策略，因此说它时一种非常保守的方法。我方选择策略的前提是假设对手会选择最小化我方收益的策略，即用最坏的情况来为下一步策略作出选择。</p>
-<a id="more"></a>
-<p>极大极小算法的最大缺点就是需要展开整个博弈树，对于那些复杂度很高的博弈，例如围棋，将会使得算法无法计算下去，</p>
-<p>解决博弈树规模过大问题的方法时通过alpha-beta剪枝算法来修建博弈树，以极大极小算法形式遍历博弈树，并且避免某些树分支的展开，alpha-beta剪枝算法通过压缩搜索空间提高搜索效率。</p>
-<h2 id="决策树ID3算法"><a href="#决策树ID3算法" class="headerlink" title="决策树ID3算法"></a>决策树ID3算法</h2><p>ID3中采用信息增益作为选择的标准。</p>
-<h3 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h3><p>考虑到信源的所有可能发生的时间，假设其概率为$p_1、p_2、…、p_N$，那么其信息熵含义：一个信源的平均不确定性。公式表示为：<br>$$<br>I(p)=-(p_1\times log_2(p_1)+p_2\times log_2(p_2)+…+p_N\times log_2(p_N))\tag{1}<br>$$</p>
-<h3 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h3><p>在X发生的情况下，Y的熵成为条件熵$H(Y|x)$。其公式为<br>$$<br>H(Y|X)=H(X,Y)-H(X)= \sum_{i}^{N}p_iH(Y|X=x) \tag{2}<br>$$<br>其表示：（X,Y）发生时包含的熵（并集），减去X的熵，得到Y发生的“新”增的熵。</p>
-<p><strong>信息增益</strong>：表示得知特征A的信息而使得D集合的信息不确定性减少的程度。它为集合D的经验熵减去特征A的条件熵。公式表示为：<br>$$<br>g(D,A)=H(D)-H(D|A) \tag{3}<br>$$<br>联立(2)(3)得：<br>$$<br>g(D,A)=H(D)-H(D|A)=H(D)-[H(D,A)-H(A)]=H(D)+H(A)-H(D,A) \tag{4}<br>$$<br><strong>决策树优先从信息增益大的特征列开始划分数据集，这样会显得更靠谱，因为信息增益最大，对结果的影响力也更大。</strong></p>
-<p>$g(D)$和$g(D|A)$可以这么理解，一个是确定$D$中一个元素的类别所需的信息量；另一个是在已知属性$A$的取值后，确定$D$中一个元素所需的信息量。</p>
-<h4 id="例-1"><a href="#例-1" class="headerlink" title="例 1"></a>例 1</h4> <center>Play Tennis 数据库训练样本集</center>
-
-<table>
-<thead>
-<tr>
-<th align="center">ID</th>
-<th align="center">Outlook</th>
-<th align="center">Temperature</th>
-<th align="center">Humidity</th>
-<th align="center">Windy</th>
-<th align="center">PlayTennis</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">sunny</td>
-<td align="center">hot</td>
-<td align="center">high</td>
-<td align="center">false</td>
-<td align="center">no</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">sunny</td>
-<td align="center">hot</td>
-<td align="center">high</td>
-<td align="center">true</td>
-<td align="center">no</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">overcast</td>
-<td align="center">hot</td>
-<td align="center">high</td>
-<td align="center">false</td>
-<td align="center">yes</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">rain</td>
-<td align="center">mild</td>
-<td align="center">high</td>
-<td align="center">false</td>
-<td align="center">yes</td>
-</tr>
-<tr>
-<td align="center">5</td>
-<td align="center">rain</td>
-<td align="center">cool</td>
-<td align="center">normal</td>
-<td align="center">false</td>
-<td align="center">yes</td>
-</tr>
-<tr>
-<td align="center">6</td>
-<td align="center">rain</td>
-<td align="center">cool</td>
-<td align="center">normal</td>
-<td align="center">true</td>
-<td align="center">no</td>
-</tr>
-<tr>
-<td align="center">7</td>
-<td align="center">overcast</td>
-<td align="center">cool</td>
-<td align="center">normal</td>
-<td align="center">true</td>
-<td align="center">yes</td>
-</tr>
-<tr>
-<td align="center">8</td>
-<td align="center">sunny</td>
-<td align="center">mild</td>
-<td align="center">high</td>
-<td align="center">false</td>
-<td align="center">no</td>
-</tr>
-<tr>
-<td align="center">9</td>
-<td align="center">sunny</td>
-<td align="center">cool</td>
-<td align="center">normal</td>
-<td align="center">false</td>
-<td align="center">yes</td>
-</tr>
-<tr>
-<td align="center">10</td>
-<td align="center">rain</td>
-<td align="center">mild</td>
-<td align="center">normal</td>
-<td align="center">false</td>
-<td align="center">yes</td>
-</tr>
-<tr>
-<td align="center">11</td>
-<td align="center">sunny</td>
-<td align="center">mild</td>
-<td align="center">normal</td>
-<td align="center">true</td>
-<td align="center">yes</td>
-</tr>
-<tr>
-<td align="center">12</td>
-<td align="center">overcast</td>
-<td align="center">mild</td>
-<td align="center">high</td>
-<td align="center">true</td>
-<td align="center">yes</td>
-</tr>
-<tr>
-<td align="center">13</td>
-<td align="center">overcast</td>
-<td align="center">hot</td>
-<td align="center">normal</td>
-<td align="center">false</td>
-<td align="center">yes</td>
-</tr>
-<tr>
-<td align="center">14</td>
-<td align="center">rain</td>
-<td align="center">mild</td>
-<td align="center">high</td>
-<td align="center">true</td>
-<td align="center">no</td>
-</tr>
-</tbody></table>
-<p>表中类别属性$PlayTennis$有两个不同的值${yes,no}$，因此有两个不同的类。</p>
-<p><strong>第一步</strong>，计算分类成不同$PlayTennis$类所需的信息量。由式（1）得：<br>$$<br>P=(9/14,5/14), H(D)=-(\frac{9}{14}log_2\frac{9}{14}+\frac{5}{14}log_2\frac{5}{14})=0.940<br>$$<br><strong>第二部</strong>，按各个属性划分，计算各个属性对一个样本集合分类所需得信息量。</p>
-<p>首先以属性$Outlook$开始，按照属性$Outlook$来划分样本，则按此属性划分后每个子集所需得信息量为：<br>$$<br>Outlook = sunny:P=(2/5,3/5),H(S_1)=-(\frac{2}{5}log_2\frac{2}{5}+\frac{3}{5}log_2\frac{3}{5})=0.971<br>$$</p>
-<p>$$<br>Outlook = overcast:P=(4/4,0),H(S_2)=-(\frac{4}{4}log_2\frac{4}{4}+\frac{0}{4}log_2\frac{0}{4})=0<br>$$</p>
-<p>$$<br>Outlook = rain:P=(3/5,2/5),H(S_3)=-(\frac{3}{5}log_2\frac{3}{5}+\frac{2}{5}log_2\frac{2}{5})=0.971<br>$$</p>
-<p>因此，按照属性$Outlook$划分样本，加权平均计算。<br>$$<br>H(Outlook,D)=\frac{5}{14}H(s_1)+\frac{4}{14}H(s_2)+\frac{5}{14}H(s_3)=0.694<br>$$<br>最后我们得到样本按属性$Outlook$划分得信息增益为：<br>$$<br>g(Outlook,D)=H(D)-H(Outlook,D)=0.940-0.694<br>$$<br>类似的，可以计算得到：<br>$$<br>g(Temperate,D)=0.029,\<br>g(Humidity,D)=0.151,\<br>g(Windy,D)=0.048<br>$$<br>比较可以知道，属性$Outlook$是具有最高信息增益得属性，所以选择$Outlook$得取值来<strong>优先</strong>划分此样本集。</p>
-<p>注：</p>
-<p>信息增益高，说明该属性对类的分类效果决定性越大，就可以优先按照该属性对样本集进行分类。</p>
-<p>经过以此多轮的信息增益计算，得到最终决策树：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20201114093215.png" alt=""></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Markdown美化 font-awesome的使用</title>
-    <url>/2020/07/16/%E4%BD%A0%E5%A5%BD/</url>
-    <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。</p>
-<a id="more"></a>
-
-
-<p><i class="fa fa-share-alt"></i> <a href="http://www.fontawesome.com.cn/icons" target="_blank" rel="noopener">font-awesome官方地址</a></p>
-<h1 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h1><p>在Markdown中添加一下代码，放在文件的最底部。</p>
-<pre><code>&lt;head&gt; 
-    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; 
-    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; 
-&lt;/head&gt; 
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css&quot;&gt;</code></pre><p>然后就可以在font-awesome官网找到合适的图标，使用方法是将<code>&lt;i class=&quot;fa fa-share-alt&quot;&gt;&lt;/i&gt;</code>放在你需要添加图标的地方。</p>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>&lt;i class=&quot;fab fa-google&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code> <i class="fab fa-google" aria-hidden="true"></i> 这是Google图标</p>
-<h2 id="图标变大"><a href="#图标变大" class="headerlink" title="图标变大"></a>图标变大</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x" aria-hidden="true"></i> 这是2倍大的Google图标，使用fa-2x</p>
-<h2 id="图标旋转"><a href="#图标旋转" class="headerlink" title="图标旋转"></a>图标旋转</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x fa-spin&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x fa-spin" aria-hidden="true"></i> 使用fa-spin来让图标进行旋转</p>
-<h2 id="特殊引用效果"><a href="#特殊引用效果" class="headerlink" title="特殊引用效果"></a>特殊引用效果</h2><p><code>&lt;i class=&quot;fab fa-google fa-3x fa-pull-left fa-border&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code></p>
-<p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>…独坐在路边街角 冷风吹醒，默默地伴着我的孤影，只想将结他紧抱，诉出辛酸，就在这刻想起往事，心中一股冲劲勇闯，抛开那现实没有顾虑，仿佛身边拥有一切，看似与别人筑起隔膜。</p>
-<p>在这里使用 <code>fa-border</code> 和 <code>fa-pull-right</code> 或 <code>fa-pull-left</code> 可以轻易构造出引用的特殊效果。</p>
-<h2 id="替换无序列表中的图标"><a href="#替换无序列表中的图标" class="headerlink" title="替换无序列表中的图标"></a>替换无序列表中的图标</h2><p>使用 <code>fa-ul</code> and <code>fa-li</code> 轻松的替换无序列表中的默认图标。</p>
-<pre><code>&lt;ul class=&quot;fa-ul&quot;&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;使用列表类图标&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;轻松的替换&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;无序列表&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-square&quot;&gt;&lt;/i&gt;中的默认图标&lt;/li&gt;
-&lt;/ul&gt;</code></pre><ul class="fa-ul">
-  <li><i class="fa-li fa fa-check-square"></i>使用列表类图标</li>
-  <li><i class="fa-li fa fa-check-square"></i>轻松的替换</li>
-  <li><i class="fa-li fa fa-spinner fa-spin"></i>无序列表</li>
-  <li><i class="fa-li fa fa-square"></i>中的默认图标</li>
-</ul>
-
-<h2 id="对图标旋转角度"><a href="#对图标旋转角度" class="headerlink" title="对图标旋转角度"></a>对图标旋转角度</h2><p>使用 <code>fa-rotate-*</code> and <code>fa-flip-*</code> 类</p>
-<pre><code>&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-90&quot;&gt;&lt;/i&gt; fa-rotate-90&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-180&quot;&gt;&lt;/i&gt; fa-rotate-180&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-270&quot;&gt;&lt;/i&gt; fa-rotate-270&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-flip-horizontal&quot;&gt;&lt;/i&gt; fa-flip-horizontal&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-flip-vertical&quot;&gt;&lt;/i&gt; fa-flip-vertical
-&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;</code></pre><p><i class="fa fa-quote-left fa-rotate-90"></i> fa-rotate-90<br><br><i class="fa fa-quote-left fa-rotate-180"></i> fa-rotate-180<br><br><i class="fa fa-quote-left fa-rotate-270"></i> fa-rotate-270<br><br><i class="fa fa-quote-left fa-flip-horizontal"></i> fa-flip-horizontal<br><br><i class="fa fa-quote-left fa-flip-vertical"></i> fa-flip-vertical</p>
-<h1 id="更多例子请看font-awesome样例"><a href="#更多例子请看font-awesome样例" class="headerlink" title="更多例子请看font-awesome样例"></a>更多例子请看<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fab fa-fort-awesome"></i><a href="http://www.fontawesome.com.cn/examples/" target="_blank" rel="noopener">font-awesome样例</a></h1><head> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
-</head> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
-      <categories>
-        <category>Mardown</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>唠叨唠叨——理发</title>
-    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
-    <content><![CDATA[<p><font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。<br><br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。<br><br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···<br><br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。<br><br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。<br><br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。</p>
-</font>]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>记录厦门教师校招-湖南师大</title>
-    <url>/2020/10/28/%E5%8E%A6%E9%97%A8%E6%95%99%E5%B8%88%E6%A0%A1%E6%8B%9B-%E6%B9%96%E5%B8%88%E5%A4%A7%E7%AB%99-%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>&emsp;&emsp;辛苦了几天终于有了好的结果，也感叹幸运之神再次眷顾了我。<br><br>&emsp;&emsp;10-15 厦门市教育局发布校招通知；订宾馆、动车~<br><br>&emsp;&emsp;10-22 6小时高铁前往长沙；<br><br>&emsp;&emsp;10-23 招聘会现场投递，争取推荐名额。六中、厦外、二中推荐通用技术笔试。<br><br>&emsp;&emsp;10-24 上午笔试，下午开始8小时片段教学练习。<br><br>&emsp;&emsp;10-25 上午面试，下午橘子洲游玩。<br><br>&emsp;&emsp; 10-26 惊险上线六中。在厦外、二中都没有入围。14点打的差点错过高铁~</p>
-<a id="more"></a>
-
-<h2 id="一些过程"><a href="#一些过程" class="headerlink" title="一些过程"></a>一些过程</h2><h3 id="匆忙"><a href="#匆忙" class="headerlink" title="匆忙"></a>匆忙</h3><p><font face='宋体' size=4>10月15号的时候看到厦门市教育局发布的2020年优秀毕业生教师招聘，当时完全是乱的。匆忙买了初中物理课本，订了湖南师范大学附近的宾馆，22号去长沙的高铁。16-19号，经历了从初中物理到小学科学再到通用技术的变化。早点确定科目真的太重要了，这么短的时间看教案，练习怎么讲课，反复磨课真的太累咯。</p>
-<h3 id="突然"><a href="#突然" class="headerlink" title="突然"></a>突然</h3><p>19号去双十中学面试，前一天接到电话说是通用技术，晚上还在纠结要不要去，因为很害怕第二天直接让我上台讲课。结果，课还是上了，教务处主任让我继续去长沙。这次面试没有任何结果，这时候的时间是19号下午2点半。</p>
-<h3 id="奔波"><a href="#奔波" class="headerlink" title="奔波"></a>奔波</h3><p>23号一早，在湖南师大体育馆门外排起了长长的队伍。一进去后往思明区队伍中排科学老师，对方看我没有教师资格证、没有普通话证书，婉拒了我的申请。又去翔安教育局投递小学科学岗位发现已经不收简历了。这才8点多。再之后将重点放在了通用技术上面。厦门十中填了申请表，对方让我好好准备笔试。厦门二中说重点推荐我。外国语让我去酒店交材料，顺便去麦当劳吃了午饭。下午看到厦门六中也有通用技术名额，上去问了问。负责的校长一开始没想要我，他让双十的通用技术老师来面试了一会，态度就转变了。让我把一志愿放在六中，只要笔试面试合格没问题，六中一定会签我。当时秉着谨慎态度，先答应了他。</p>
-<h3 id="备考"><a href="#备考" class="headerlink" title="备考"></a>备考</h3><p>24号下午开始，直到晚上休息。一直待在酒店里准备第二天的片段教学。自己用手机录像，发给陈欣让她点评。对每一小节的内容都单独准备片段，背课本上的概念。练习了板书格式，副板书格式。从白天到深夜，我自己都没发现时间过的这么快~</p>
-<h3 id="等待"><a href="#等待" class="headerlink" title="等待"></a>等待</h3><p>&emsp;&emsp;每次考完试最难熬的应该就是等待成绩了吧，尤其是对于很重要的考试。这次面试也不例外，面试完后，自我感觉整个面试过程还是比较顺利的，对于片段教学的过程也比较完善，引入，总结，板书，这些都有。按照往年惯例，面试完的晚上就可能会接到学校电话。有的更是让你第二天一早就到某某酒店等结果公布，有的让你把三方协议书先交给他们学校。电话倒是接到了，二中问还报了哪些学校；外国语让第二天7点去他们指定的一个酒店；没有消息的一晚。</p>
-<h3 id="惊险"><a href="#惊险" class="headerlink" title="惊险"></a>惊险</h3><p>&emsp;&emsp;为什么又说惊险的。9点出成绩的时候我瞄了一眼，笔试成绩60分。按照招聘规定，笔试是100分，60分及格线，不及格就直接取消资格了。这60分我猜想是因为改卷子的老师手下留情了，报考通用技术的考生原本就不多，大概只是想让多一点考生进面试，就放了我一马。最后惊险的上岸了啊，当时的心情好像没有非常的开心，可能是被这60分给吓得。李承霖去了双十，姚守菊去了厦外，都是自己很满意的结果。</p>
-<h3 id="未完"><a href="#未完" class="headerlink" title="未完"></a>未完</h3><p>由于没有通用技术的教师资格证，而这次教资考试我报名的是初中物理，所以明年3月份将是我唯一的机会，如果这次能把两门公共课给通过，就是最好的结果了。31号考试，后面几天还是得再辛苦辛苦啊！！！</font></p>
-]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>教师</tag>
-        <tag>工作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python实现列表排序</title>
-    <url>/2020/07/16/%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h2 id="一、-快速排序"><a href="#一、-快速排序" class="headerlink" title="一、 快速排序"></a>一、 快速排序</h2><h3 id="1-算法原理"><a href="#1-算法原理" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>快速排序首先要在数组中选择一个基准元素，<a id="more"></a>以此为基准将数组分为 左边全部小于基准元素，右边全部大于基准元素。</p>
-<p>&emsp;&emsp;算法的步骤：</p>
-<p>&emsp;&emsp;1. 选取数组第一个元素为基准元素:first = nums[0]。</p>
-<p>&emsp;&emsp;2. 从第二个元素开始for i 循环:</p>
-<p>&emsp;&emsp;&emsp;&emsp;当遇到 i &lt; mid，将i元素放入右边数组中，right.append(i)</p>
-<p>&emsp;&emsp;&emsp;&emsp;当遇到 i &gt;= mid，将i元素放入左边数组中，left.append(i)</p>
-<p>&emsp;&emsp;3.递归进行第2步骤，对left和right数组进行相同操作，从无序变成有序。</font></p>
-<h3 id="2-Python-3-代码实现"><a href="#2-Python-3-代码实现" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">快读排序</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(arr)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> arr ==[]:</span><br><span class="line">		<span class="keyword">return</span> []</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		mid = arr[<span class="number">0</span>]                                      <span class="comment"># 取第一个元素作为基准元素</span></span><br><span class="line">		left ,right = [], []</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> arr[<span class="number">1</span>:]:</span><br><span class="line">			<span class="keyword">if</span> i &lt; mid:</span><br><span class="line">				right.append(i)</span><br><span class="line">			<span class="keyword">if</span> i &gt;= mid:</span><br><span class="line">				left.append(i)</span><br><span class="line">	res =  quick_sort(left) + [mid] + quick_sort(right)  <span class="comment"># 递归处理</span></span><br><span class="line">	<span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></code></pre><h3 id="3-复杂度"><a href="#3-复杂度" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(nlogn)</code>，空间复杂度是<code>O(nlog2n)</code>；不稳定。</p>
-<h2 id="二、-冒泡排序"><a href="#二、-冒泡排序" class="headerlink" title="二、 冒泡排序"></a>二、 冒泡排序</h2><h3 id="1-算法原理-1"><a href="#1-算法原理-1" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢”浮”到数列的顶端</p>
-<p>&emsp;&emsp;算法的步骤：</p>
-<p>&emsp;&emsp;1. 从左往右开始，依次循环。</p>
-<p>&emsp;&emsp;2. 比较当前元素与后一个元素的大小:</p>
-<p>&emsp;&emsp;3. 如果当前元素小于后一个元素，则两元素位置进行交换。</p>
-<p>&emsp;&emsp;4. 重复上述步骤到最后一个元素，至此这一轮排序结束。</p>
-<p>&emsp;&emsp;5. 递归上述步骤，当外层循环到最后一个元素的时候即结束运行。</font></p>
-<h3 id="2-Python-3-代码实现-1"><a href="#2-Python-3-代码实现-1" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">冒泡排序</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> nums ==[]:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    n = len(nums)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n-i<span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> nums[j] &lt; nums[j+<span class="number">1</span>]:</span><br><span class="line">                nums[j] ,nums[j+<span class="number">1</span>]= nums[j+<span class="number">1</span>], nums[j]</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure></code></pre><h3 id="3-复杂度-1"><a href="#3-复杂度-1" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(n2)</code>，空间复杂度是<code>O(1)</code>；稳定。</p>
-<h2 id="三、-选择排序"><a href="#三、-选择排序" class="headerlink" title="三、 选择排序"></a>三、 选择排序</h2><h3 id="1-算法原理-2"><a href="#1-算法原理-2" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>每次从待排序的列表中选择第一位元素作为基准比较元素，再从待排序列表中选出最小（或最大）一个元素，将其存放在该列表中的起始位置。和冒泡排序的不同之处是，选择排序每轮只交换一次，而冒泡排序需要交换很多次。</p>
-<p>&emsp;&emsp;算法的步骤：</p>
-<p>&emsp;&emsp;1. 开始时选择列表中第一个元素作为基准比较元素，后面的元素都是待排序元素。</p>
-<p>&emsp;&emsp;2. 一次比较待排序元素与基准比较元素的大小。</p>
-<p>&emsp;&emsp;3. 找到最小（最大）元素，然后交换基准比较元素和该最小（最大）元素的位置，至此一轮结束。</p>
-<p>&emsp;&emsp;4. 重复上述步骤到最后待排序列表为空时停止。<br></font></p>
-<h3 id="2-Python-3-代码实现-2"><a href="#2-Python-3-代码实现-2" class="headerlink" title="2. Python 3 代码实现"></a>2. Python 3 代码实现</h3><pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">选择排序</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">select_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> nums == []:</span><br><span class="line">		<span class="keyword">return</span> nums</span><br><span class="line">	n=len(nums)</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,n<span class="number">-1</span>):</span><br><span class="line">		min_index = i</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,n):</span><br><span class="line">			<span class="keyword">if</span> nums[j] &gt; nums[min_index]:</span><br><span class="line">				min_index = j</span><br><span class="line">		nums[i], nums[min_index] = nums[min_index], nums[i]</span><br><span class="line">	<span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure></code></pre><h3 id="3-复杂度-2"><a href="#3-复杂度-2" class="headerlink" title="3.复杂度"></a>3.复杂度</h3><p>快速排序的平均时间复杂度是<code>O(n2)</code>，空间复杂度是<code>O(1)</code>；不稳定。</p>
-<head> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
-</head> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>列表排序</tag>
-        <tag>算法</tag>
       </tags>
   </entry>
 </search>
