@@ -164,7 +164,7 @@ print(&quot;Running time: %s&quot; % (end-start))
       </tags>
   </entry>
   <entry>
-    <title>博弈树与决策树</title>
+    <title>决策树（一）</title>
     <url>/2020/11/13/%E5%8D%9A%E5%BC%88%E6%A0%91%E4%B8%8E%E5%86%B3%E7%AD%96%E6%A0%91/</url>
     <content><![CDATA[<h2 id="极大极小-maxmini-策略"><a href="#极大极小-maxmini-策略" class="headerlink" title="极大极小(maxmini)策略"></a>极大极小(maxmini)策略</h2><p>在博弈中，当面对完全不了解的对手时，使用一种非常保守的策略，即极大极小算法，再假定对手执行最佳行动的前提下，最大化自己的收益。也可以说是在各种可以获得的最小收益的策略中选择最大收益的策略，有点类似鞍点的概念。这种方法放弃了最优策略，转而寻求风险最小的策略，因此说它时一种非常保守的方法。我方选择策略的前提是假设对手会选择最小化我方收益的策略，即用最坏的情况来为下一步策略作出选择。<br><a id="more"></a><br>极大极小算法的最大缺点就是需要展开整个博弈树，对于那些复杂度很高的博弈，例如围棋，将会使得算法无法计算下去，</p>
 <p>解决博弈树规模过大问题的方法时通过alpha-beta剪枝算法来修建博弈树，以极大极小算法形式遍历博弈树，并且避免某些树分支的展开，alpha-beta剪枝算法通过压缩搜索空间提高搜索效率。</p>
@@ -332,6 +332,9 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
 <p>经过以此多轮的信息增益计算，得到最终决策树：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20201114093215.png" alt=""></p>
 ]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
   </entry>
   <entry>
     <title>唠叨唠叨——理发</title>
