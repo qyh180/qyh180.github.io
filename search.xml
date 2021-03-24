@@ -124,18 +124,6 @@ print(&quot;Running time: %s&quot; % (end-start))
       </categories>
   </entry>
   <entry>
-    <title>hexo</title>
-    <url>/2020/07/16/hexo/</url>
-    <content><![CDATA[<ul>
-<li>mkdir blog</li>
-<li>cd blog</li>
-<li>hexo init</li>
-<li>cnpm install —save hexo-deployer-git</li>
-<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>决策树（一）</title>
     <url>/2020/11/13/%E5%86%B3%E7%AD%96%E6%A0%91%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<h2 id="极大极小-maxmini-策略"><a href="#极大极小-maxmini-策略" class="headerlink" title="极大极小(maxmini)策略"></a>极大极小(maxmini)策略</h2><p>在博弈中，当面对完全不了解的对手时，使用一种非常保守的策略，即极大极小算法，再假定对手执行最佳行动的前提下，最大化自己的收益。也可以说是在各种可以获得的最小收益的策略中选择最大收益的策略，有点类似鞍点的概念。这种方法放弃了最优策略，转而寻求风险最小的策略，因此说它时一种非常保守的方法。我方选择策略的前提是假设对手会选择最小化我方收益的策略，即用最坏的情况来为下一步策略作出选择。<br><a id="more"></a><br>极大极小算法的最大缺点就是需要展开整个博弈树，对于那些复杂度很高的博弈，例如围棋，将会使得算法无法计算下去，</p>
@@ -329,6 +317,18 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
       </tags>
   </entry>
   <entry>
+    <title>hexo</title>
+    <url>/2020/07/16/hexo/</url>
+    <content><![CDATA[<ul>
+<li>mkdir blog</li>
+<li>cd blog</li>
+<li>hexo init</li>
+<li>cnpm install —save hexo-deployer-git</li>
+<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>唠叨唠叨——理发</title>
     <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
     <content><![CDATA[<font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。
@@ -340,6 +340,24 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
 
 
 </font>]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>近期总结</title>
+    <url>/2021/03/23/%E8%BF%91%E6%9C%9F%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>最近一直下雨~<br><a id="more"></a></p>
+<h2 id="毕业论文篇"><a href="#毕业论文篇" class="headerlink" title="毕业论文篇 "></a>毕业论文篇 <i class="fa fa-graduation-cap" aria-hidden="true"></i></h2><p>&emsp;&emsp;前两天把毕业论文写完后发给了老师，按照往届学长们的情况来看，不太可能会给我大改，而且老师会不会给看也难说。自己这边的规划是不管老师有没有改，4月1号的时候自己要先去查重一遍，然后在交稿日期4月7号前再好好修改完善一下。<br>&emsp;&emsp;小论文投出去快两个月了，上周五发了邮件询问进度至今也没有收到回复。后面如果还不接受就得跟老师商量一下撤稿，改投《科技创新导报》好了，听说接收的速度非常快。<br>&emsp;&emsp;大论文的事情目前告一段落了，近期也比较轻松。计划着多去健身跑步，休息为主。还有就是搞一搞可视化的程序，看能不能用这个来增加毕业论文的工作量。</p>
+<h2 id="教资"><a href="#教资" class="headerlink" title="教资 "></a>教资 <i class="fa fa-meh-o" aria-hidden="true"></i></h2><p>&emsp;&emsp;3.13考了科目三，考完那几天真实很伤心，怀疑自己最后一题教学设计是不是偏题了，担惊受怕自己不及格。其实现在心里还是有点担心，自己按照各题进行扣分的话，刚好再及格的边缘，希望判卷老师能够手下留情吧！<br>&emsp;&emsp;从去年校招完了之后，考了好多试了，教资的科目一、二过了，普通话也考了82.5分过了。希望这次科目三也能如期过掉，后面面试的时候也要势如破竹。</p>
+<p><head> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
+</head> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"></p>
+]]></content>
       <categories>
         <category>生活</category>
       </categories>
@@ -388,24 +406,6 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
         <tag>Python</tag>
         <tag>列表排序</tag>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>近期总结</title>
-    <url>/2021/03/23/%E8%BF%91%E6%9C%9F%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>最近一直下雨~<br><a id="more"></a></p>
-<h2 id="毕业论文篇"><a href="#毕业论文篇" class="headerlink" title="毕业论文篇 "></a>毕业论文篇 <i class="fa fa-graduation-cap" aria-hidden="true"></i></h2><p>&emsp;&emsp;前两天把毕业论文写完后发给了老师，按照往届学长们的情况来看，不太可能会给我大改，而且老师会不会给看也难说。自己这边的规划是不管老师有没有改，4月1号的时候自己要先去查重一遍，然后在交稿日期4月7号前再好好修改完善一下。<br>&emsp;&emsp;小论文投出去快两个月了，上周五发了邮件询问进度至今也没有收到回复。后面如果还不接受就得跟老师商量一下撤稿，改投《科技创新导报》好了，听说接收的速度非常快。<br>&emsp;&emsp;大论文的事情目前告一段落了，近期也比较轻松。计划着多去健身跑步，休息为主。还有就是搞一搞可视化的程序，看能不能用这个来增加毕业论文的工作量。</p>
-<h2 id="教资"><a href="#教资" class="headerlink" title="教资 "></a>教资 <i class="fa fa-meh-o" aria-hidden="true"></i></h2><p>&emsp;&emsp;3.13考了科目三，考完那几天真实很伤心，怀疑自己最后一题教学设计是不是偏题了，担惊受怕自己不及格。其实现在心里还是有点担心，自己按照各题进行扣分的话，刚好再及格的边缘，希望判卷老师能够手下留情吧！<br>&emsp;&emsp;从去年校招完了之后，考了好多试了，教资的科目一、二过了，普通话也考了82.5分过了。希望这次科目三也能如期过掉，后面面试的时候也要势如破竹。</p>
-<p><head> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
-</head> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"></p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
       </tags>
   </entry>
 </search>
