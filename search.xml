@@ -74,18 +74,6 @@ print(&quot;Running time: %s&quot; % (end-start))
       </tags>
   </entry>
   <entry>
-    <title>hexo</title>
-    <url>/2020/07/16/hexo/</url>
-    <content><![CDATA[<ul>
-<li>mkdir blog</li>
-<li>cd blog</li>
-<li>hexo init</li>
-<li>cnpm install —save hexo-deployer-git</li>
-<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>Selenium Server使用配置（一）</title>
     <url>/2020/07/22/Selenium%20Grid/</url>
     <content><![CDATA[<h1 id="1-Selenium-Grid是什么？"><a href="#1-Selenium-Grid是什么？" class="headerlink" title="1. Selenium Grid是什么？"></a>1. Selenium Grid是什么？</h1><p><code>Selenium Grid</code>专门用于在不同的浏览器、操作系统和机器上<strong>并行运行</strong>多个测试用例。通过将命令发送给远程的Web浏览器实例来完成并行测试，其中的一台服务器充当中心。Hub会在多态计算机上并发执行测试，从而集中管理不同的浏览器，而不用对每个浏览器进行单独的测试，<code>Selenium Grid</code>使跨浏览器测试变得容易，因为单个测试能够在多台机器和浏览器上运行，快速完成测试。</p>
@@ -167,6 +155,18 @@ print(&quot;Running time: %s&quot; % (end-start))
       </tags>
   </entry>
   <entry>
+    <title>hexo</title>
+    <url>/2020/07/16/hexo/</url>
+    <content><![CDATA[<ul>
+<li>mkdir blog</li>
+<li>cd blog</li>
+<li>hexo init</li>
+<li>cnpm install —save hexo-deployer-git</li>
+<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>Markdown美化 font-awesome的使用</title>
     <url>/2020/07/16/%E4%BD%A0%E5%A5%BD/</url>
     <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。<br><a id="more"></a></p>
@@ -215,6 +215,41 @@ print(&quot;Running time: %s&quot; % (end-start))
       <categories>
         <category>Mardown</category>
       </categories>
+  </entry>
+  <entry>
+    <title>使用Pytest进行测试</title>
+    <url>/2020/07/28/%E4%BD%BF%E7%94%A8Pytest%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="What-is-Pytest"><a href="#What-is-Pytest" class="headerlink" title="What is Pytest?"></a>What is Pytest?</h1><p>与<code>unittest</code>进行对比，<code>pytest</code>简直太简单，这个简单是容易阅读；容易编写；容易拓展；不仅如此，测试失败还会提醒。测试用例使用方法进行编写的，<code>unittest</code>是用类进行编写。</p>
+<h1 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h1><p>因为参考某篇文章，对新项目创建一个虚拟环境，同一台计算机上项目就不会相互冲突，在这里使用pipenv。<br><a id="more"></a></p>
+<h2 id="全局安装pipenv"><a href="#全局安装pipenv" class="headerlink" title="全局安装pipenv"></a>全局安装pipenv</h2><p>因为本机使用的是anaconda，所以打开<code>Anaconda Prompt</code>，输入：</p>
+<pre><code>pip install pipenv。
+</code></pre><p>然后在项目文件中安装pytest：</p>
+<pre><code>pipenv install pytest --dev
+</code></pre><p>这样在项目文件中就会出现两个新的文件：<code>Pipfile</code> <code>Pipfile.lock</code></p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>一般将测试用例都放在一个目录下面，目录名称遵守规定，以<code>test</code>开头。</p>
+<pre><code>mkdir tests
+cd tests
+</code></pre><p>创建一个py文件：test_match.py</p>
+<pre><code>def test_addition():
+    assert 1 + 1 == 2
+</code></pre><p>看看吧，是不是和unittest比起来简洁很多。都不用导入其他库，而且使用Python自带的assert语句就可以断言了。</p>
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>有看到两种方法运行测试：</p>
+<ol>
+<li>在<code>tests</code>目录下执行：<code>pyetst test_match.py</code>;或者<code>pytest -v test_match.py</code>. <code>-v</code>可以在控制台输出更详细的信息。</li>
+<li>回到项目的目录下执行：<code>pipenv run python -m pytest</code></li>
+</ol>
+<p>两者的执行结果都是一样的。</p>
+<h2 id="显示失败详情"><a href="#显示失败详情" class="headerlink" title="显示失败详情"></a>显示失败详情</h2><p>如果测试失败，通过-v这个选项可以显示具体哪里失败</p>
+<p><img src="C:\Users\QueYang\AppData\Roaming\Typora\typora-user-images\image-20200728204241264.png" alt="image-20200728204241264"></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>测试</tag>
+        <tag>Pytest</tag>
+      </tags>
   </entry>
   <entry>
     <title>决策树（一）</title>
@@ -390,60 +425,6 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
       </categories>
   </entry>
   <entry>
-    <title>使用Pytest进行测试</title>
-    <url>/2020/07/28/%E4%BD%BF%E7%94%A8Pytest%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="What-is-Pytest"><a href="#What-is-Pytest" class="headerlink" title="What is Pytest?"></a>What is Pytest?</h1><p>与<code>unittest</code>进行对比，<code>pytest</code>简直太简单，这个简单是容易阅读；容易编写；容易拓展；不仅如此，测试失败还会提醒。测试用例使用方法进行编写的，<code>unittest</code>是用类进行编写。</p>
-<h1 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h1><p>因为参考某篇文章，对新项目创建一个虚拟环境，同一台计算机上项目就不会相互冲突，在这里使用pipenv。<br><a id="more"></a></p>
-<h2 id="全局安装pipenv"><a href="#全局安装pipenv" class="headerlink" title="全局安装pipenv"></a>全局安装pipenv</h2><p>因为本机使用的是anaconda，所以打开<code>Anaconda Prompt</code>，输入：</p>
-<pre><code>pip install pipenv。
-</code></pre><p>然后在项目文件中安装pytest：</p>
-<pre><code>pipenv install pytest --dev
-</code></pre><p>这样在项目文件中就会出现两个新的文件：<code>Pipfile</code> <code>Pipfile.lock</code></p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>一般将测试用例都放在一个目录下面，目录名称遵守规定，以<code>test</code>开头。</p>
-<pre><code>mkdir tests
-cd tests
-</code></pre><p>创建一个py文件：test_match.py</p>
-<pre><code>def test_addition():
-    assert 1 + 1 == 2
-</code></pre><p>看看吧，是不是和unittest比起来简洁很多。都不用导入其他库，而且使用Python自带的assert语句就可以断言了。</p>
-<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>有看到两种方法运行测试：</p>
-<ol>
-<li>在<code>tests</code>目录下执行：<code>pyetst test_match.py</code>;或者<code>pytest -v test_match.py</code>. <code>-v</code>可以在控制台输出更详细的信息。</li>
-<li>回到项目的目录下执行：<code>pipenv run python -m pytest</code></li>
-</ol>
-<p>两者的执行结果都是一样的。</p>
-<h2 id="显示失败详情"><a href="#显示失败详情" class="headerlink" title="显示失败详情"></a>显示失败详情</h2><p>如果测试失败，通过-v这个选项可以显示具体哪里失败</p>
-<p><img src="C:\Users\QueYang\AppData\Roaming\Typora\typora-user-images\image-20200728204241264.png" alt="image-20200728204241264"></p>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>测试</tag>
-        <tag>Pytest</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>唠叨唠叨——理发</title>
-    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
-    <content><![CDATA[<font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。
-<br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。
-<br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···
-<br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。
-<br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。
-<br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。
-
-
-</font>]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>记录厦门教师校招-湖南师大</title>
     <url>/2020/10/28/%E5%8E%A6%E9%97%A8%E6%95%99%E5%B8%88%E6%A0%A1%E6%8B%9B-%E6%B9%96%E5%B8%88%E5%A4%A7%E7%AB%99-%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>&emsp;&emsp;辛苦了几天终于有了好的结果，也感叹幸运之神再次眷顾了我。<br><br>&emsp;&emsp;10-15 厦门市教育局发布校招通知；订宾馆、动车~<br><br>&emsp;&emsp;10-22 6小时高铁前往长沙；<br><br>&emsp;&emsp;10-23 招聘会现场投递，争取推荐名额。六中、厦外、二中推荐通用技术笔试。<br><br>&emsp;&emsp;10-24 上午笔试，下午开始8小时片段教学练习。<br><br>&emsp;&emsp;10-25 上午面试，下午橘子洲游玩。<br><br>&emsp;&emsp; 10-26 惊险上线六中。在厦外、二中都没有入围。14点打的差点错过高铁~<br><a id="more"></a></p>
@@ -471,6 +452,25 @@ cd tests
       <tags>
         <tag>教师</tag>
         <tag>工作</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>唠叨唠叨——理发</title>
+    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
+    <content><![CDATA[<font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。
+<br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。
+<br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···
+<br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。
+<br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。
+<br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。
+
+
+</font>]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
