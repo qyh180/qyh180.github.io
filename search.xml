@@ -1,160 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>IP地址分类查询</title>
-    <url>/2020/07/16/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：<br><a id="more"></a><br>1/ 格式是否符合；</p>
-<p>2/ ip地址范围是否符合；<br>后续增加：</p>
-<p>1/ 对私有地址分类再细分   —get；</p>
-<p>2/ 封装成.exe；</p>
-<p>3/ 代码结构优化；</p>
-<p>通过了所有测试用例。太冗杂了，应该还可以优化</p>
-<pre><code>start = time.time()
-while True:
-    ip = input(&quot;请输入IP地址:&quot;)
-    # ip = &quot;250.11.22.33&quot;
-    text = re.compile(r&quot;[0-9]$&quot;)
-    if (&quot;.&quot; not in ip) or (ip.count(&quot;.&quot;) != 3) or (text.match(ip)):
-        print(&quot;格式错误，请重新输入(例:192.168.0.1):&quot;)
-        continue
-    else:
-        ip_list = ip.split(&quot;.&quot;)
-        iplist = [int(x) for x in ip_list]
-        if len(iplist) != 4:
-            print(&quot;数量不对，请重新输入(例:192.168.0.1):&quot;)
-            continue
-        else:
-            if (iplist[0] &lt;= 255 and iplist[0] &gt;= 0) and (iplist[1] &gt;= 0 and iplist[1] &lt;= 255) \
-                    and (iplist[2] &gt;= 0 and iplist[2] &lt;= 255) \
-                    and (iplist[3] &gt;= 0 and iplist[3] &lt;= 255):
-                ackip = iplist
-                break
-            else:
-                print(&quot;超过范围，请重新输入(例:192.168.0.1):&quot;)
-                continue
-
-if ackip[0] &lt;=255 and ackip[0] &gt; 0 and ackip[3]&lt;=254 and ackip[3]&gt;0:
-    if ackip[0] &gt;= 1 and ackip[0] &lt;= 126:
-        if ackip[0] == 10:
-            print(&quot;此IP地址：%s 属于 A类私有地址&quot; % ip)
-        else:
-            print(&quot;此IP地址：%s 属于 A类地址&quot; % ip)
-    elif ackip[0] ==127:
-        print(&quot;此IP地址：%s 属于回环地址&quot; % ip)
-    elif ackip[0] &gt;= 128 and ackip[0] &lt;= 191:
-        if ackip[0] == 172 and (ackip[1] &lt;= 31 and ackip[1] &gt;= 16):
-            print(&quot;此IP地址：%s 属于 B类私有地址&quot; % ip)
-        elif ackip[0] == 169 and ackip[1] == 254:
-            print(&quot;此IP地址：%s 属于 windows自动分配&quot; % ip)
-        else:
-            print(&quot;此IP地址：%s 属于 B类地址&quot; % ip)
-    elif ackip[0] &gt;= 192 and ackip[0] &lt;= 223:
-        if ackip[0] == 192 and ackip[1] == 168:
-            print(&quot;此IP地址：%s 属于 C类私有地址&quot; % ip)
-        else:
-            print(&quot;此IP地址：%s 属于 C类地址&quot; % ip)
-    elif ackip[0] &gt;= 224 and ackip[0] &lt;= 239:
-        print(&quot;此IP地址：%s 属于 D类地址,不可用IP&quot; % ip)
-    elif ackip[0] &gt;= 240 and ackip[0] &lt;= 255:
-        print(&quot;此IP地址：%s 属于 E类地址,不可用IP&quot; % ip)
-elif ackip[0] == 0 or ackip[3] == 0:
-    print(&quot;此IP地址：%s 属于 全网地址，不可用IP&quot; % ip)
-elif ackip[3] == 255:
-    print(&quot;此IP地址：%s 属于 广播地址，不可用IP&quot; % ip)
-
-end=time.time()
-print(&quot;Running time: %s&quot; % (end-start))
-</code></pre>]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>TCP/IP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Selenium Server使用配置（一）</title>
-    <url>/2020/07/22/Selenium%20Grid/</url>
-    <content><![CDATA[<h1 id="1-Selenium-Grid是什么？"><a href="#1-Selenium-Grid是什么？" class="headerlink" title="1. Selenium Grid是什么？"></a>1. Selenium Grid是什么？</h1><p><code>Selenium Grid</code>专门用于在不同的浏览器、操作系统和机器上<strong>并行运行</strong>多个测试用例。通过将命令发送给远程的Web浏览器实例来完成并行测试，其中的一台服务器充当中心。Hub会在多态计算机上并发执行测试，从而集中管理不同的浏览器，而不用对每个浏览器进行单独的测试，<code>Selenium Grid</code>使跨浏览器测试变得容易，因为单个测试能够在多台机器和浏览器上运行，快速完成测试。</p>
-<p>Selenium Grid 的两个主要组件时：</p>
-<ul>
-<li><p>Hub是一台中心服务器，它接受来自WebDriver客户端的访问请求，并将JSON测试命令路由到节点上的远程驱动器。它从客户端获取指令，并在各个节点上并发的远程执行它们。</p>
-</li>
-<li><p>Node是一个由本地操作系统和远程WebDriver组成的远程设备。它以JSON测试命令的形式接收来自中心的请求，并使用WebDriver执行它们</p>
-</li>
-</ul>
-<p>由于学生党比较穷，后面流程都是在一台本地计算机上进行的。</p>
-  <a id="more"></a>
-<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20170726154758111-1.jpg" alt=""></p>
-<h1 id="2-整个流程"><a href="#2-整个流程" class="headerlink" title="2. 整个流程"></a>2. 整个流程</h1><p>要使用Selenium Grid进行分布式的操作，步骤大致是下面几个。</p>
-<ol>
-<li>在本地CMD创建hub</li>
-<li>在hub创建node,要对node配置端口号</li>
-<li>在python脚本中配置要执行哪一个Node</li>
-</ol>
-<h1 id="3-webdriver下载"><a href="#3-webdriver下载" class="headerlink" title="3. webdriver下载"></a>3. webdriver下载</h1><p>webdriver 是用来执行并操作浏览器的一个API，程序脚本通过webdriver来直接对浏览器进行操作，相当于起到一个链接浏览器和程序的桥梁。</p>
-<h2 id="3-1-IE"><a href="#3-1-IE" class="headerlink" title="3.1 IE"></a>3.1 IE</h2><ol>
-<li>下载地址：<a href="http://selenium-release.storage.googleapis.com/index.html?path=3.5/" target="_blank" rel="noopener">IEDriverServer</a><br>选择和电脑位数相同的额压缩包</li>
-<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。<h2 id="3-2-Chrome"><a href="#3-2-Chrome" class="headerlink" title="3.2 Chrome"></a>3.2 Chrome</h2></li>
-<li>下载地址：<a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="noopener">ChromeDriver</a><br>注意要和电脑中Chrome版本一致，</li>
-<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。<h2 id="3-3-Firefox"><a href="#3-3-Firefox" class="headerlink" title="3.3 Firefox"></a>3.3 Firefox</h2></li>
-<li>下载地址：<a href="https://github.com/mozilla/geckodriver/releases" target="_blank" rel="noopener">geckodriver</a></li>
-<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。</li>
-</ol>
-<h1 id="4-Selenium-Grid启动"><a href="#4-Selenium-Grid启动" class="headerlink" title="4. Selenium Grid启动"></a>4. Selenium Grid启动</h1><h2 id="4-1-启动hub"><a href="#4-1-启动hub" class="headerlink" title="4.1 启动hub"></a>4.1 启动hub</h2><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
-<p><code>-port 4455</code>是开启4455号端口<code>-role hub</code>是将<code>Selenium server</code>作为<code>hub</code>或者<code>Grid server</code></p>
-<p>如图所示<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722200102.png" alt=""></p>
-<p>在浏览器地址栏输入<code>loaclhost:4455/grid/console</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722200620.png" alt=""></p>
-<h2 id="4-2-添加node"><a href="#4-2-添加node" class="headerlink" title="4.2 添加node"></a>4.2 添加node</h2><p>每一个节点就代表一台计算机</p>
-<p>新打开一个cmd</p>
-<p>输入<code>java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.141.59.jar -role node -hub http://10.30.35.106:4455</code></p>
-<p>创建一个节点，结果如图<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722202415.png" alt=""></p>
-<p>刷新浏览器</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722202558.png" alt=""></p>
-<h2 id="4-3-使用json文件来自定义节点"><a href="#4-3-使用json文件来自定义节点" class="headerlink" title="4.3 使用json文件来自定义节点"></a>4.3 使用json文件来自定义节点</h2><p>在使用json自定义节点前，必须先开启hub</p>
-<p>cmd输入命令<code>java -jar selenium-server-standalone-3.149.0.jar -role node -nodeConfig nodeconfig.json</code><br><code>nodeConfig.json</code>文件如下<br>    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"capabilities"</span>:</span><br><span class="line">  [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"browserName"</span>: <span class="string">"firefox"</span>,</span><br><span class="line">      <span class="string">"maxInstances"</span>: <span class="number">3</span>,</span><br><span class="line">      <span class="string">"seleniumProtocol"</span>: <span class="string">"WebDriver"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"browserName"</span>: <span class="string">"chrome"</span>,</span><br><span class="line">      <span class="string">"maxInstances"</span>: <span class="number">5</span>,</span><br><span class="line">      <span class="string">"seleniumProtocol"</span>: <span class="string">"WebDriver"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"browserName"</span>: <span class="string">"internet explorer"</span>,</span><br><span class="line">      <span class="string">"maxInstances"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="string">"seleniumProtocol"</span>: <span class="string">"WebDriver"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"proxy"</span>: <span class="string">"org.openqa.grid.selenium.proxy.DefaultRemoteProxy"</span>,</span><br><span class="line">  <span class="string">"maxSession"</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="string">"port"</span>: <span class="number">6666</span>,</span><br><span class="line">  <span class="string">"register"</span>: true,</span><br><span class="line">  <span class="string">"registerCycle"</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="string">"hub"</span>: <span class="string">"http://localhost:4455"</span>,</span><br><span class="line">  <span class="string">"nodeStatusCheckTimeout"</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="string">"nodePolling"</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="string">"role"</span>: <span class="string">"node"</span>,</span><br><span class="line">  <span class="string">"unregisterIfStillDownAfter"</span>: <span class="number">60000</span>,</span><br><span class="line">  <span class="string">"downPollingLimit"</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="string">"debug"</span>: false,</span><br><span class="line">  <span class="string">"servlets"</span> : [],</span><br><span class="line">  <span class="string">"withoutServlets"</span>: [],</span><br><span class="line">  <span class="string">"custom"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>启动后在浏览器输入地址<code>http://localhost:4455/grid/console</code>，因为json中设置的hub是<code>http://localhost:4455</code>。<br>结果如下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722204600.png" alt=""></p>
-<p>启动了1个IE，3个火狐，5个Chrome。注意，这些节点是在<code>id : http://10.30.35.106:5555, OS : WIN10</code>中的节点，注意端口号。</p>
-<h2 id="4-4-添加Firefox节点"><a href="#4-4-添加Firefox节点" class="headerlink" title="4.4 添加Firefox节点"></a>4.4 添加Firefox节点</h2><ol>
-<li>重新启动一个hub 端口是4444</li>
-<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser&quot;browserName=firefox,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 6677</code></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722210247.png" alt=""></p>
-<h2 id="4-5-添加Chrome节点"><a href="#4-5-添加Chrome节点" class="headerlink" title="4.5 添加Chrome节点"></a>4.5 添加Chrome节点</h2><ol>
-<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
-<li><code>java -jar selenium-server-standalone-13.141.59.jar -role webdriver -browser &quot;browserName=chrome,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 7777</code></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722210624.png" alt=""></p>
-<p>此时，总共有两个端口有节点了。体会一下红框的意思。<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722210913.png" alt=""></p>
-<h2 id="4-6-在Mac-OS-下添加Safari"><a href="#4-6-在Mac-OS-下添加Safari" class="headerlink" title="4.6 在Mac OS 下添加Safari"></a>4.6 在Mac OS 下添加Safari</h2><ol>
-<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
-<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser &quot;browserName=safari,version=7,maxinstance=2,platform=MAC&quot; -hubHost 10.30.35.106 –port 7788</code></li>
-</ol>
-<p>此时多了一列<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722211407.png" alt=""></p>
-<p>但是为什么显示UNKONW,这个后面再研究研究</p>
-<h1 id="5-在Python中使用"><a href="#5-在Python中使用" class="headerlink" title="5 在Python中使用"></a>5 在Python中使用</h1><h2 id="5-1-使用单个节点"><a href="#5-1-使用单个节点" class="headerlink" title="5.1 使用单个节点"></a>5.1 使用单个节点</h2><p>当配置好hub和Node后，如何用Python来启动相应的节点呢。</p>
-<p>在<code>def setUp(self)</code>里使用下面方法<br>    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">self.driver = webdriver.Remote(command_executor = <span class="string">'http://192.168.50.115:5555/wd/hub'</span>,</span><br><span class="line">									   desired_capabilities=&#123;<span class="string">'platform'</span>: <span class="string">'WINDOWS'</span>,</span><br><span class="line">										<span class="string">'browserName'</span>:<span class="string">'chrome'</span>,</span><br><span class="line">										  <span class="string">'version'</span>: <span class="string">''</span>,</span><br><span class="line">										  <span class="string">'javascriptEnabled'</span>: <span class="literal">True</span>&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>有几个注意点：</p>
-<ol>
-<li><code>command_executor</code>的端口号是Node的端口号，不是hub的端口号，因为最终测试的执行还是在Node上执行。</li>
-<li><code>desired_capabilities</code>的各个参数用来配置这个测试使用哪一个操作系统和浏览器，还支持输入浏览器版本号。</li>
-</ol>
-<h2 id="5-2-使用多个节点"><a href="#5-2-使用多个节点" class="headerlink" title="5.2 使用多个节点"></a>5.2 使用多个节点</h2><p>要使用多个节点，可以先把节点地址和浏览器创建在一个字典内，然后用<code>for</code>循环进行逐个使用。<br>    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义node_hub与浏览器对应关系</span></span><br><span class="line">nodes = &#123;</span><br><span class="line"><span class="string">'http://192.168.50.115:5555/wd/hub'</span>: <span class="string">'chrome'</span>,</span><br><span class="line"><span class="string">'http://192.168.50.115:6666/wd/hub'</span>: <span class="string">'internet explorer'</span>,</span><br><span class="line"><span class="string">'http://192.168.50.115:7777/wd/hub'</span>: <span class="string">'firefox'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 通过不同的浏览器执行测试脚本</span></span><br><span class="line"><span class="keyword">for</span> host, browser <span class="keyword">in</span> nodes.items():</span><br><span class="line">    print(host, browser)</span><br><span class="line">    <span class="comment"># 调用remote方法</span></span><br><span class="line">    driver = Remote(command_executor=host,</span><br><span class="line">                    desired_capabilities=&#123;<span class="string">'platform'</span>: <span class="string">'ANY'</span>, 	<span class="string">'browserName'</span>: browser, <span class="string">'version'</span>: <span class="string">''</span>, <span class="string">'javascriptEnabled'</span>: <span class="literal">True</span>&#125;)</span><br><span class="line">driver.get(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line">driver.find_element_by_id(<span class="string">"kw"</span>).send_keys(<span class="string">"hello"</span>)</span><br><span class="line">driver.find_element_by_id(<span class="string">"su"</span>).click()</span><br><span class="line">time.sleep(<span class="number">2</span>)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure></p>
-<h1 id="6-可能存在的问题"><a href="#6-可能存在的问题" class="headerlink" title="6. 可能存在的问题"></a>6. 可能存在的问题</h1><p>运行时候你会发现，IE浏览器无法打开，而Chrome和Firfox却没问题。</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开IE浏览器，Internet 选项，安全。将启用保护模式勾选取消，四个区域都要这样设置<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200723201622.png" alt=""><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~~</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>selenium</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo</title>
     <url>/2020/07/16/hexo/</url>
     <content><![CDATA[<ul>
@@ -165,41 +11,6 @@ print(&quot;Running time: %s&quot; % (end-start))
 <li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title>使用Pytest进行测试</title>
-    <url>/2020/07/28/%E4%BD%BF%E7%94%A8Pytest%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="What-is-Pytest"><a href="#What-is-Pytest" class="headerlink" title="What is Pytest?"></a>What is Pytest?</h1><p>与<code>unittest</code>进行对比，<code>pytest</code>简直太简单，这个简单是容易阅读；容易编写；容易拓展；不仅如此，测试失败还会提醒。测试用例使用方法进行编写的，<code>unittest</code>是用类进行编写。</p>
-<h1 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h1><p>因为参考某篇文章，对新项目创建一个虚拟环境，同一台计算机上项目就不会相互冲突，在这里使用pipenv。<br><a id="more"></a></p>
-<h2 id="全局安装pipenv"><a href="#全局安装pipenv" class="headerlink" title="全局安装pipenv"></a>全局安装pipenv</h2><p>因为本机使用的是anaconda，所以打开<code>Anaconda Prompt</code>，输入：</p>
-<pre><code>pip install pipenv。
-</code></pre><p>然后在项目文件中安装pytest：</p>
-<pre><code>pipenv install pytest --dev
-</code></pre><p>这样在项目文件中就会出现两个新的文件：<code>Pipfile</code> <code>Pipfile.lock</code></p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>一般将测试用例都放在一个目录下面，目录名称遵守规定，以<code>test</code>开头。</p>
-<pre><code>mkdir tests
-cd tests
-</code></pre><p>创建一个py文件：test_match.py</p>
-<pre><code>def test_addition():
-    assert 1 + 1 == 2
-</code></pre><p>看看吧，是不是和unittest比起来简洁很多。都不用导入其他库，而且使用Python自带的assert语句就可以断言了。</p>
-<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>有看到两种方法运行测试：</p>
-<ol>
-<li>在<code>tests</code>目录下执行：<code>pyetst test_match.py</code>;或者<code>pytest -v test_match.py</code>. <code>-v</code>可以在控制台输出更详细的信息。</li>
-<li>回到项目的目录下执行：<code>pipenv run python -m pytest</code></li>
-</ol>
-<p>两者的执行结果都是一样的。</p>
-<h2 id="显示失败详情"><a href="#显示失败详情" class="headerlink" title="显示失败详情"></a>显示失败详情</h2><p>如果测试失败，通过-v这个选项可以显示具体哪里失败</p>
-<p><img src="C:\Users\QueYang\AppData\Roaming\Typora\typora-user-images\image-20200728204241264.png" alt="image-20200728204241264"></p>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>测试</tag>
-        <tag>Pytest</tag>
-      </tags>
   </entry>
   <entry>
     <title>Markdown美化 font-awesome的使用</title>
@@ -455,22 +266,38 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
       </categories>
   </entry>
   <entry>
-    <title>唠叨唠叨——理发</title>
-    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
-    <content><![CDATA[<font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。
-<br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。
-<br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···
-<br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。
-<br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。
-<br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。
-
-
-</font>]]></content>
+    <title>使用Pytest进行测试</title>
+    <url>/2020/07/28/%E4%BD%BF%E7%94%A8Pytest%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="What-is-Pytest"><a href="#What-is-Pytest" class="headerlink" title="What is Pytest?"></a>What is Pytest?</h1><p>与<code>unittest</code>进行对比，<code>pytest</code>简直太简单，这个简单是容易阅读；容易编写；容易拓展；不仅如此，测试失败还会提醒。测试用例使用方法进行编写的，<code>unittest</code>是用类进行编写。</p>
+<h1 id="基础入门"><a href="#基础入门" class="headerlink" title="基础入门"></a>基础入门</h1><p>因为参考某篇文章，对新项目创建一个虚拟环境，同一台计算机上项目就不会相互冲突，在这里使用pipenv。<br><a id="more"></a></p>
+<h2 id="全局安装pipenv"><a href="#全局安装pipenv" class="headerlink" title="全局安装pipenv"></a>全局安装pipenv</h2><p>因为本机使用的是anaconda，所以打开<code>Anaconda Prompt</code>，输入：</p>
+<pre><code>pip install pipenv。
+</code></pre><p>然后在项目文件中安装pytest：</p>
+<pre><code>pipenv install pytest --dev
+</code></pre><p>这样在项目文件中就会出现两个新的文件：<code>Pipfile</code> <code>Pipfile.lock</code></p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>一般将测试用例都放在一个目录下面，目录名称遵守规定，以<code>test</code>开头。</p>
+<pre><code>mkdir tests
+cd tests
+</code></pre><p>创建一个py文件：test_match.py</p>
+<pre><code>def test_addition():
+    assert 1 + 1 == 2
+</code></pre><p>看看吧，是不是和unittest比起来简洁很多。都不用导入其他库，而且使用Python自带的assert语句就可以断言了。</p>
+<h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><p>有看到两种方法运行测试：</p>
+<ol>
+<li>在<code>tests</code>目录下执行：<code>pyetst test_match.py</code>;或者<code>pytest -v test_match.py</code>. <code>-v</code>可以在控制台输出更详细的信息。</li>
+<li>回到项目的目录下执行：<code>pipenv run python -m pytest</code></li>
+</ol>
+<p>两者的执行结果都是一样的。</p>
+<h2 id="显示失败详情"><a href="#显示失败详情" class="headerlink" title="显示失败详情"></a>显示失败详情</h2><p>如果测试失败，通过-v这个选项可以显示具体哪里失败</p>
+<p><img src="C:\Users\QueYang\AppData\Roaming\Typora\typora-user-images\image-20200728204241264.png" alt="image-20200728204241264"></p>
+]]></content>
       <categories>
-        <category>生活</category>
+        <category>Python</category>
       </categories>
       <tags>
-        <tag>生活</tag>
+        <tag>Python</tag>
+        <tag>测试</tag>
+        <tag>Pytest</tag>
       </tags>
   </entry>
   <entry>
@@ -514,6 +341,179 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
         <tag>Python</tag>
         <tag>列表排序</tag>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Selenium Server使用配置（一）</title>
+    <url>/2020/07/22/Selenium%20Grid/</url>
+    <content><![CDATA[<h1 id="1-Selenium-Grid是什么？"><a href="#1-Selenium-Grid是什么？" class="headerlink" title="1. Selenium Grid是什么？"></a>1. Selenium Grid是什么？</h1><p><code>Selenium Grid</code>专门用于在不同的浏览器、操作系统和机器上<strong>并行运行</strong>多个测试用例。通过将命令发送给远程的Web浏览器实例来完成并行测试，其中的一台服务器充当中心。Hub会在多态计算机上并发执行测试，从而集中管理不同的浏览器，而不用对每个浏览器进行单独的测试，<code>Selenium Grid</code>使跨浏览器测试变得容易，因为单个测试能够在多台机器和浏览器上运行，快速完成测试。</p>
+<p>Selenium Grid 的两个主要组件时：</p>
+<ul>
+<li><p>Hub是一台中心服务器，它接受来自WebDriver客户端的访问请求，并将JSON测试命令路由到节点上的远程驱动器。它从客户端获取指令，并在各个节点上并发的远程执行它们。</p>
+</li>
+<li><p>Node是一个由本地操作系统和远程WebDriver组成的远程设备。它以JSON测试命令的形式接收来自中心的请求，并使用WebDriver执行它们</p>
+</li>
+</ul>
+<p>由于学生党比较穷，后面流程都是在一台本地计算机上进行的。</p>
+  <a id="more"></a>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20170726154758111-1.jpg" alt=""></p>
+<h1 id="2-整个流程"><a href="#2-整个流程" class="headerlink" title="2. 整个流程"></a>2. 整个流程</h1><p>要使用Selenium Grid进行分布式的操作，步骤大致是下面几个。</p>
+<ol>
+<li>在本地CMD创建hub</li>
+<li>在hub创建node,要对node配置端口号</li>
+<li>在python脚本中配置要执行哪一个Node</li>
+</ol>
+<h1 id="3-webdriver下载"><a href="#3-webdriver下载" class="headerlink" title="3. webdriver下载"></a>3. webdriver下载</h1><p>webdriver 是用来执行并操作浏览器的一个API，程序脚本通过webdriver来直接对浏览器进行操作，相当于起到一个链接浏览器和程序的桥梁。</p>
+<h2 id="3-1-IE"><a href="#3-1-IE" class="headerlink" title="3.1 IE"></a>3.1 IE</h2><ol>
+<li>下载地址：<a href="http://selenium-release.storage.googleapis.com/index.html?path=3.5/" target="_blank" rel="noopener">IEDriverServer</a><br>选择和电脑位数相同的额压缩包</li>
+<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。<h2 id="3-2-Chrome"><a href="#3-2-Chrome" class="headerlink" title="3.2 Chrome"></a>3.2 Chrome</h2></li>
+<li>下载地址：<a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="noopener">ChromeDriver</a><br>注意要和电脑中Chrome版本一致，</li>
+<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。<h2 id="3-3-Firefox"><a href="#3-3-Firefox" class="headerlink" title="3.3 Firefox"></a>3.3 Firefox</h2></li>
+<li>下载地址：<a href="https://github.com/mozilla/geckodriver/releases" target="_blank" rel="noopener">geckodriver</a></li>
+<li>将压缩包内<code>.exe</code>文件放到Python安装目录下的<code>Scripts\</code>文件夹下即可。</li>
+</ol>
+<h1 id="4-Selenium-Grid启动"><a href="#4-Selenium-Grid启动" class="headerlink" title="4. Selenium Grid启动"></a>4. Selenium Grid启动</h1><h2 id="4-1-启动hub"><a href="#4-1-启动hub" class="headerlink" title="4.1 启动hub"></a>4.1 启动hub</h2><p><code>java -jar selenium-server-standalone-3.149.0.jar -port 4455 -role hub</code></p>
+<p><code>-port 4455</code>是开启4455号端口<code>-role hub</code>是将<code>Selenium server</code>作为<code>hub</code>或者<code>Grid server</code></p>
+<p>如图所示<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722200102.png" alt=""></p>
+<p>在浏览器地址栏输入<code>loaclhost:4455/grid/console</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722200620.png" alt=""></p>
+<h2 id="4-2-添加node"><a href="#4-2-添加node" class="headerlink" title="4.2 添加node"></a>4.2 添加node</h2><p>每一个节点就代表一台计算机</p>
+<p>新打开一个cmd</p>
+<p>输入<code>java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.141.59.jar -role node -hub http://10.30.35.106:4455</code></p>
+<p>创建一个节点，结果如图<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722202415.png" alt=""></p>
+<p>刷新浏览器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722202558.png" alt=""></p>
+<h2 id="4-3-使用json文件来自定义节点"><a href="#4-3-使用json文件来自定义节点" class="headerlink" title="4.3 使用json文件来自定义节点"></a>4.3 使用json文件来自定义节点</h2><p>在使用json自定义节点前，必须先开启hub</p>
+<p>cmd输入命令<code>java -jar selenium-server-standalone-3.149.0.jar -role node -nodeConfig nodeconfig.json</code><br><code>nodeConfig.json</code>文件如下<br>    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"capabilities"</span>:</span><br><span class="line">  [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"browserName"</span>: <span class="string">"firefox"</span>,</span><br><span class="line">      <span class="string">"maxInstances"</span>: <span class="number">3</span>,</span><br><span class="line">      <span class="string">"seleniumProtocol"</span>: <span class="string">"WebDriver"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"browserName"</span>: <span class="string">"chrome"</span>,</span><br><span class="line">      <span class="string">"maxInstances"</span>: <span class="number">5</span>,</span><br><span class="line">      <span class="string">"seleniumProtocol"</span>: <span class="string">"WebDriver"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"browserName"</span>: <span class="string">"internet explorer"</span>,</span><br><span class="line">      <span class="string">"maxInstances"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="string">"seleniumProtocol"</span>: <span class="string">"WebDriver"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"proxy"</span>: <span class="string">"org.openqa.grid.selenium.proxy.DefaultRemoteProxy"</span>,</span><br><span class="line">  <span class="string">"maxSession"</span>: <span class="number">5</span>,</span><br><span class="line">  <span class="string">"port"</span>: <span class="number">6666</span>,</span><br><span class="line">  <span class="string">"register"</span>: true,</span><br><span class="line">  <span class="string">"registerCycle"</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="string">"hub"</span>: <span class="string">"http://localhost:4455"</span>,</span><br><span class="line">  <span class="string">"nodeStatusCheckTimeout"</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="string">"nodePolling"</span>: <span class="number">5000</span>,</span><br><span class="line">  <span class="string">"role"</span>: <span class="string">"node"</span>,</span><br><span class="line">  <span class="string">"unregisterIfStillDownAfter"</span>: <span class="number">60000</span>,</span><br><span class="line">  <span class="string">"downPollingLimit"</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="string">"debug"</span>: false,</span><br><span class="line">  <span class="string">"servlets"</span> : [],</span><br><span class="line">  <span class="string">"withoutServlets"</span>: [],</span><br><span class="line">  <span class="string">"custom"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>启动后在浏览器输入地址<code>http://localhost:4455/grid/console</code>，因为json中设置的hub是<code>http://localhost:4455</code>。<br>结果如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722204600.png" alt=""></p>
+<p>启动了1个IE，3个火狐，5个Chrome。注意，这些节点是在<code>id : http://10.30.35.106:5555, OS : WIN10</code>中的节点，注意端口号。</p>
+<h2 id="4-4-添加Firefox节点"><a href="#4-4-添加Firefox节点" class="headerlink" title="4.4 添加Firefox节点"></a>4.4 添加Firefox节点</h2><ol>
+<li>重新启动一个hub 端口是4444</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser&quot;browserName=firefox,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 6677</code></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722210247.png" alt=""></p>
+<h2 id="4-5-添加Chrome节点"><a href="#4-5-添加Chrome节点" class="headerlink" title="4.5 添加Chrome节点"></a>4.5 添加Chrome节点</h2><ol>
+<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
+<li><code>java -jar selenium-server-standalone-13.141.59.jar -role webdriver -browser &quot;browserName=chrome,version=27,maxinstance=2,platform=WINDOWS&quot; -hubHost 10.30.35.106 –port 7777</code></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722210624.png" alt=""></p>
+<p>此时，总共有两个端口有节点了。体会一下红框的意思。<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722210913.png" alt=""></p>
+<h2 id="4-6-在Mac-OS-下添加Safari"><a href="#4-6-在Mac-OS-下添加Safari" class="headerlink" title="4.6 在Mac OS 下添加Safari"></a>4.6 在Mac OS 下添加Safari</h2><ol>
+<li>打开新的cmd，进入到 selenium-server-standalone-3.141.59.jar 所在文件夹</li>
+<li><code>java -jar selenium-server-standalone-3.141.59.jar -role webdriver -browser &quot;browserName=safari,version=7,maxinstance=2,platform=MAC&quot; -hubHost 10.30.35.106 –port 7788</code></li>
+</ol>
+<p>此时多了一列<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200722211407.png" alt=""></p>
+<p>但是为什么显示UNKONW,这个后面再研究研究</p>
+<h1 id="5-在Python中使用"><a href="#5-在Python中使用" class="headerlink" title="5 在Python中使用"></a>5 在Python中使用</h1><h2 id="5-1-使用单个节点"><a href="#5-1-使用单个节点" class="headerlink" title="5.1 使用单个节点"></a>5.1 使用单个节点</h2><p>当配置好hub和Node后，如何用Python来启动相应的节点呢。</p>
+<p>在<code>def setUp(self)</code>里使用下面方法<br>    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">self.driver = webdriver.Remote(command_executor = <span class="string">'http://192.168.50.115:5555/wd/hub'</span>,</span><br><span class="line">									   desired_capabilities=&#123;<span class="string">'platform'</span>: <span class="string">'WINDOWS'</span>,</span><br><span class="line">										<span class="string">'browserName'</span>:<span class="string">'chrome'</span>,</span><br><span class="line">										  <span class="string">'version'</span>: <span class="string">''</span>,</span><br><span class="line">										  <span class="string">'javascriptEnabled'</span>: <span class="literal">True</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>有几个注意点：</p>
+<ol>
+<li><code>command_executor</code>的端口号是Node的端口号，不是hub的端口号，因为最终测试的执行还是在Node上执行。</li>
+<li><code>desired_capabilities</code>的各个参数用来配置这个测试使用哪一个操作系统和浏览器，还支持输入浏览器版本号。</li>
+</ol>
+<h2 id="5-2-使用多个节点"><a href="#5-2-使用多个节点" class="headerlink" title="5.2 使用多个节点"></a>5.2 使用多个节点</h2><p>要使用多个节点，可以先把节点地址和浏览器创建在一个字典内，然后用<code>for</code>循环进行逐个使用。<br>    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义node_hub与浏览器对应关系</span></span><br><span class="line">nodes = &#123;</span><br><span class="line"><span class="string">'http://192.168.50.115:5555/wd/hub'</span>: <span class="string">'chrome'</span>,</span><br><span class="line"><span class="string">'http://192.168.50.115:6666/wd/hub'</span>: <span class="string">'internet explorer'</span>,</span><br><span class="line"><span class="string">'http://192.168.50.115:7777/wd/hub'</span>: <span class="string">'firefox'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 通过不同的浏览器执行测试脚本</span></span><br><span class="line"><span class="keyword">for</span> host, browser <span class="keyword">in</span> nodes.items():</span><br><span class="line">    print(host, browser)</span><br><span class="line">    <span class="comment"># 调用remote方法</span></span><br><span class="line">    driver = Remote(command_executor=host,</span><br><span class="line">                    desired_capabilities=&#123;<span class="string">'platform'</span>: <span class="string">'ANY'</span>, 	<span class="string">'browserName'</span>: browser, <span class="string">'version'</span>: <span class="string">''</span>, <span class="string">'javascriptEnabled'</span>: <span class="literal">True</span>&#125;)</span><br><span class="line">driver.get(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line">driver.find_element_by_id(<span class="string">"kw"</span>).send_keys(<span class="string">"hello"</span>)</span><br><span class="line">driver.find_element_by_id(<span class="string">"su"</span>).click()</span><br><span class="line">time.sleep(<span class="number">2</span>)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure></p>
+<h1 id="6-可能存在的问题"><a href="#6-可能存在的问题" class="headerlink" title="6. 可能存在的问题"></a>6. 可能存在的问题</h1><p>运行时候你会发现，IE浏览器无法打开，而Chrome和Firfox却没问题。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开IE浏览器，Internet 选项，安全。将启用保护模式勾选取消，四个区域都要这样设置<br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20200723201622.png" alt=""><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~~~</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>selenium</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>唠叨唠叨——理发</title>
+    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
+    <content><![CDATA[<font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。
+<br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。
+<br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···
+<br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。
+<br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。
+<br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。
+
+
+</font>]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IP地址分类查询</title>
+    <url>/2020/07/16/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：<br><a id="more"></a><br>1/ 格式是否符合；</p>
+<p>2/ ip地址范围是否符合；<br>后续增加：</p>
+<p>1/ 对私有地址分类再细分   —get；</p>
+<p>2/ 封装成.exe；</p>
+<p>3/ 代码结构优化；</p>
+<p>通过了所有测试用例。太冗杂了，应该还可以优化</p>
+<pre><code>start = time.time()
+while True:
+    ip = input(&quot;请输入IP地址:&quot;)
+    # ip = &quot;250.11.22.33&quot;
+    text = re.compile(r&quot;[0-9]$&quot;)
+    if (&quot;.&quot; not in ip) or (ip.count(&quot;.&quot;) != 3) or (text.match(ip)):
+        print(&quot;格式错误，请重新输入(例:192.168.0.1):&quot;)
+        continue
+    else:
+        ip_list = ip.split(&quot;.&quot;)
+        iplist = [int(x) for x in ip_list]
+        if len(iplist) != 4:
+            print(&quot;数量不对，请重新输入(例:192.168.0.1):&quot;)
+            continue
+        else:
+            if (iplist[0] &lt;= 255 and iplist[0] &gt;= 0) and (iplist[1] &gt;= 0 and iplist[1] &lt;= 255) \
+                    and (iplist[2] &gt;= 0 and iplist[2] &lt;= 255) \
+                    and (iplist[3] &gt;= 0 and iplist[3] &lt;= 255):
+                ackip = iplist
+                break
+            else:
+                print(&quot;超过范围，请重新输入(例:192.168.0.1):&quot;)
+                continue
+
+if ackip[0] &lt;=255 and ackip[0] &gt; 0 and ackip[3]&lt;=254 and ackip[3]&gt;0:
+    if ackip[0] &gt;= 1 and ackip[0] &lt;= 126:
+        if ackip[0] == 10:
+            print(&quot;此IP地址：%s 属于 A类私有地址&quot; % ip)
+        else:
+            print(&quot;此IP地址：%s 属于 A类地址&quot; % ip)
+    elif ackip[0] ==127:
+        print(&quot;此IP地址：%s 属于回环地址&quot; % ip)
+    elif ackip[0] &gt;= 128 and ackip[0] &lt;= 191:
+        if ackip[0] == 172 and (ackip[1] &lt;= 31 and ackip[1] &gt;= 16):
+            print(&quot;此IP地址：%s 属于 B类私有地址&quot; % ip)
+        elif ackip[0] == 169 and ackip[1] == 254:
+            print(&quot;此IP地址：%s 属于 windows自动分配&quot; % ip)
+        else:
+            print(&quot;此IP地址：%s 属于 B类地址&quot; % ip)
+    elif ackip[0] &gt;= 192 and ackip[0] &lt;= 223:
+        if ackip[0] == 192 and ackip[1] == 168:
+            print(&quot;此IP地址：%s 属于 C类私有地址&quot; % ip)
+        else:
+            print(&quot;此IP地址：%s 属于 C类地址&quot; % ip)
+    elif ackip[0] &gt;= 224 and ackip[0] &lt;= 239:
+        print(&quot;此IP地址：%s 属于 D类地址,不可用IP&quot; % ip)
+    elif ackip[0] &gt;= 240 and ackip[0] &lt;= 255:
+        print(&quot;此IP地址：%s 属于 E类地址,不可用IP&quot; % ip)
+elif ackip[0] == 0 or ackip[3] == 0:
+    print(&quot;此IP地址：%s 属于 全网地址，不可用IP&quot; % ip)
+elif ackip[3] == 255:
+    print(&quot;此IP地址：%s 属于 广播地址，不可用IP&quot; % ip)
+
+end=time.time()
+print(&quot;Running time: %s&quot; % (end-start))
+</code></pre>]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>TCP/IP</tag>
       </tags>
   </entry>
 </search>
