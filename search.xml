@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>IP地址分类查询</title>
+    <url>/2020/07/16/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：<br><a id="more"></a><br>1/ 格式是否符合；</p>
+<p>2/ ip地址范围是否符合；<br>后续增加：</p>
+<p>1/ 对私有地址分类再细分   —get；</p>
+<p>2/ 封装成.exe；</p>
+<p>3/ 代码结构优化；</p>
+<p>通过了所有测试用例。太冗杂了，应该还可以优化</p>
+<pre><code>start = time.time()
+while True:
+    ip = input(&quot;请输入IP地址:&quot;)
+    # ip = &quot;250.11.22.33&quot;
+    text = re.compile(r&quot;[0-9]$&quot;)
+    if (&quot;.&quot; not in ip) or (ip.count(&quot;.&quot;) != 3) or (text.match(ip)):
+        print(&quot;格式错误，请重新输入(例:192.168.0.1):&quot;)
+        continue
+    else:
+        ip_list = ip.split(&quot;.&quot;)
+        iplist = [int(x) for x in ip_list]
+        if len(iplist) != 4:
+            print(&quot;数量不对，请重新输入(例:192.168.0.1):&quot;)
+            continue
+        else:
+            if (iplist[0] &lt;= 255 and iplist[0] &gt;= 0) and (iplist[1] &gt;= 0 and iplist[1] &lt;= 255) \
+                    and (iplist[2] &gt;= 0 and iplist[2] &lt;= 255) \
+                    and (iplist[3] &gt;= 0 and iplist[3] &lt;= 255):
+                ackip = iplist
+                break
+            else:
+                print(&quot;超过范围，请重新输入(例:192.168.0.1):&quot;)
+                continue
+
+if ackip[0] &lt;=255 and ackip[0] &gt; 0 and ackip[3]&lt;=254 and ackip[3]&gt;0:
+    if ackip[0] &gt;= 1 and ackip[0] &lt;= 126:
+        if ackip[0] == 10:
+            print(&quot;此IP地址：%s 属于 A类私有地址&quot; % ip)
+        else:
+            print(&quot;此IP地址：%s 属于 A类地址&quot; % ip)
+    elif ackip[0] ==127:
+        print(&quot;此IP地址：%s 属于回环地址&quot; % ip)
+    elif ackip[0] &gt;= 128 and ackip[0] &lt;= 191:
+        if ackip[0] == 172 and (ackip[1] &lt;= 31 and ackip[1] &gt;= 16):
+            print(&quot;此IP地址：%s 属于 B类私有地址&quot; % ip)
+        elif ackip[0] == 169 and ackip[1] == 254:
+            print(&quot;此IP地址：%s 属于 windows自动分配&quot; % ip)
+        else:
+            print(&quot;此IP地址：%s 属于 B类地址&quot; % ip)
+    elif ackip[0] &gt;= 192 and ackip[0] &lt;= 223:
+        if ackip[0] == 192 and ackip[1] == 168:
+            print(&quot;此IP地址：%s 属于 C类私有地址&quot; % ip)
+        else:
+            print(&quot;此IP地址：%s 属于 C类地址&quot; % ip)
+    elif ackip[0] &gt;= 224 and ackip[0] &lt;= 239:
+        print(&quot;此IP地址：%s 属于 D类地址,不可用IP&quot; % ip)
+    elif ackip[0] &gt;= 240 and ackip[0] &lt;= 255:
+        print(&quot;此IP地址：%s 属于 E类地址,不可用IP&quot; % ip)
+elif ackip[0] == 0 or ackip[3] == 0:
+    print(&quot;此IP地址：%s 属于 全网地址，不可用IP&quot; % ip)
+elif ackip[3] == 255:
+    print(&quot;此IP地址：%s 属于 广播地址，不可用IP&quot; % ip)
+
+end=time.time()
+print(&quot;Running time: %s&quot; % (end-start))
+</code></pre>]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>TCP/IP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown美化 font-awesome的使用</title>
+    <url>/2020/07/16/Markdown%E7%BE%8E%E5%8C%96%20font-awesome%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。<br><a id="more"></a></p>
+<p><i class="fa fa-share-alt"></i> <a href="http://www.fontawesome.com.cn/icons" target="_blank" rel="noopener">font-awesome官方地址</a></p>
+<h1 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h1><p>在Markdown中添加一下代码，放在文件的最底部。</p>
+<pre><code>&lt;head&gt; 
+    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; 
+    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; 
+&lt;/head&gt; 
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css&quot;&gt;
+</code></pre><p>然后就可以在font-awesome官网找到合适的图标，使用方法是将<code>&lt;i class=&quot;fa fa-share-alt&quot;&gt;&lt;/i&gt;</code>放在你需要添加图标的地方。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>&lt;i class=&quot;fab fa-google&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code> <i class="fab fa-google" aria-hidden="true"></i> 这是Google图标</p>
+<h2 id="图标变大"><a href="#图标变大" class="headerlink" title="图标变大"></a>图标变大</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x" aria-hidden="true"></i> 这是2倍大的Google图标，使用fa-2x</p>
+<h2 id="图标旋转"><a href="#图标旋转" class="headerlink" title="图标旋转"></a>图标旋转</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x fa-spin&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x fa-spin" aria-hidden="true"></i> 使用fa-spin来让图标进行旋转</p>
+<h2 id="特殊引用效果"><a href="#特殊引用效果" class="headerlink" title="特殊引用效果"></a>特殊引用效果</h2><p><code>&lt;i class=&quot;fab fa-google fa-3x fa-pull-left fa-border&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code></p>
+<p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>…独坐在路边街角 冷风吹醒，默默地伴着我的孤影，只想将结他紧抱，诉出辛酸，就在这刻想起往事，心中一股冲劲勇闯，抛开那现实没有顾虑，仿佛身边拥有一切，看似与别人筑起隔膜。</p>
+<p>在这里使用 <code>fa-border</code> 和 <code>fa-pull-right</code> 或 <code>fa-pull-left</code> 可以轻易构造出引用的特殊效果。</p>
+<h2 id="替换无序列表中的图标"><a href="#替换无序列表中的图标" class="headerlink" title="替换无序列表中的图标"></a>替换无序列表中的图标</h2><p>使用 <code>fa-ul</code> and <code>fa-li</code> 轻松的替换无序列表中的默认图标。</p>
+<pre><code>&lt;ul class=&quot;fa-ul&quot;&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;使用列表类图标&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;轻松的替换&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;无序列表&lt;/li&gt;
+    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-square&quot;&gt;&lt;/i&gt;中的默认图标&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><ul class="fa-ul">
+  <li><i class="fa-li fa fa-check-square"></i>使用列表类图标</li>
+  <li><i class="fa-li fa fa-check-square"></i>轻松的替换</li>
+  <li><i class="fa-li fa fa-spinner fa-spin"></i>无序列表</li>
+  <li><i class="fa-li fa fa-square"></i>中的默认图标</li>
+</ul>
+
+<h2 id="对图标旋转角度"><a href="#对图标旋转角度" class="headerlink" title="对图标旋转角度"></a>对图标旋转角度</h2><p>使用 <code>fa-rotate-*</code> and <code>fa-flip-*</code> 类</p>
+<pre><code>&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-90&quot;&gt;&lt;/i&gt; fa-rotate-90&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-180&quot;&gt;&lt;/i&gt; fa-rotate-180&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-rotate-270&quot;&gt;&lt;/i&gt; fa-rotate-270&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-flip-horizontal&quot;&gt;&lt;/i&gt; fa-flip-horizontal&lt;br&gt;
+&lt;i class=&quot;fa fa-quote-left fa-flip-vertical&quot;&gt;&lt;/i&gt; fa-flip-vertical
+&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
+</code></pre><p><i class="fa fa-quote-left fa-rotate-90">&lt;/i&gt; fa-rotate-90<br><br><i class="fa fa-quote-left fa-rotate-180"></i> fa-rotate-180<br><br><i class="fa fa-quote-left fa-rotate-270">&lt;/i&gt; fa-rotate-270<br><br><i class="fa fa-quote-left fa-flip-horizontal"></i> fa-flip-horizontal<br><br><i class="fa fa-quote-left fa-flip-vertical"></i> fa-flip-vertical</p>
+<h1 id="更多例子请看-lt-i-gt-lt-i-gt-font-awesome样例"><a href="#更多例子请看-lt-i-gt-lt-i-gt-font-awesome样例" class="headerlink" title="更多例子请看&lt;/i&gt;&lt;/i&gt;font-awesome样例"></a>更多例子请看<i class="fa fa-angle-double-right" aria-hidden="true">&lt;/i&gt;<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true">&lt;/i&gt;<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fab fa-fort-awesome"></i><a href="http://www.fontawesome.com.cn/examples/" target="_blank" rel="noopener">font-awesome样例</a></h1><p><head> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
+</head> </p>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
+      <categories>
+        <category>Mardown</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Matlab实现决策树分类的ID3算法</title>
     <url>/2021/03/24/Matlab%E5%AE%9E%E7%8E%B0%E5%86%B3%E7%AD%96%E6%A0%91%E5%88%86%E7%B1%BB%E7%9A%84ID3%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p>用ID3算法实现决策树分类，目前结果还不能以树的形式进行展示，后期会加以改进。<br><a id="more"></a></p>
@@ -24,6 +147,18 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo</title>
+    <url>/2020/07/16/hexo/</url>
+    <content><![CDATA[<ul>
+<li>mkdir blog</li>
+<li>cd blog</li>
+<li>hexo init</li>
+<li>cnpm install —save hexo-deployer-git</li>
+<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>记录厦门教师校招-湖南师大</title>
     <url>/2020/10/28/%E5%8E%A6%E9%97%A8%E6%95%99%E5%B8%88%E6%A0%A1%E6%8B%9B-%E6%B9%96%E5%B8%88%E5%A4%A7%E7%AB%99-%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>&emsp;&emsp;辛苦了几天终于有了好的结果，也感叹幸运之神再次眷顾了我。<br><br>&emsp;&emsp;10-15 厦门市教育局发布校招通知；订宾馆、动车~<br><br>&emsp;&emsp;10-22 6小时高铁前往长沙；<br><br>&emsp;&emsp;10-23 招聘会现场投递，争取推荐名额。六中、厦外、二中推荐通用技术笔试。<br><br>&emsp;&emsp;10-24 上午笔试，下午开始8小时片段教学练习。<br><br>&emsp;&emsp;10-25 上午面试，下午橘子洲游玩。<br><br>&emsp;&emsp; 10-26 惊险上线六中。在厦外、二中都没有入围。14点打的差点错过高铁~<br><a id="more"></a></p>
@@ -41,42 +176,6 @@
       <tags>
         <tag>教师</tag>
         <tag>工作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo</title>
-    <url>/2020/07/16/hexo/</url>
-    <content><![CDATA[<ul>
-<li>mkdir blog</li>
-<li>cd blog</li>
-<li>hexo init</li>
-<li>cnpm install —save hexo-deployer-git</li>
-<li>git clone <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a> themes/next</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>备考教师资格证面试</title>
-    <url>/2021/04/03/%E5%A4%87%E8%80%83%E6%95%99%E5%B8%88%E8%B5%84%E6%A0%BC%E8%AF%81%E9%9D%A2%E8%AF%95/</url>
-    <content><![CDATA[<p>&emsp;&emsp;现在笔试成绩也还没有出来，先准备一下面试的内容吧！按往年，5月中旬左右就是面试。<a id="more"></a></p>
-<h1 id="面试需要的资源"><a href="#面试需要的资源" class="headerlink" title="面试需要的资源"></a>面试需要的资源</h1><ol>
-<li>面试大纲<br>&emsp;&emsp;<a href="http://ntce.neea.edu.cn/html1/report/1508/377-1.htm" target="_blank" rel="noopener">中小学和幼儿园教师资格考试面试大纲(试行)—中学</a><br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20210403214354.png" alt="评分标准"></li>
-<li>通用技术网站<br>&emsp;&emsp;<a href="http://www.tyjs.org/" target="_blank" rel="noopener">通用技术网</a><h1 id="面试流程"><a href="#面试流程" class="headerlink" title="面试流程"></a>面试流程</h1></li>
-<li>候考</li>
-<li>抽题</li>
-<li>备课：在备课室备课20分钟。</li>
-<li><strong>回答结构性问题</strong>：题库随机抽取2个问题，时间5分钟。</li>
-<li><strong>试讲</strong>：按照环节3的备课内容进行试讲，时间10分钟。</li>
-<li>答辩：对试讲内容进行提问，答辩，时间5分钟。</li>
-<li>评分</li>
-</ol>
-]]></content>
-      <categories>
-        <category>教师</category>
-      </categories>
-      <tags>
-        <tag>工作</tag>
-        <tag>备考</tag>
       </tags>
   </entry>
   <entry>
@@ -253,6 +352,49 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
       </categories>
   </entry>
   <entry>
+    <title>唠叨唠叨——理发</title>
+    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
+    <content><![CDATA[<font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。
+<br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。
+<br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···
+<br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。
+<br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。
+<br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。
+
+
+</font>]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>备考教师资格证面试</title>
+    <url>/2021/04/03/%E5%A4%87%E8%80%83%E6%95%99%E5%B8%88%E8%B5%84%E6%A0%BC%E8%AF%81%E9%9D%A2%E8%AF%95/</url>
+    <content><![CDATA[<p>&emsp;&emsp;现在笔试成绩也还没有出来，先准备一下面试的内容吧！按往年，5月中旬左右就是面试。<a id="more"></a></p>
+<h1 id="面试需要的资源"><a href="#面试需要的资源" class="headerlink" title="面试需要的资源"></a>面试需要的资源</h1><ol>
+<li>面试大纲<br>&emsp;&emsp;<a href="http://ntce.neea.edu.cn/html1/report/1508/377-1.htm" target="_blank" rel="noopener">中小学和幼儿园教师资格考试面试大纲(试行)—中学</a><br><img src="https://cdn.jsdelivr.net/gh/qyh180/figure@master/img/20210403214354.png" alt="评分标准"></li>
+<li>通用技术网站<br>&emsp;&emsp;<a href="http://www.tyjs.org/" target="_blank" rel="noopener">通用技术网</a><h1 id="面试流程"><a href="#面试流程" class="headerlink" title="面试流程"></a>面试流程</h1></li>
+<li>候考</li>
+<li>抽题</li>
+<li>备课：在备课室备课20分钟。</li>
+<li><strong>回答结构性问题</strong>：题库随机抽取2个问题，时间5分钟。</li>
+<li><strong>试讲</strong>：按照环节3的备课内容进行试讲，时间10分钟。</li>
+<li>答辩：对试讲内容进行提问，答辩，时间5分钟。</li>
+<li>评分</li>
+</ol>
+]]></content>
+      <categories>
+        <category>教师</category>
+      </categories>
+      <tags>
+        <tag>工作</tag>
+        <tag>备考</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python实现列表排序</title>
     <url>/2020/07/16/%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<h2 id="一、-快速排序"><a href="#一、-快速排序" class="headerlink" title="一、 快速排序"></a>一、 快速排序</h2><h3 id="1-算法原理"><a href="#1-算法原理" class="headerlink" title="1.  算法原理"></a>1.  算法原理</h3><p> <i class="fa fa-quote-left fa-2x fa-pull-left fa-border"></i><font face="楷体" size=4>快速排序首先要在数组中选择一个基准元素，<a id="more"></a>以此为基准将数组分为 左边全部小于基准元素，右边全部大于基准元素。</p>
@@ -290,8 +432,8 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
         <category>Python</category>
       </categories>
       <tags>
-        <tag>算法</tag>
         <tag>Python</tag>
+        <tag>算法</tag>
         <tag>列表排序</tag>
       </tags>
   </entry>
@@ -312,147 +454,5 @@ g(Windy,D)=0.048</script><p>比较可以知道，属性$Outlook$是具有最高�
       <tags>
         <tag>生活</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>唠叨唠叨——理发</title>
-    <url>/2020/07/16/%E6%97%A0%E8%B5%96%E5%94%A0%E5%8F%A81/</url>
-    <content><![CDATA[<font face='宋体' size=4>&emsp;&emsp;昨天去校外理发的时候发生了一件以前只是经常听说但是没亲眼见过的事情，<a id="more"></a>哈哈哈，其实就是一个顾客因为理发店擅自更改了会员卡的使用方式而要求退卡。
-<br>&emsp;&emsp;但我觉得今年疫情比较特殊，理发店可能经营有点困难，毕竟将近半年没什么生意，也就接受了。但是从这次这家理发店对会员卡制的处理不恰当来看，多年以来的这类问题还再不断的上演。在我本科的时候，学校内就发生过好几次理发店让学生办了会员卡之后，下个学期换老板了，或者关门了。学生也有组织起来维权，但要是每一次顾客的利益都没法得到保障，理发行业的名声就只能越来越差，大家也越来越难挣钱了，说到底还是一个信誉的问题。
-<br>&emsp;&emsp;按我的想法，理发店如果确实因为外界不可抗因素而做出违背当时签订会员卡时候的承诺，大可实实在在的讲出来。但今天我听理发店员工一个劲在说就付10块钱嘛；当时办卡我也不清楚；这是老板说的···这么说只能找来顾客的反感，一个劲的把自己的责任撇干净，而不去兑现自己的承诺。结果就是，员工也免去了这个顾客的费用···
-<br>&emsp;&emsp;第二，提前告知；如果做不到线上联系到每位顾客，那也要想办法在主要路口张贴公告。其实这里也提醒，做好运营重要性，如果理发店能有那么一个微信群、QQ群，能及时和学生联系，定期搞一个活动来增加收入，遇到这次问题还能一起沟通协商。但做了这些，其实还需要提供一个补偿选择，给顾客一定的实惠。很少有学生能真真正正的把卡里400用完，像我都是借同学的卡。如果能退剩余余额的一小部分钱，对学生群体来说也是可以接受的，重点是展示自己的诚意。
-<br>&emsp;&emsp;第三，就目前这种环境来看，还是不要去办卡比较好。顾客权益保障太不全了，难以维权。
-<br>&emsp;&emsp;就唠叨这么多吧，以后多写一些生活类的。
-
-
-</font>]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IP地址分类查询</title>
-    <url>/2020/07/16/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/</url>
-    <content><![CDATA[<p><font face='宋体' size=4>查询IP地址的分类，并且对IP作一下检测：<br><a id="more"></a><br>1/ 格式是否符合；</p>
-<p>2/ ip地址范围是否符合；<br>后续增加：</p>
-<p>1/ 对私有地址分类再细分   —get；</p>
-<p>2/ 封装成.exe；</p>
-<p>3/ 代码结构优化；</p>
-<p>通过了所有测试用例。太冗杂了，应该还可以优化</p>
-<pre><code>start = time.time()
-while True:
-    ip = input(&quot;请输入IP地址:&quot;)
-    # ip = &quot;250.11.22.33&quot;
-    text = re.compile(r&quot;[0-9]$&quot;)
-    if (&quot;.&quot; not in ip) or (ip.count(&quot;.&quot;) != 3) or (text.match(ip)):
-        print(&quot;格式错误，请重新输入(例:192.168.0.1):&quot;)
-        continue
-    else:
-        ip_list = ip.split(&quot;.&quot;)
-        iplist = [int(x) for x in ip_list]
-        if len(iplist) != 4:
-            print(&quot;数量不对，请重新输入(例:192.168.0.1):&quot;)
-            continue
-        else:
-            if (iplist[0] &lt;= 255 and iplist[0] &gt;= 0) and (iplist[1] &gt;= 0 and iplist[1] &lt;= 255) \
-                    and (iplist[2] &gt;= 0 and iplist[2] &lt;= 255) \
-                    and (iplist[3] &gt;= 0 and iplist[3] &lt;= 255):
-                ackip = iplist
-                break
-            else:
-                print(&quot;超过范围，请重新输入(例:192.168.0.1):&quot;)
-                continue
-
-if ackip[0] &lt;=255 and ackip[0] &gt; 0 and ackip[3]&lt;=254 and ackip[3]&gt;0:
-    if ackip[0] &gt;= 1 and ackip[0] &lt;= 126:
-        if ackip[0] == 10:
-            print(&quot;此IP地址：%s 属于 A类私有地址&quot; % ip)
-        else:
-            print(&quot;此IP地址：%s 属于 A类地址&quot; % ip)
-    elif ackip[0] ==127:
-        print(&quot;此IP地址：%s 属于回环地址&quot; % ip)
-    elif ackip[0] &gt;= 128 and ackip[0] &lt;= 191:
-        if ackip[0] == 172 and (ackip[1] &lt;= 31 and ackip[1] &gt;= 16):
-            print(&quot;此IP地址：%s 属于 B类私有地址&quot; % ip)
-        elif ackip[0] == 169 and ackip[1] == 254:
-            print(&quot;此IP地址：%s 属于 windows自动分配&quot; % ip)
-        else:
-            print(&quot;此IP地址：%s 属于 B类地址&quot; % ip)
-    elif ackip[0] &gt;= 192 and ackip[0] &lt;= 223:
-        if ackip[0] == 192 and ackip[1] == 168:
-            print(&quot;此IP地址：%s 属于 C类私有地址&quot; % ip)
-        else:
-            print(&quot;此IP地址：%s 属于 C类地址&quot; % ip)
-    elif ackip[0] &gt;= 224 and ackip[0] &lt;= 239:
-        print(&quot;此IP地址：%s 属于 D类地址,不可用IP&quot; % ip)
-    elif ackip[0] &gt;= 240 and ackip[0] &lt;= 255:
-        print(&quot;此IP地址：%s 属于 E类地址,不可用IP&quot; % ip)
-elif ackip[0] == 0 or ackip[3] == 0:
-    print(&quot;此IP地址：%s 属于 全网地址，不可用IP&quot; % ip)
-elif ackip[3] == 255:
-    print(&quot;此IP地址：%s 属于 广播地址，不可用IP&quot; % ip)
-
-end=time.time()
-print(&quot;Running time: %s&quot; % (end-start))
-</code></pre>]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>TCP/IP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Markdown美化 font-awesome的使用</title>
-    <url>/2020/07/16/Markdown%E7%BE%8E%E5%8C%96%20font-awesome%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>经常看到别人文章中使用了很多好看的符号来对段落进行标注，今天特意去搜索了一下font-awesome的使用，符号库真的好丰富啊。<br><a id="more"></a></p>
-<p><i class="fa fa-share-alt"></i> <a href="http://www.fontawesome.com.cn/icons" target="_blank" rel="noopener">font-awesome官方地址</a></p>
-<h1 id="使用规则"><a href="#使用规则" class="headerlink" title="使用规则"></a>使用规则</h1><p>在Markdown中添加一下代码，放在文件的最底部。</p>
-<pre><code>&lt;head&gt; 
-    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; 
-    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; 
-&lt;/head&gt; 
-&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css&quot;&gt;
-</code></pre><p>然后就可以在font-awesome官网找到合适的图标，使用方法是将<code>&lt;i class=&quot;fa fa-share-alt&quot;&gt;&lt;/i&gt;</code>放在你需要添加图标的地方。</p>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>&lt;i class=&quot;fab fa-google&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code> <i class="fab fa-google" aria-hidden="true"></i> 这是Google图标</p>
-<h2 id="图标变大"><a href="#图标变大" class="headerlink" title="图标变大"></a>图标变大</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x" aria-hidden="true"></i> 这是2倍大的Google图标，使用fa-2x</p>
-<h2 id="图标旋转"><a href="#图标旋转" class="headerlink" title="图标旋转"></a>图标旋转</h2><p><code>&lt;i class=&quot;fab fa-google fa-2x fa-spin&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code><i class="fab fa-google fa-2x fa-spin" aria-hidden="true"></i> 使用fa-spin来让图标进行旋转</p>
-<h2 id="特殊引用效果"><a href="#特殊引用效果" class="headerlink" title="特殊引用效果"></a>特殊引用效果</h2><p><code>&lt;i class=&quot;fab fa-google fa-3x fa-pull-left fa-border&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;</code></p>
-<p><i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>…独坐在路边街角 冷风吹醒，默默地伴着我的孤影，只想将结他紧抱，诉出辛酸，就在这刻想起往事，心中一股冲劲勇闯，抛开那现实没有顾虑，仿佛身边拥有一切，看似与别人筑起隔膜。</p>
-<p>在这里使用 <code>fa-border</code> 和 <code>fa-pull-right</code> 或 <code>fa-pull-left</code> 可以轻易构造出引用的特殊效果。</p>
-<h2 id="替换无序列表中的图标"><a href="#替换无序列表中的图标" class="headerlink" title="替换无序列表中的图标"></a>替换无序列表中的图标</h2><p>使用 <code>fa-ul</code> and <code>fa-li</code> 轻松的替换无序列表中的默认图标。</p>
-<pre><code>&lt;ul class=&quot;fa-ul&quot;&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;使用列表类图标&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-check-square&quot;&gt;&lt;/i&gt;轻松的替换&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;无序列表&lt;/li&gt;
-    &lt;li&gt;&lt;i class=&quot;fa-li fa fa-square&quot;&gt;&lt;/i&gt;中的默认图标&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre><ul class="fa-ul">
-  <li><i class="fa-li fa fa-check-square"></i>使用列表类图标</li>
-  <li><i class="fa-li fa fa-check-square"></i>轻松的替换</li>
-  <li><i class="fa-li fa fa-spinner fa-spin"></i>无序列表</li>
-  <li><i class="fa-li fa fa-square"></i>中的默认图标</li>
-</ul>
-
-<h2 id="对图标旋转角度"><a href="#对图标旋转角度" class="headerlink" title="对图标旋转角度"></a>对图标旋转角度</h2><p>使用 <code>fa-rotate-*</code> and <code>fa-flip-*</code> 类</p>
-<pre><code>&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-90&quot;&gt;&lt;/i&gt; fa-rotate-90&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-180&quot;&gt;&lt;/i&gt; fa-rotate-180&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-rotate-270&quot;&gt;&lt;/i&gt; fa-rotate-270&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-flip-horizontal&quot;&gt;&lt;/i&gt; fa-flip-horizontal&lt;br&gt;
-&lt;i class=&quot;fa fa-quote-left fa-flip-vertical&quot;&gt;&lt;/i&gt; fa-flip-vertical
-&lt;i class=&quot;fa fa-quote-left&quot;&gt;&lt;/i&gt; normal&lt;br&gt;
-</code></pre><p><i class="fa fa-quote-left fa-rotate-90">&lt;/i&gt; fa-rotate-90<br><br><i class="fa fa-quote-left fa-rotate-180"></i> fa-rotate-180<br><br><i class="fa fa-quote-left fa-rotate-270">&lt;/i&gt; fa-rotate-270<br><br><i class="fa fa-quote-left fa-flip-horizontal"></i> fa-flip-horizontal<br><br><i class="fa fa-quote-left fa-flip-vertical"></i> fa-flip-vertical</p>
-<h1 id="更多例子请看-lt-i-gt-lt-i-gt-font-awesome样例"><a href="#更多例子请看-lt-i-gt-lt-i-gt-font-awesome样例" class="headerlink" title="更多例子请看&lt;/i&gt;&lt;/i&gt;font-awesome样例"></a>更多例子请看<i class="fa fa-angle-double-right" aria-hidden="true">&lt;/i&gt;<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true">&lt;/i&gt;<i class="fa fa-angle-double-right" aria-hidden="true"></i><i class="fab fa-fort-awesome"></i><a href="http://www.fontawesome.com.cn/examples/" target="_blank" rel="noopener">font-awesome样例</a></h1><p><head> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script> 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js"></script> 
-</head> </p>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">]]></content>
-      <categories>
-        <category>Mardown</category>
-      </categories>
   </entry>
 </search>
